@@ -23,32 +23,22 @@
         #presentation-overlay.active { opacity: 1; pointer-events: all; }
         .presentation-container { position: relative; width: 90%; max-width: 1280px; height: 80vh; max-height: 720px; background-color: #f8fafc; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); overflow: hidden; display: flex; flex-direction: column; }
         .close-presentation-btn { position: absolute; top: 30px; left: 30px; z-index: 100; text-decoration: none; color: #475569; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 10px; padding: 12px 24px; background: rgba(255, 255, 255, 0.9); border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.2s ease; cursor: pointer; border: 1px solid rgba(203, 213, 225, 0.5); }
-        .close-presentation-btn:hover { color: #2563eb; transform: scale(1.05); background: white; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
         
-        /* Slides Styles */
         .slide { display: none; width: 100%; height: 100%; padding: 40px 60px; flex-direction: column; justify-content: center; position: relative; z-index: 1; animation: slideFade 0.5s ease; }
         .slide.active { display: flex; }
         @keyframes slideFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
         .slide h1 { font-size: clamp(40px, 5vw, 80px); background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-weight: 700; text-align: center; }
         .slide h2.slide-title { font-size: clamp(32px, 4vw, 56px); color: #1e293b; margin: 0 0 40px 0; border-left: 8px solid #2563eb; padding-left: 30px; }
-        .slide p, .slide li { color: #475569; font-size: clamp(20px, 2vw, 26px); line-height: 1.6; }
-        .slide .subtitle { font-size: clamp(20px, 2.5vw, 28px); color: #64748b; text-align: center; margin-top: 10px; }
-        .text-wrapper { max-width: 900px; margin: 0 auto; width: 100%; text-align: left; }
-        .tiled-content { display: flex; gap: 20px; width: 100%; max-width: 1100px; margin: 0 auto; align-items: stretch; }
-        .tile { flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .tile .icon { width: 80px; height: 80px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #2563eb; font-size: 32px; }
-        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; font-weight: 700; }
-        .tile p { font-size: 18px; }
-        .custom-list { list-style: none; padding: 0; }
-        .custom-list li { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-size: 24px; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: none; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; color: #2563eb; font-size: 24px; z-index: 10; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .nav-btn:hover { background: #eff6ff; transform: translateY(-50%) scale(1.1); }
-        .nav-btn.prev { left: 20px; } .nav-btn.next { right: 20px; }
-        .indicators { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: background 0.3s; }
-        .dot.active { background: #2563eb; }
-        .bg-decoration-1 { position: absolute; top: -10%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
-        .bg-decoration-2 { position: absolute; bottom: -10%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
+        
+        .nav-btn-slide { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: none; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; color: #2563eb; z-index: 10; display: flex; align-items: center; justify-content: center; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: #2563eb; width: 30px; border-radius: 10px; }
+
+        .status-badge { font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 30px; text-transform: uppercase; }
+        .status-guest { background: #f1f5f9; color: #64748b; }
+        .status-pending { background: #fef3c7; color: #b45309; }
+        .status-student { background: #dcfce7; color: #15803d; }
+        .status-admin { background: #1e293b; color: #ffffff; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen relative flex flex-col">
@@ -58,266 +48,299 @@
     <!-- Navegação -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" onclick="window.showLandingPage()">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.showLandingPage()">
                 <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-sm"><i data-lucide="book-open" class="w-5 h-5"></i></div>
                 <span class="font-bold text-lg tracking-tight text-slate-900">Dimas Learning</span>
             </div>
             
-            <!-- Menu Público -->
-            <div id="nav-links" class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-                <a href="#home" class="hover:text-blue-600 transition-colors" data-i18n="nav_home">Início</a>
-                <a href="#cursos" class="hover:text-blue-600 transition-colors" data-i18n="nav_courses">Cursos</a>
-                <button onclick="window.openPresentation()" class="hover:text-blue-600 transition-colors focus:outline-none font-medium" data-i18n="nav_about">Sobre</button>
+            <div id="nav-links" class="flex gap-8 text-sm font-medium text-slate-600">
+                <a href="#home" onclick="window.showLandingPage()" class="hover:text-blue-600 transition-colors">Início</a>
+                <a href="#cursos" onclick="window.showLandingPage()" class="hover:text-blue-600 transition-colors">Cursos</a>
+                <button onclick="window.openPresentation()" class="hover:text-blue-600 transition-colors font-medium">Sobre</button>
             </div>
 
-            <!-- Menu do Utilizador (Visível após Login) -->
-            <div id="user-nav-links" class="hidden md:flex gap-8 text-sm font-medium text-slate-600 hidden-section">
-                <button onclick="window.scrollToSection('user-dashboard')" class="hover:text-blue-600 transition-colors text-blue-600 font-bold"><i class="fa-solid fa-house mr-1"></i> Dashboard</button>
-                <button onclick="window.scrollToSection('study-area')" class="hover:text-blue-600 transition-colors"><i class="fa-solid fa-book-open mr-1"></i> Materiais</button>
-                <button onclick="window.scrollToSection('profile-area')" class="hover:text-blue-600 transition-colors"><i class="fa-solid fa-user mr-1"></i> Perfil</button>
+            <div id="user-nav-links" class="hidden-section flex gap-8 text-sm font-medium text-slate-600">
+                <button onclick="window.switchTab('dashboard')" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</button>
+                <button onclick="window.switchTab('profile')" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1"><i data-lucide="user" class="w-4 h-4"></i> Perfil</button>
             </div>
 
             <div class="flex items-center gap-4">
-                <button onclick="window.toggleLanguage()" class="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">
-                    <i data-lucide="globe" class="w-4 h-4"></i><span id="currentLang">PT</span>
-                </button>
-                <button id="loginBtn" onclick="window.openLoginModal()" class="px-5 py-2 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all hover:scale-105 shadow-md" data-i18n="nav_login">Entrar</button>
+                <button id="loginBtn" onclick="window.openLoginModal()" class="px-5 py-2 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all shadow-md">Entrar</button>
                 <button id="logoutBtn" onclick="window.logout()" class="hidden px-5 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full hover:bg-red-100 transition-all border border-red-200">Sair <i class="fa-solid fa-sign-out-alt ml-2"></i></button>
             </div>
         </div>
     </nav>
 
-    <!-- LANDING PAGE (Pública) -->
+    <!-- LANDING PAGE -->
     <main id="landing-page" class="flex-grow pt-28 pb-12 px-4">
         <section id="home" class="min-h-[80vh] flex flex-col justify-center items-center text-center animate-fade-in mb-20">
             <div class="glass-effect p-10 rounded-3xl shadow-xl border border-slate-100/50 flex flex-col items-center max-w-4xl mx-auto">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 text-white p-6 rounded-2xl shadow-lg mb-6 transform hover:rotate-6 transition-transform duration-500"><i data-lucide="graduation-cap" class="w-20 h-20"></i></div>
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-4">Dimas <span class="text-blue-600">Learning</span></h1>
-                <p class="text-slate-500 font-medium tracking-wide uppercase text-sm mb-6" data-i18n="hero_subtitle">Plataforma de Ensino Digital</p>
-                <p class="text-xl text-slate-600 font-light mb-8 max-w-2xl leading-relaxed" data-i18n="hero_text">Aprende ao teu ritmo com tecnologia de ponta e um design focado na clareza.</p>
-                <div class="flex gap-4"><a href="#cursos" class="px-8 py-3.5 bg-blue-600 text-white font-semibold rounded-full shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all hover:-translate-y-1 flex items-center gap-2"><span data-i18n="hero_cta">Ver Cursos</span><i data-lucide="arrow-down" class="w-4 h-4"></i></a></div>
+                <p class="text-slate-500 font-medium tracking-wide uppercase text-sm mb-6 tracking-widest">Plataforma de Ensino Digital</p>
+                <p class="text-xl text-slate-600 font-light mb-8 max-w-2xl leading-relaxed">Aprende ao teu ritmo com tecnologia de ponta e um design focado na clareza.</p>
+                <div class="flex gap-4"><a href="#cursos" class="px-8 py-3.5 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2">Ver Cursos <i data-lucide="arrow-down" class="w-4 h-4"></i></a></div>
             </div>
         </section>
 
         <section id="cursos" class="max-w-7xl mx-auto py-16">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4" data-i18n="courses_title">Cursos Disponíveis</h2>
-                <p class="text-slate-500" data-i18n="courses_subtitle">Escolhe o plano que melhor se adapta aos teus objetivos.</p>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Cursos Disponíveis</h2>
+                <p class="text-slate-500">Escolhe o plano que melhor se adapta aos teus objetivos.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Cards -->
+                <!-- Inglês -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col relative overflow-hidden group h-full">
-                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg" data-i18n="label_popular">POPULAR</div>
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                     <div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-500"><i data-lucide="message-circle" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full" data-i18n="tag_languages">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight" data-i18n="course1_title">Inglês para Falantes de Português</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow" data-i18n="course1_desc">Aulas com objetivo prático e totalmente personalizadas para cada aluno. Foca-te no que realmente precisas.</p>
-                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white/60 mt-auto"><div class="flex justify-between items-center border-b border-slate-200/50 pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wide" data-i18n="price_class_50">Aula (50m)</span><span class="text-lg font-bold text-blue-600">€12</span></div><div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wide" data-i18n="price_class_90">Aula (1h30)</span><span class="text-lg font-bold text-blue-600">€15</span></div></div>
-                    <button onclick="window.openDetails('ingles')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-lg shadow-slate-200/50 flex justify-center items-center gap-2"><span data-i18n="btn_details">Ver Detalhes</span><i data-lucide="info" class="w-4 h-4"></i></button>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Inglês Personalizado</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Aulas com objetivo prático e totalmente personalizadas para cada aluno. Foca-te no que realmente precisas.</p>
+                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
+                        <div class="flex justify-between items-center border-b pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Aula (50m)</span><span class="text-lg font-bold text-blue-600">€12</span></div>
+                        <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Aula (1h30)</span><span class="text-lg font-bold text-blue-600">€15</span></div>
+                    </div>
+                    <button onclick="window.openDetails('ingles')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
+                <!-- Português -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-green-400/50 transition-colors h-full">
                     <div class="h-40 bg-green-50 rounded-xl mb-4 flex items-center justify-center text-green-600"><i data-lucide="book-a" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full" data-i18n="tag_languages">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 4.9</div></div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="course2_title">Portuguese for English Speakers</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow" data-i18n="course2_desc">Learn Portuguese effectively. Classes specifically designed for English speakers, focusing on conversation and culture.</p>
-                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white/60 mt-auto"><div class="flex justify-between items-center border-b border-slate-200/50 pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wide" data-i18n="price_class_50">Aula (50m)</span><span class="text-lg font-bold text-green-600">€12</span></div><div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wide" data-i18n="price_class_90">Aula (1h30)</span><span class="text-lg font-bold text-green-600">€15</span></div></div>
-                    <button onclick="window.openDetails('portugues')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-green-600 transition-colors shadow-md flex justify-center items-center gap-2"><span data-i18n="btn_details">Ver Detalhes</span><i data-lucide="info" class="w-4 h-4"></i></button>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 4.9</div></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Portuguese for English</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Learn Portuguese effectively. Classes specifically designed for English speakers, focusing on conversation and culture.</p>
+                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
+                        <div class="flex justify-between items-center border-b pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Class (50m)</span><span class="text-lg font-bold text-green-600">€12</span></div>
+                        <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Class (1h30)</span><span class="text-lg font-bold text-green-600">€15</span></div>
+                    </div>
+                    <button onclick="window.openDetails('portugues')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-green-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
+                <!-- AI -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-violet-400/50 transition-colors h-full">
                     <div class="h-40 bg-violet-50 rounded-xl mb-4 flex items-center justify-center text-violet-600"><i data-lucide="cpu" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full" data-i18n="tag_tech">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="course3_title">Aulas de AI e Tecnologia</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow" data-i18n="course3_desc">Orientação prática para criação de projetos utilizando ferramentas de Inteligência Artificial. Potencia a tua criatividade.</p>
-                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white/60 mt-auto"><div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wide" data-i18n="price_mentorship">Mentoria (1h30)</span><span class="text-lg font-bold text-violet-600">€20</span></div></div>
-                    <button onclick="window.openDetails('ai')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-violet-600 transition-colors shadow-md flex justify-center items-center gap-2"><span data-i18n="btn_details">Ver Detalhes</span><i data-lucide="info" class="w-4 h-4"></i></button>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Aulas de AI e Tecnologia</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Orientação prática para criação de projetos utilizando ferramentas de Inteligência Artificial. Potencia a tua criatividade.</p>
+                    <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
+                        <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Mentoria (1h30)</span><span class="text-lg font-bold text-violet-600">€20</span></div>
+                    </div>
+                    <button onclick="window.openDetails('ai')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-violet-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- DASHBOARD DO ALUNO (Área Privada) -->
+    <!-- DASHBOARD -->
     <main id="user-dashboard" class="hidden-section flex-grow pt-28 pb-12 px-4 max-w-7xl mx-auto w-full animate-fade-in">
         
-        <!-- Cabeçalho de Boas-vindas -->
-        <div class="mb-10 bg-gradient-to-r from-slate-900 to-blue-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-10 rounded-full -translate-y-1/2 translate-x-1/3"></div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
-                <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-3xl font-bold border-2 border-white/20">
-                    <span id="user-initial">A</span>
+        <div id="dashboard-tab-content">
+            <!-- Header User -->
+            <div class="mb-10 bg-gradient-to-r from-slate-900 to-blue-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-3xl font-bold border-2 border-white/20">
+                        <span id="user-initial">U</span>
+                    </div>
+                    <div class="text-center md:text-left flex-grow">
+                        <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
+                            <h2 class="text-3xl font-bold">Olá, <span id="user-name-display">...</span>!</h2>
+                            <span id="user-status-badge" class="status-badge">...</span>
+                        </div>
+                        <p class="text-blue-100 text-lg font-light" id="user-subtitle">Pronto para continuar a aprender?</p>
+                    </div>
+                    <!-- Botão Agendar (Só Alunos) -->
+                    <div id="student-schedule-btn-area" class="hidden">
+                        <button onclick="window.openScheduleModal()" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-xl transition-all flex items-center gap-2">
+                            <i data-lucide="calendar-plus" class="w-5 h-5"></i> Agendar Aula
+                        </button>
+                    </div>
                 </div>
-                <div class="text-center md:text-left">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-2">Olá, <span id="user-name-display">Aluno</span>!</h2>
-                    <p class="text-blue-100 text-lg">Pronto para continuar a aprender?</p>
+            </div>
+
+            <!-- PAINEL ADMIN: AGENDAMENTOS -->
+            <div id="admin-schedule-management" class="hidden-section mb-10 animate-fade-in">
+                <div class="glass-card rounded-[2rem] p-8 border border-amber-200 bg-amber-50/20">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="calendar-check" class="text-amber-600"></i> Pedidos de Agendamento</h3>
+                    <div id="schedule-list-admin" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
-                <div class="md:ml-auto">
-                    <!-- BOTÃO PRINCIPAL "ÁREA DE ESTUDO" -->
-                    <button onclick="window.scrollToSection('study-area')" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-900/50 transition-all hover:scale-105 flex items-center gap-3">
-                        <i class="fa-solid fa-rocket text-xl"></i>
-                        <span>Entrar na Área de Estudo</span>
-                    </button>
+            </div>
+
+            <!-- PAINEL ADMIN: GESTÃO DE ALUNOS -->
+            <div id="admin-user-management" class="hidden-section mb-10 animate-fade-in">
+                <div class="glass-card rounded-[2rem] p-8 border border-slate-200">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="users" class="text-blue-600"></i> Gestão de Candidatos</h3>
+                    <div id="users-list-admin" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
+            </div>
+
+            <!-- FORMULÁRIO GUEST -->
+            <div id="guest-request-form" class="hidden-section mb-10 animate-fade-in">
+                <div class="glass-card rounded-[2.5rem] p-10 border-2 border-blue-50 max-w-2xl mx-auto">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-bold text-slate-900 mb-2">Torna-te Aluno</h3>
+                        <p class="text-slate-500">Diz-nos o teu curso e horário.</p>
+                    </div>
+                    <form id="studentRequestForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <select id="reqCourse" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold focus:border-blue-500 text-slate-700">
+                                <option value="Inglês Personalizado">Inglês Personalizado</option>
+                                <option value="Portuguese for English Speakers">Portuguese for English Speakers</option>
+                                <option value="AI e Tecnologia">AI e Tecnologia</option>
+                            </select>
+                            <select id="reqAvailability" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold focus:border-blue-500 text-slate-700">
+                                <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
+                                <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
+                                <option value="Fins de Semana">Fins de Semana</option>
+                                <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-5 bg-blue-600 text-white font-bold rounded-3xl shadow-xl hover:bg-slate-900 transition-all transform active:scale-95">
+                            Enviar Pedido de Acesso
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ÁREA ALUNO (MATERIAIS) -->
+            <div id="student-content-area" class="hidden-section grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div id="study-area" class="lg:col-span-2 space-y-6">
+                    <div class="glass-card rounded-[2rem] p-8">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3"><i data-lucide="folder-open" class="text-blue-600"></i> Meus Materiais</h3>
+                        <div id="materials-list" class="space-y-4"></div>
+                    </div>
+                    <!-- Aviso de Segurança -->
+                    <div class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 text-xs text-slate-400 text-center font-medium">
+                        <i data-lucide="info" class="w-4 h-4 inline-block mr-1"></i> Em caso de erro, contactar: <span class="font-bold text-blue-600">dimaslearningbusiness@gmail.com</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-[2rem] p-8 h-fit">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest">Nível Atual</h3>
+                    <div id="user-level-display" class="text-xl font-black text-blue-600 mb-2">A1 Iniciante</div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden"><div id="progress-bar-fill" class="bg-blue-600 h-3 transition-all duration-1000" style="width: 25%"></div></div>
+                </div>
+            </div>
+
+            <!-- PENDENTE -->
+            <div id="pending-empty-state" class="hidden-section py-20 text-center glass-card rounded-[2rem] mt-10">
+                <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 animate-pulse"><i data-lucide="clock"></i></div>
+                <h3 class="text-2xl font-bold text-slate-800">Candidatura Pendente</h3>
+                <p class="text-slate-500">O Dimas está a rever o teu pedido.</p>
             </div>
         </div>
 
-        <!-- PAINEL DE ADMIN (Visível Apenas para o Admin) -->
-        <div id="admin-panel" class="hidden-section mb-10">
-            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
-                <div class="flex items-center gap-3 mb-4 text-amber-700">
-                    <i class="fa-solid fa-lock text-2xl"></i>
-                    <h3 class="text-xl font-bold">Painel de Administrador</h3>
-                </div>
-                <form id="addMaterialForm" class="flex flex-col md:flex-row gap-4 items-end">
-                    <div class="flex-grow w-full">
-                        <label class="block text-sm font-medium text-amber-800 mb-1">Título da Aula / Material</label>
-                        <input type="text" id="matTitle" required placeholder="Ex: Aula 3 - Vocabulário" class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+        <!-- PROFILE TAB -->
+        <div id="profile-tab-content" class="hidden-section animate-fade-in max-w-2xl mx-auto">
+            <div class="glass-card rounded-[2.5rem] p-8 md:p-12 border-2 border-slate-100">
+                <div class="text-center mb-10"><h3 class="text-3xl font-bold text-slate-900">Editar Perfil</h3></div>
+                <form id="editProfileForm" class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-black text-slate-400 ml-2 uppercase">Nome Completo</label>
+                        <input type="text" id="editName" required class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold text-slate-700 focus:border-blue-500">
                     </div>
-                    <div class="flex-grow w-full">
-                        <label class="block text-sm font-medium text-amber-800 mb-1">Link do Material (URL)</label>
-                        <input type="url" id="matLink" required placeholder="https://docs.google.com/..." class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                    <div class="space-y-2">
+                        <label class="text-xs font-black text-slate-400 ml-2 uppercase tracking-widest opacity-50">Email (Não editável)</label>
+                        <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-semibold text-slate-400 cursor-not-allowed">
                     </div>
-                    <button type="submit" class="px-6 py-2 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition-colors w-full md:w-auto">
-                        <i class="fa-solid fa-plus mr-2"></i> Adicionar
-                    </button>
+                    <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl shadow-xl hover:bg-blue-600 transition-all">Guardar Alterações</button>
                 </form>
+                <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-bold border border-emerald-100">Perfil atualizado com sucesso!</div>
             </div>
         </div>
 
-        <!-- Navegação Rápida (Hub) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            <button onclick="window.scrollToSection('study-area')" class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all flex flex-col items-center gap-3 group">
-                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors"><i class="fa-solid fa-book-open text-xl"></i></div>
-                <span class="font-semibold text-slate-700">Materiais</span>
-            </button>
-            <button class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-green-200 hover:shadow-md transition-all flex flex-col items-center gap-3 group">
-                <div class="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors"><i class="fa-solid fa-chart-line text-xl"></i></div>
-                <span class="font-semibold text-slate-700">Progresso</span>
-            </button>
-            <button onclick="window.changePassword()" class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all flex flex-col items-center gap-3 group">
-                <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-full flex items-center justify-center group-hover:bg-violet-600 group-hover:text-white transition-colors"><i class="fa-solid fa-key text-xl"></i></div>
-                <span class="font-semibold text-slate-700">Password</span>
-            </button>
-            <button onclick="window.logout()" class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-red-200 hover:shadow-md transition-all flex flex-col items-center gap-3 group">
-                <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors"><i class="fa-solid fa-sign-out-alt text-xl"></i></div>
-                <span class="font-semibold text-slate-700">Sair</span>
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Coluna Principal: Ficheiros -->
-            <div id="study-area" class="md:col-span-2 space-y-6 scroll-mt-32">
-                <div class="glass-card rounded-2xl p-6">
-                    <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="folder-open" class="text-blue-600"></i> Materiais das Aulas</h3>
-                    
-                    <!-- Lista Dinâmica do Firebase -->
-                    <div id="materials-list" class="space-y-3">
-                        <p class="text-slate-400 text-sm italic p-4 text-center">A carregar materiais...</p>
-                        <!-- Os materiais vão aparecer aqui automaticamente -->
-                    </div>
+        <!-- PAINEL ADMIN: ATRIBUIR FICHEIRO -->
+        <div id="admin-add-material-panel" class="hidden-section mt-10 animate-fade-in scroll-mt-32">
+            <div class="bg-amber-50 border border-amber-200 rounded-[2rem] p-10 shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-amber-900 tracking-tight">Atribuir Ficheiro a <span id="target-student-name" class="underline">...</span></h3>
+                    <button onclick="window.closeMaterialPanel()" class="text-amber-800 text-xs font-black uppercase bg-white px-3 py-1 rounded-lg">Fechar</button>
                 </div>
-            </div>
-            
-            <!-- Barra Lateral: Próxima Aula -->
-            <div class="space-y-6">
-                <div class="glass-card rounded-2xl p-6 bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-xl">
-                    <h3 class="text-lg font-bold mb-1 opacity-90">Próxima Aula</h3>
-                    <p class="text-3xl font-bold mb-4">04 Fev, 15:00</p>
-                    <a href="https://zoom.us/" target="_blank" class="flex items-center justify-center gap-2 text-sm bg-white text-blue-900 font-bold p-3 rounded-xl hover:bg-blue-50 transition-all cursor-pointer shadow-md">
-                        <i data-lucide="video" class="w-4 h-4"></i>
-                        <span>Entrar no Zoom</span>
-                    </a>
-                </div>
-
-                <div id="profile-area" class="glass-card rounded-2xl p-6 scroll-mt-32">
-                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">O Meu Progresso</h3>
-                    <div class="mb-2 flex justify-between text-xs font-semibold">
-                        <span>Nível Atual</span>
-                        <span class="text-blue-600">B1 Intermédio</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-4">
-                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
-                    </div>
-                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
-                        <p class="text-xs text-blue-800 font-medium text-center">"A persistência é o caminho do êxito."</p>
-                    </div>
-                </div>
+                <form id="addMaterialForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <input type="text" id="matTitle" required placeholder="Título do material" class="px-5 py-4 bg-white border border-amber-100 rounded-2xl outline-none font-medium">
+                    <input type="url" id="matLink" required placeholder="Link (PDF, Drive...)" class="px-5 py-4 bg-white border border-amber-100 rounded-2xl outline-none font-medium">
+                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl hover:bg-amber-700 shadow-md">Adicionar Agora</button>
+                </form>
             </div>
         </div>
     </main>
 
-    <!-- Modal Login/Registo -->
-    <div id="loginModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full relative animate-fade-in">
-            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
-            
+    <!-- MODAL CONFIRMAÇÃO -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-sm w-full text-center animate-fade-in">
+            <h4 class="text-2xl font-black text-slate-900 mb-4" id="confirmTitle">Confirmar?</h4>
+            <p class="text-slate-500 font-medium mb-10" id="confirmText">Desejas realizar esta ação?</p>
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="window.closeConfirmModal()" class="py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl">Cancelar</button>
+                <button id="confirmActionBtn" class="py-4 bg-red-600 text-white font-black rounded-2xl shadow-lg">Sim, Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAIS DE LOGIN -->
+    <div id="loginModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative animate-fade-in">
+            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600"><i data-lucide="x"></i></button>
             <div id="loginFormContainer">
-                <div class="text-center mb-6"><h3 class="text-2xl font-bold text-slate-900" data-i18n="login_welcome">Bem-vindo</h3><p class="text-slate-500 text-sm" data-i18n="login_subtitle">Entra na tua conta</p></div>
+                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Entrar</h3>
                 <form id="formLogin" class="space-y-4">
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="login_email">Email</label><input id="loginEmail" type="email" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"></div>
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="login_password">Palavra-passe</label><input id="loginPass" type="password" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"></div>
-                    <div class="text-right"><a href="#" onclick="window.recoverPassword()" class="text-xs text-blue-600 hover:text-blue-800 font-medium hover:underline">Esqueci-me da palavra-passe</a></div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-lg hover:bg-blue-700 transition-colors" data-i18n="btn_login">Entrar</button>
+                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="loginPass" type="password" placeholder="Palavra-passe" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all">Iniciar Sessão</button>
                 </form>
-                <p class="text-center mt-4 text-xs text-slate-400"><span data-i18n="login_no_account">Ainda não tens conta?</span> <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 hover:underline" data-i18n="login_register">Regista-te</a></p>
+                <p class="text-center mt-6 text-xs text-slate-400 uppercase font-bold tracking-widest">Novo por aqui? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar Conta</a></p>
             </div>
-
             <div id="registerFormContainer" class="hidden">
-                <div class="text-center mb-6"><h3 class="text-2xl font-bold text-slate-900" data-i18n="register_title">Criar Conta</h3><p class="text-slate-500 text-sm" data-i18n="register_subtitle">Começa hoje</p></div>
+                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Criar Conta</h3>
                 <form id="formRegister" class="space-y-4">
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="register_name">Nome</label><input id="regName" type="text" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"></div>
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="login_email">Email</label><input id="regEmail" type="email" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"></div>
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="login_password">Palavra-passe</label><input id="regPass" type="password" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all"></div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-lg hover:bg-blue-700 transition-colors" data-i18n="btn_register">Registar</button>
+                    <input id="regName" type="text" placeholder="Teu Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="regEmail" type="email" placeholder="Teu Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="regPass" type="password" placeholder="Password (mín. 6 chars)" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all">Criar Agora</button>
                 </form>
-                <p class="text-center mt-4 text-xs text-slate-400"><span data-i18n="register_has_account">Já tens conta?</span> <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 hover:underline" data-i18n="register_login_link">Entrar</a></p>
+                <p class="text-center mt-6 text-xs text-slate-400 uppercase font-bold tracking-widest">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Modal Detalhes -->
-    <div id="detailsModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full relative animate-fade-in overflow-hidden">
-            <div class="bg-slate-50 p-6 border-b border-slate-100 flex justify-between items-center">
-                <div><h3 id="modalTitle" class="text-xl font-bold text-slate-900">Detalhes</h3></div>
-                <button onclick="document.getElementById('detailsModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 p-2 hover:bg-slate-100 rounded-full transition-colors"><i data-lucide="x" class="w-6 h-6"></i></button>
-            </div>
-            <div class="p-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-6">
-                        <div class="flex gap-4"><div class="bg-blue-100 p-2 rounded-lg h-fit text-blue-600"><i data-lucide="target" class="w-6 h-6"></i></div><div><h4 id="detail-title-1" class="font-bold text-slate-800 mb-1">...</h4><p id="detail-text-1" class="text-sm text-slate-600 leading-relaxed">...</p></div></div>
-                        <div class="flex gap-4"><div class="bg-green-100 p-2 rounded-lg h-fit text-green-600"><i data-lucide="users" class="w-6 h-6"></i></div><div><h4 id="detail-title-2" class="font-bold text-slate-800 mb-1">...</h4><p id="detail-text-2" class="text-sm text-slate-600 leading-relaxed">...</p></div></div>
-                        <div class="flex gap-4"><div class="bg-violet-100 p-2 rounded-lg h-fit text-violet-600"><i data-lucide="zap" class="w-6 h-6"></i></div><div><h4 id="detail-title-3" class="font-bold text-slate-800 mb-1">...</h4><p id="detail-text-3" class="text-sm text-slate-600 leading-relaxed">...</p></div></div>
-                    </div>
-                    <div class="bg-slate-50 rounded-2xl p-6 flex flex-col justify-center items-center text-center border border-slate-100">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-4 text-blue-600"><i data-lucide="calendar-check" class="w-8 h-8"></i></div>
-                        <h4 class="font-bold text-slate-900 mb-2" data-i18n="cta_ready">Pronto?</h4>
-                        <button class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-200" data-i18n="btn_schedule">Agendar</button>
-                    </div>
+    <!-- MODAL AGENDAR (ALUNO) -->
+    <div id="scheduleModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-w-md w-full relative animate-fade-in">
+            <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
+            <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Marcar Aula</h3>
+            <form id="formLessonRequest" class="space-y-6">
+                <div>
+                    <label class="text-xs font-black text-slate-400 uppercase ml-1">Data Pretendida</label>
+                    <input type="date" id="lessonDate" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-medium text-slate-700 focus:bg-white focus:border-blue-500 outline-none">
                 </div>
-            </div>
+                <div>
+                    <label class="text-xs font-black text-slate-400 uppercase ml-1">Bloco Horário</label>
+                    <select id="lessonSlot" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-semibold text-slate-700 focus:bg-white focus:border-blue-500 outline-none">
+                        <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
+                        <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
+                        <option value="Fins de Semana">Fins de Semana</option>
+                        <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl hover:bg-slate-900 transition-all">Solicitar Agendamento</button>
+            </form>
         </div>
     </div>
 
-    <!-- Apresentação -->
+    <!-- APRESENTAÇÃO (SOBRE) -->
     <div id="presentation-overlay">
-        <button class="close-presentation-btn" onclick="window.closePresentation()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="btn_back_home">Voltar</span></button>
+        <button class="close-presentation-btn" onclick="window.closePresentation()"><i class="fa-solid fa-arrow-left"></i> <span>Voltar</span></button>
         <div class="presentation-container">
-            <div class="bg-decoration-1"></div><div class="bg-decoration-2"></div>
-            <button class="nav-btn prev" onclick="window.changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="nav-btn next" onclick="window.changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-            <div class="slide active"><div style="text-align: center;"><div style="font-size: 80px; color: #2563eb; margin-bottom: 20px;"><i class="fa-solid fa-graduation-cap"></i></div><h1>Dimas Learning</h1><p class="subtitle" data-i18n="slide_sub_1">...</p></div></div>
-            <div class="slide"><div class="text-wrapper"><h2 class="slide-title" data-i18n="slide_title_2">Jornada</h2><p data-i18n="slide_text_2a">...</p></div></div>
-            <div class="slide"><div class="tiled-content"><div class="tile"><h3 data-i18n="slide_card_1_title">AI</h3></div></div></div>
-            <div class="slide"><div class="text-wrapper"><h2 class="slide-title" data-i18n="slide_title_4">Filosofia</h2><ul class="custom-list"><li>...</li></ul></div></div>
-            <div class="indicators"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <!-- Slides preenchidos por JS para garantir tradução e dinâmica -->
+            <div id="slides-container" class="w-full h-full"></div>
+            
+            <button class="nav-btn-slide" style="left:20px" onclick="window.changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="nav-btn-slide" style="right:20px" onclick="window.changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-3" id="presentation-dots"></div>
         </div>
     </div>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, updatePassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
-        // <!-- CONFIGURAÇÃO FIREBASE -->
         const firebaseConfig = {
             apiKey: "AIzaSyDgmisKY0vQY1UkRm2dndaAa2jbOl9Ju1s",
             authDomain: "dimas-learning.firebaseapp.com",
@@ -325,285 +348,414 @@
             storageBucket: "dimas-learning.firebasestorage.app",
             messagingSenderId: "600636545831",
             appId: "1:600636545831:web:389dcd6a744221f4456702",
-            measurementId: "G-SYQSJ160G0"
         };
 
-        // Inicializar Firebase
-        let auth, db;
-        try {
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase carregado!");
-        } catch (e) {
-            console.error("Erro Firebase: Configuração em falta ou errada.", e);
-        }
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const APP_ID = 'dimas-learning-v2';
+        const ADMIN_EMAIL = "dimaslearningbusiness@gmail.com";
 
-        // --- SISTEMA DE UI E NAVEGAÇÃO ---
+        let currentUserProfile = null;
+        let selectedTargetStudentId = null;
+        let pendingActionFn = null;
+        let slideIdx = 0;
+
         window.lucide.createIcons();
 
-        // 1. Mostrar/Esconder Modais e Páginas
-        window.openLoginModal = () => { document.getElementById('loginModal').classList.remove('hidden'); window.toggleAuthMode('login'); };
-        window.toggleAuthMode = (mode) => {
-            const l = document.getElementById('loginFormContainer'); const r = document.getElementById('registerFormContainer');
-            if(mode === 'register'){ l.classList.add('hidden'); r.classList.remove('hidden'); }
-            else { r.classList.add('hidden'); l.classList.remove('hidden'); }
-        };
-        
-        window.logout = async () => {
-            if(auth) await signOut(auth);
-            else location.reload();
+        // --- SISTEMA DE MODAL ---
+        window.openConfirmModal = (title, text, actionFn) => {
+            document.getElementById('confirmTitle').innerText = title;
+            document.getElementById('confirmText').innerText = text;
+            pendingActionFn = actionFn;
+            document.getElementById('confirmModal').classList.remove('hidden');
         };
 
+        window.closeConfirmModal = () => {
+            document.getElementById('confirmModal').classList.add('hidden');
+            pendingActionFn = null;
+        };
+
+        document.getElementById('confirmActionBtn').addEventListener('click', () => {
+            if (pendingActionFn) { pendingActionFn(); window.closeConfirmModal(); }
+        });
+
+        // --- GLOBAL ACTIONS ---
+        window.approve = async (uid) => {
+            await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' });
+        };
+
+        window.revoke = (uid) => {
+            window.openConfirmModal("Revogar Acesso?", "O utilizador voltará a ser Convidado.", async () => {
+                await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' });
+            });
+        };
+
+        window.changeLevel = async (uid, newLevel) => {
+            await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: newLevel });
+        };
+
+        window.deleteMaterialForStudent = (uid, matId) => {
+            window.openConfirmModal("Eliminar Ficheiro?", "O aluno deixará de ver este material.", async () => {
+                await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId));
+            });
+        };
+
+        window.resolveLessonRequest = async (requestId, status) => {
+            if (status === 'confirmar') alert("Agendamento aceite! Podes contactar o aluno.");
+            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', requestId));
+        };
+
+        window.openMaterialPanel = (uid, name) => {
+            selectedTargetStudentId = uid;
+            document.getElementById('target-student-name').innerText = name;
+            document.getElementById('admin-add-material-panel').classList.remove('hidden-section');
+            document.getElementById('admin-add-material-panel').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        window.closeMaterialPanel = () => {
+            document.getElementById('admin-add-material-panel').classList.add('hidden-section');
+            selectedTargetStudentId = null;
+        };
+
+        // --- NAVIGATION ---
+        window.logout = () => signOut(auth);
+        window.openLoginModal = () => {
+            document.getElementById('loginModal').classList.remove('hidden');
+            window.toggleAuthMode('login');
+        };
+        window.toggleAuthMode = (m) => {
+            document.getElementById('loginFormContainer').classList.toggle('hidden', m === 'register');
+            document.getElementById('registerFormContainer').classList.toggle('hidden', m === 'login');
+        };
+        
         window.showLandingPage = () => {
             document.getElementById('landing-page').classList.remove('hidden-section');
             document.getElementById('user-dashboard').classList.add('hidden-section');
-            document.getElementById('nav-links').classList.remove('hidden');
-            document.getElementById('user-nav-links').classList.add('hidden-section'); // Esconde menu user
-            document.getElementById('loginBtn').classList.remove('hidden');
-            document.getElementById('logoutBtn').classList.add('hidden');
+            const loggedIn = !!auth.currentUser;
+            document.getElementById('loginBtn').classList.toggle('hidden', loggedIn);
+            document.getElementById('logoutBtn').classList.toggle('hidden', !loggedIn);
+            document.getElementById('user-nav-links').classList.toggle('hidden-section', !loggedIn);
+            window.scrollTo(0, 0);
+        };
+
+        window.switchTab = (tab) => {
+            document.getElementById('landing-page').classList.add('hidden-section');
+            document.getElementById('user-dashboard').classList.remove('hidden-section');
+            const dContent = document.getElementById('dashboard-tab-content');
+            const pContent = document.getElementById('profile-tab-content');
+            if (tab === 'dashboard') {
+                dContent.classList.remove('hidden-section');
+                pContent.classList.add('hidden-section');
+            } else {
+                dContent.classList.add('hidden-section');
+                pContent.classList.remove('hidden-section');
+                document.getElementById('editName').value = currentUserProfile.name;
+                document.getElementById('displayEmail').value = currentUserProfile.email;
+            }
         };
 
         window.scrollToSection = (id) => {
-            const el = document.getElementById(id);
-            if(el) el.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // 2. Lógica de Autenticação
-        const formLogin = document.getElementById('formLogin');
-        const formRegister = document.getElementById('formRegister');
-
-        if(formLogin) {
-            formLogin.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('loginEmail').value;
-                const pass = document.getElementById('loginPass').value;
-                try {
-                    if(!auth) throw new Error("Firebase não configurado.");
-                    await signInWithEmailAndPassword(auth, email, pass);
-                    document.getElementById('loginModal').classList.add('hidden');
-                } catch (error) {
-                    alert("Erro ao entrar: " + error.message);
-                }
-            });
-        }
-
-        if(formRegister) {
-            formRegister.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('regName').value;
-                const email = document.getElementById('regEmail').value;
-                const pass = document.getElementById('regPass').value;
-                try {
-                    if(!auth) throw new Error("Firebase não configurado.");
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-                    const user = userCredential.user;
-                    // Guardar nome na base de dados
-                    await setDoc(doc(db, "users", user.uid), { name: name, email: email });
-                    document.getElementById('loginModal').classList.add('hidden');
-                } catch (error) {
-                    alert("Erro ao registar: " + error.message);
-                }
-            });
-        }
-
-        window.recoverPassword = async () => {
-            const email = prompt("Insere o teu email para recuperar a palavra-passe:");
-            if(email) {
-                try { await sendPasswordResetEmail(auth, email); alert("Email de recuperação enviado!"); } catch(e) { alert("Erro: " + e.message); }
-            }
+            if (id === 'user-dashboard') { window.switchTab('dashboard'); return; }
+            window.showLandingPage();
+            setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }, 100);
         };
 
-        window.changePassword = async () => {
-            const newPass = prompt("Nova palavra-passe (mínimo 6 caracteres):");
-            if(newPass) {
-                try {
-                    if(auth.currentUser) { await updatePassword(auth.currentUser, newPass); alert("Palavra-passe atualizada!"); }
-                    else alert("Sessão inválida. Faz login novamente.");
-                } catch(e) { alert("Erro: " + e.message); }
-            }
-        };
+        window.openScheduleModal = () => document.getElementById('scheduleModal').classList.remove('hidden');
 
-        // --- LÓGICA DE ADMINISTRAÇÃO E MATERIAIS ---
-        const addMaterialForm = document.getElementById('addMaterialForm');
-        
-        // 1. Função para Adicionar Material (Só Admin)
-        if(addMaterialForm) {
-            addMaterialForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const title = document.getElementById('matTitle').value;
-                const link = document.getElementById('matLink').value;
-                
-                try {
-                    await addDoc(collection(db, "materials"), {
-                        title: title,
-                        link: link,
-                        createdAt: serverTimestamp()
-                    });
-                    alert("Material adicionado com sucesso!");
-                    addMaterialForm.reset();
-                } catch (error) {
-                    alert("Erro ao adicionar: " + error.message);
-                }
-            });
+        // --- PROFILE MONITOR ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid);
+                onSnapshot(profileRef, (snap) => {
+                    if (snap.exists()) {
+                        currentUserProfile = snap.data();
+                        updateDashboardUI();
+                    } else {
+                        const data = { 
+                            uid: user.uid, name: user.displayName || "Novo Aluno", email: user.email, 
+                            status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante'
+                        };
+                        setDoc(profileRef, data);
+                    }
+                });
+            } else {
+                window.showLandingPage();
+            }
+        });
+
+        function getProgressPercentage(level) {
+            const levels = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
+            return levels[level] || 10;
         }
 
-        // 2. Função para Ler e Mostrar Materiais (Para todos)
-        function loadMaterials() {
-            const listContainer = document.getElementById('materials-list');
-            const q = query(collection(db, "materials"), orderBy("createdAt", "desc"));
+        function updateDashboardUI() {
+            if (!currentUserProfile) return;
+            const profile = currentUserProfile;
+            const isAdmin = profile.email === ADMIN_EMAIL;
             
-            onSnapshot(q, (snapshot) => {
-                listContainer.innerHTML = ''; // Limpar lista
-                if (snapshot.empty) {
-                    listContainer.innerHTML = '<p class="text-slate-400 text-sm italic p-4 text-center">Ainda não há materiais.</p>';
-                    return;
+            document.getElementById('user-name-display').innerText = profile.name;
+            document.getElementById('user-initial').innerText = (profile.name || "U").charAt(0).toUpperCase();
+            document.getElementById('user-status-badge').innerText = isAdmin ? 'Administrador' : profile.status;
+            document.getElementById('user-status-badge').className = `status-badge status-${isAdmin ? 'admin' : profile.status}`;
+
+            document.getElementById('loginBtn').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+            document.getElementById('user-nav-links').classList.remove('hidden-section');
+
+            document.getElementById('admin-user-management').classList.toggle('hidden-section', !isAdmin);
+            document.getElementById('admin-schedule-management').classList.toggle('hidden-section', !isAdmin);
+            document.getElementById('student-schedule-btn-area').classList.toggle('hidden', isAdmin || profile.status !== 'student');
+            
+            if (isAdmin) {
+                document.getElementById('user-subtitle').innerText = "Painel Central Dimas Learning.";
+                loadAdminDashboard();
+                loadAdminSchedules();
+            } else {
+                document.getElementById('guest-request-form').classList.toggle('hidden-section', profile.status !== 'guest');
+                document.getElementById('pending-empty-state').classList.toggle('hidden-section', profile.status !== 'pending');
+                document.getElementById('student-content-area').classList.toggle('hidden-section', profile.status !== 'student');
+                if (profile.status === 'student') {
+                    document.getElementById('user-level-display').innerText = profile.level || 'A1 Iniciante';
+                    document.getElementById('progress-bar-fill').style.width = getProgressPercentage(profile.level) + "%";
+                    loadStudentMaterials(profile.uid);
                 }
-                
-                snapshot.forEach((doc) => {
-                    const m = doc.data();
-                    const itemHTML = `
-                        <div class="flex items-center justify-between p-4 bg-white/50 rounded-xl border border-slate-100 hover:bg-white hover:shadow-md transition-all group">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
-                                    <i class="fa-solid fa-file-lines"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-slate-800 text-sm">${m.title}</p>
-                                    <p class="text-xs text-slate-400">Clique para abrir</p>
-                                </div>
-                            </div>
-                            <a href="${m.link}" target="_blank" class="text-slate-400 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors">
-                                <i data-lucide="external-link" class="w-5 h-5"></i>
-                            </a>
+            }
+            window.lucide.createIcons();
+        }
+
+        function loadAdminDashboard() {
+            const list = document.getElementById('users-list-admin');
+            const q = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles'));
+            onSnapshot(q, (snap) => {
+                list.innerHTML = "";
+                snap.forEach((d) => {
+                    const u = d.data();
+                    if (u.email === ADMIN_EMAIL) return;
+                    const div = document.createElement('div');
+                    div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4 animate-fade-in";
+                    const mid = `admin-mat-list-${u.uid}`;
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400 font-bold">${u.email}</p></div>
+                            <span class="status-badge status-${u.status}">${u.status}</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl space-y-2">
+                            <label class="text-[9px] font-black text-slate-400 uppercase">Nível Atual:</label>
+                            <select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white border border-slate-200 rounded p-1 text-[11px] font-bold text-slate-700 outline-none">
+                                <option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>Idioma: A1</option>
+                                <option value="A2" ${u.level === 'A2' ? 'selected' : ''}>Idioma: A2</option>
+                                <option value="B1" ${u.level === 'B1' ? 'selected' : ''}>Idioma: B1</option>
+                                <option value="B2" ${u.level === 'B2' ? 'selected' : ''}>Idioma: B2</option>
+                                <option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Tech: Iniciante</option>
+                                <option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Tech: Intermédio</option>
+                                <option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Tech: Avançado</option>
+                            </select>
+                        </div>
+                        <div class="border-t pt-3">
+                            <p class="text-[9px] font-black text-slate-400 uppercase mb-2">Ficheiros Atribuídos:</p>
+                            <div id="${mid}" class="space-y-1 max-h-24 overflow-y-auto pr-1"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-auto pt-2">
+                            ${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2.5 rounded-xl shadow-sm">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2.5 rounded-xl border border-red-100">REVOGAR</button>`}
+                            <button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2.5 rounded-xl shadow-sm">FICHEIROS</button>
                         </div>
                     `;
-                    listContainer.innerHTML += itemHTML;
+                    list.appendChild(div);
+                    loadAdminMaterialsView(u.uid, mid);
                 });
-                window.lucide.createIcons(); // Atualizar ícones novos
             });
         }
 
-        // 3. Monitor de Estado
-        if(auth) {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    // Utilizador entrou
-                    let userName = "Aluno";
-                    try {
-                        const docRef = doc(db, "users", user.uid);
-                        const docSnap = await getDoc(docRef);
-                        if (docSnap.exists()) userName = docSnap.data().name;
-                    } catch(e) { console.log("Erro perfil", e); }
+        function loadAdminMaterialsView(uid, cid) {
+            const container = document.getElementById(cid);
+            const q = query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc'));
+            onSnapshot(q, (snap) => {
+                if (!container) return;
+                container.innerHTML = snap.empty ? '<p class="text-[10px] text-slate-400 italic">Vazio.</p>' : '';
+                snap.forEach((d) => {
+                    const m = d.data();
+                    const item = document.createElement('div');
+                    item.className = "flex items-center justify-between bg-slate-50 p-2 rounded-lg";
+                    item.innerHTML = `
+                        <span class="text-[9px] font-bold text-slate-600 truncate mr-2">${m.title}</span>
+                        <div class="flex gap-2">
+                            <a href="${m.link}" target="_blank" class="text-blue-500 hover:scale-110"><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+                            <button onclick="window.deleteMaterialForStudent('${uid}', '${d.id}')" class="text-red-400 hover:text-red-600"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+                window.lucide.createIcons();
+            });
+        }
 
-                    document.getElementById('user-name-display').innerText = userName;
-                    document.getElementById('user-initial').innerText = userName.charAt(0).toUpperCase();
+        function loadAdminSchedules() {
+            const list = document.getElementById('schedule-list-admin');
+            const q = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), orderBy('createdAt', 'desc'));
+            onSnapshot(q, (snap) => {
+                list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Nenhum pedido pendente.</p>' : '';
+                snap.forEach((d) => {
+                    const r = d.data();
+                    const card = document.createElement('div');
+                    card.className = "bg-white p-4 rounded-xl border border-amber-200 flex justify-between items-center shadow-sm";
+                    card.innerHTML = `
+                        <div>
+                            <p class="text-xs font-black text-slate-800 uppercase tracking-tighter">${r.studentName}</p>
+                            <p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="window.resolveLessonRequest('${d.id}', 'confirmar')" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button>
+                            <button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            });
+        }
 
-                    // VERIFICAÇÃO DE ADMIN
-                    if (user.email === "dimaslearningbusiness@gmail.com") {
-                        document.getElementById('admin-panel').classList.remove('hidden-section');
-                    } else {
-                        document.getElementById('admin-panel').classList.add('hidden-section');
-                    }
-
-                    // Carregar Lista de Materiais
-                    loadMaterials();
-
-                    // UI Updates
-                    document.getElementById('landing-page').classList.add('hidden-section');
-                    document.getElementById('user-dashboard').classList.remove('hidden-section');
-                    document.getElementById('nav-links').classList.add('hidden');
-                    document.getElementById('user-nav-links').classList.remove('hidden-section');
-                    document.getElementById('loginBtn').classList.add('hidden');
-                    document.getElementById('logoutBtn').classList.remove('hidden');
+        function loadStudentMaterials(uid) {
+            const list = document.getElementById('materials-list');
+            const q = query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc'));
+            onSnapshot(q, (snap) => {
+                list.innerHTML = snap.empty ? '<p class="text-center py-12 text-slate-400 italic font-medium">O teu tutor ainda não enviou ficheiros.</p>' : '';
+                snap.forEach((d) => {
+                    const m = d.data();
+                    const item = document.createElement('div');
+                    item.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl";
+                    item.innerHTML = `
+                        <div class="flex items-center gap-4"><div class="bg-blue-50 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-lines text-xl"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div>
+                        <a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-2xl hover:bg-blue-600 transition-all shadow-md">
+                            <span>Aceder ao Link</span><i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    `;
+                    list.appendChild(item);
                     window.lucide.createIcons();
-                } else {
-                    // Utilizador saiu
-                    window.showLandingPage();
-                }
+                });
             });
         }
 
-        // --- RESTO DO CÓDIGO (SLIDES, TRADUÇÃO, CANVAS) ---
-        window.openPresentation = () => { document.getElementById('presentation-overlay').classList.add('active'); state.slideIndex = 0; window.updateSlides(); };
-        window.closePresentation = () => { document.getElementById('presentation-overlay').classList.remove('active'); };
-        
-        const state = { slideIndex: 0 };
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        
-        window.updateSlides = () => { slides.forEach((s, i) => { s.classList.remove('active'); dots[i].classList.remove('active'); if (i === state.slideIndex) { s.classList.add('active'); dots[i].classList.add('active'); } }); };
-        window.changeSlide = (d) => { state.slideIndex += d; if (state.slideIndex >= slides.length) state.slideIndex = 0; if (state.slideIndex < 0) state.slideIndex = slides.length - 1; window.updateSlides(); };
-        window.goToSlide = (i) => { state.slideIndex = i; window.updateSlides(); };
+        // --- SUBMISSÕES ---
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid);
+            await updateDoc(profileRef, { name: document.getElementById('editName').value });
+            const msg = document.getElementById('profileUpdateMsg');
+            msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000);
+        });
 
-        let currentLanguage = 'pt';
-        const translations = {
-            pt: {
-                nav_home: "Início", nav_courses: "Cursos", nav_about: "Sobre", nav_login: "Entrar",
-                hero_subtitle: "Plataforma de Ensino Digital", hero_text: "Aprende ao teu ritmo com tecnologia de ponta e um design focado na clareza.", hero_cta: "Ver Cursos",
-                courses_title: "Cursos Disponíveis", courses_subtitle: "Escolhe o plano que melhor se adapta aos teus objetivos.", label_popular: "POPULAR",
-                course1_title: "Inglês Personalizado", course1_desc: "Aulas com objetivo prático e totalmente personalizadas para cada aluno. Foca-te no que realmente precisas.",
-                course2_title: "Portuguese for English Speakers", course2_desc: "Learn Portuguese effectively. Classes specifically designed for English speakers, focusing on conversation and culture.",
-                course3_title: "Aulas de AI e Tecnologia", course3_desc: "Orientação prática para criação de projetos utilizando ferramentas de Inteligência Artificial. Potencia a tua criatividade.",
-                price_class_50: "Aula (50m)", price_class_90: "Aula (1h30)", price_mentorship: "Mentoria (1h30)", btn_details: "Ver Detalhes",
-                login_welcome: "Bem-vindo", login_subtitle: "Entra na tua conta Dimas Learning", login_email: "Email", login_password: "Palavra-passe", btn_login: "Entrar", login_no_account: "Ainda não tens conta?", login_register: "Regista-te",
-                register_title: "Criar Conta", register_subtitle: "Começa a tua jornada hoje", register_name: "Nome", btn_register: "Registar", register_has_account: "Já tens conta?", register_login_link: "Entrar",
-                modal_subtitle: "Metodologia Dimas Learning", cta_ready: "Pronto para começar?", cta_desc: "Agenda a tua primeira sessão e descobre o potencial da aprendizagem personalizada.", btn_schedule: "Agendar Agora",
-                footer_rights: "&copy; 2024 Dimas Learning. Todos os direitos reservados.",
-                btn_back_home: "Voltar ao Início",
-                slide_sub_1: "Uma nova abordagem ao ensino de línguas,<br>focada na tecnologia e no ritmo pessoal.",
-                slide_title_2: "A Minha Jornada", slide_text_2a: "Novo no ensino, veterano na aprendizagem.", slide_text_2b: "Embora esteja a começar agora como instrutor, trago comigo anos de experiência como autodidata. Aprendi Inglês sozinho e estou atualmente a dominar o Francês.", slide_text_2c: "Sei exatamente quais são os obstáculos de quem aprende uma nova língua e, mais importante, sei como usar as ferramentas certas para os ultrapassar.",
-                slide_title_3: "Tecnologia", slide_card_1_title: "Inteligência Artificial", slide_card_1_desc: "Personalizar exercícios e corrigir pronúncia.", slide_card_2_title: "Ferramentas Digitais", slide_card_2_desc: "Aprender mesmo fora das aulas.", slide_card_3_title: "Ritmo Pessoal", slide_card_3_desc: "Adapta-se à tua velocidade.",
-                slide_title_4: "A Nossa Filosofia", slide_text_4: "O objetivo é criar um espaço onde possas aprender <strong>sem pressões</strong> e <strong>sem grandes custos</strong>.", slide_list_1: "Ambiente seguro.", slide_list_2: "Preços acessíveis.", slide_list_3: "Autonomia do aluno."
-            },
-            en: {
-                nav_home: "Home", nav_courses: "Courses", nav_about: "About", nav_login: "Login",
-                hero_subtitle: "Digital Learning Platform", hero_text: "Learn at your own pace with cutting-edge technology and a design focused on clarity.", hero_cta: "View Courses",
-                courses_title: "Available Courses", courses_subtitle: "Choose the plan that best fits your goals.", label_popular: "POPULAR",
-                tag_languages: "Languages", tag_tech: "Technology",
-                course1_title: "English for Portuguese Speakers", course1_desc: "Practical classes fully customized for each student. Focus on what you really need to learn.",
-                course2_title: "Portuguese for English Speakers", course2_desc: "Learn Portuguese effectively. Classes specifically designed for English speakers, focusing on conversation and culture.",
-                course3_title: "AI & Technology Classes", course3_desc: "Practical guidance for creating projects using Artificial Intelligence tools. Boost your creativity.",
-                price_class_50: "Class (50m)", price_class_90: "Class (1h30)", price_mentorship: "Mentorship (1h30)", btn_details: "View Details",
-                login_welcome: "Welcome", login_subtitle: "Log in to your Dimas Learning account", login_email: "Email", login_password: "Password", btn_login: "Login", login_no_account: "Don't have an account?", login_register: "Sign up",
-                register_title: "Create Account", register_subtitle: "Start your journey today", register_name: "Name", btn_register: "Sign Up", register_has_account: "Have account?", register_login_link: "Login",
-                modal_subtitle: "Dimas Learning Methodology", cta_ready: "Ready to start?", cta_desc: "Schedule your first session.", btn_schedule: "Schedule Now",
-                footer_rights: "&copy; 2024 Dimas Learning. All rights reserved.",
-                btn_back_home: "Back to Home",
-                slide_sub_1: "A new approach to language learning,<br>focused on technology and personal pace.",
-                slide_title_2: "My Journey", slide_text_2a: "New to teaching, veteran in learning.", slide_text_2b: "Although I am just starting as an instructor, I bring years of experience as a self-taught learner. I learned English on my own and am currently mastering French.", slide_text_2c: "I know exactly the obstacles of learning a new language and, more importantly, I know how to use the right tools to overcome them.",
-                slide_title_3: "Technology", slide_card_1_title: "Artificial Intelligence", slide_card_1_desc: "Customize exercises and correct pronunciation.", slide_card_2_title: "Digital Tools", slide_card_2_desc: "Learn even outside of classes.", slide_card_3_title: "Personal Pace", slide_card_3_desc: "Adapts to your speed.",
-                slide_title_4: "Our Philosophy", slide_text_4: "The goal is to create a space where you can learn <strong>without pressure</strong> and <strong>without high costs</strong>.", slide_list_1: "Safe environment.", slide_list_2: "Affordable prices.", slide_list_3: "Student autonomy."
-            }
+        document.getElementById('studentRequestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid);
+            await updateDoc(profileRef, { 
+                status: 'pending', courseOfInterest: document.getElementById('reqCourse').value, availability: document.getElementById('reqAvailability').value 
+            });
+        });
+
+        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), {
+                studentUid: auth.currentUser.uid, studentName: currentUserProfile.name, date: document.getElementById('lessonDate').value, slot: document.getElementById('lessonSlot').value, createdAt: serverTimestamp()
+            });
+            document.getElementById('scheduleModal').classList.add('hidden');
+            alert("Pedido de agendamento enviado com sucesso!");
+        });
+
+        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedTargetStudentId) return;
+            await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { 
+                title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() 
+            });
+            document.getElementById('addMaterialForm').reset();
+            alert("Ficheiro atribuído ao aluno!");
+        });
+
+        // --- AUTH ---
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+                document.getElementById('loginModal').classList.add('hidden');
+            } catch (err) { alert("Credenciais erradas."); }
+        });
+
+        document.getElementById('formRegister').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value);
+                await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { 
+                    uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() 
+                });
+                document.getElementById('loginModal').classList.add('hidden');
+            } catch (err) { alert("Erro ao criar conta."); }
+        });
+
+        // --- PRESENTATION (SOBRE) ---
+        const presentationData = [
+            { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza e no ritmo individual.", icon: "sparkles", type: "welcome" },
+            { title: "A Minha Jornada", text: "Novo no ensino, veterano na aprendizagem. Aprendi Inglês sozinho e estou a dominar Francês. Sei usar as ferramentas certas para te ajudar.", icon: "graduation-cap", type: "text" },
+            { title: "Tecnologia", tiles: [ {t:"IA", d:"Exercícios com IA"}, {t:"Digital", d:"Mobile-first"}, {t:"Ritmo", d:"Velocidade pessoal"} ], type: "tiles" },
+            { title: "Filosofia", list: ["Foco na aplicação real", "Preços transparentes", "Autonomia total"], icon: "check", type: "list" }
+        ];
+
+        window.openPresentation = () => {
+            document.getElementById('presentation-overlay').classList.add('active');
+            slideIdx = 0;
+            window.updateSlides();
+        };
+        window.closePresentation = () => document.getElementById('presentation-overlay').classList.remove('active');
+        window.changeSlide = (n) => { slideIdx += n; if(slideIdx < 0) slideIdx = presentationData.length-1; if(slideIdx >= presentationData.length) slideIdx = 0; window.updateSlides(); };
+
+        window.updateSlides = () => {
+            const container = document.getElementById('slides-container');
+            const dotsContainer = document.getElementById('presentation-dots');
+            const data = presentationData[slideIdx];
+            
+            container.innerHTML = `
+                <div class="slide active">
+                    ${data.type === 'welcome' ? `
+                        <div class="text-center">
+                            <div class="text-blue-600 mb-8"><i class="fa-solid fa-graduation-cap" style="font-size: 80px;"></i></div>
+                            <h1>${data.title}</h1>
+                            <p>${data.text}</p>
+                        </div>
+                    ` : ''}
+                    ${data.type === 'text' ? `
+                        <div class="max-w-3xl mx-auto">
+                            <h2 class="slide-title">${data.title}</h2>
+                            <p class="font-bold text-blue-600 mb-4">Novo no ensino, veterano na aprendizagem.</p>
+                            <p>${data.text}</p>
+                        </div>
+                    ` : ''}
+                    ${data.type === 'tiles' ? `
+                        <div class="tiled-content">
+                            ${data.tiles.map(t => `<div class="tile"><h3>${t.t}</h3><p>${t.d}</p></div>`).join('')}
+                        </div>
+                    ` : ''}
+                    ${data.type === 'list' ? `
+                        <div class="max-w-3xl mx-auto">
+                            <h2 class="slide-title">${data.title}</h2>
+                            <ul class="space-y-4">
+                                ${data.list.map(l => `<li class="flex items-center gap-4 font-bold text-slate-600"><i class="fa-solid fa-check text-blue-600"></i> ${l}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            dotsContainer.innerHTML = presentationData.map((_, i) => `<div class="dot ${i === slideIdx ? 'active' : ''}"></div>`).join('');
+            window.lucide.createIcons();
         };
 
-        const courseData = {
-            'ingles': { pt: { title: 'Inglês Personalizado', p1: { title: 'Personalização', text: 'Totalmente adaptado.' }, p2: { title: 'Autonomia', text: 'Uso de ferramentas.' }, p3: { title: 'Apoio', text: 'Exercícios personalizados.' } }, en: { title: 'Custom English', p1: { title: 'Customization', text: 'Fully adapted.' }, p2: { title: 'Autonomy', text: 'Tool usage.' }, p3: { title: 'Support', text: 'Personalized exercises.' } } },
-            'portugues': { pt: { title: 'Português', p1: { title: 'Conversação', text: 'Foco na fala.' }, p2: { title: 'Cultura', text: 'Imersão cultural.' }, p3: { title: 'Flexível', text: 'Adaptado ao horário.' } }, en: { title: 'Portuguese for English Speakers', p1: { title: 'Total Customization', text: 'Classes tailored to your level.' }, p2: { title: 'Autonomy & Tools', text: 'Learn to practice on your own.' }, p3: { title: 'Continuous Support', text: 'Exercises and support.' } } },
-            'ai': { pt: { title: 'Mentoria AI', p1: { title: 'Projetos', text: 'Criação própria.' }, p2: { title: 'Ferramentas', text: 'Produtividade.' }, p3: { title: 'Estratégia', text: 'Integração no trabalho.' } }, en: { title: 'AI Mentorship', p1: { title: 'Projects', text: 'Create your own.' }, p2: { title: 'Tools', text: 'Productivity.' }, p3: { title: 'Strategy', text: 'Work integration.' } } }
-        };
-
-        window.toggleLanguage = () => {
-            currentLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
-            document.getElementById('currentLang').innerText = currentLanguage.toUpperCase();
-            window.updateContent();
-        }
-        window.updateContent = () => { document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (translations[currentLanguage][k]) el.innerHTML = translations[currentLanguage][k]; }); }
-        window.openDetails = (courseKey) => {
-            const d = courseData[courseKey][currentLanguage];
-            if (d) { document.getElementById('modalTitle').innerText = d.title; document.getElementById('detail-title-1').innerText = d.p1.title; document.getElementById('detail-text-1').innerText = d.p1.text; document.getElementById('detail-title-2').innerText = d.p2.title; document.getElementById('detail-text-2').innerText = d.p2.text; document.getElementById('detail-title-3').innerText = d.p3.title; document.getElementById('detail-text-3').innerText = d.p3.text; }
-            document.getElementById('detailsModal').classList.remove('hidden');
-        }
-
-        // Canvas
+        // --- BG ANIM ---
         const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
-        let width, height; let particles = [];
-        const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
-        class Particle { constructor() { this.x = Math.random()*width; this.y = Math.random()*height; this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5; this.size = Math.random()*2+1; this.color = `rgba(59, 130, 246, ${Math.random()*0.2})`; } update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>width)this.vx*=-1; if(this.y<0||this.y>height)this.vy*=-1; } draw() { ctx.fillStyle=this.color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
-        const initParticles = () => { particles=[]; const n=Math.floor((width*height)/15000); for(let i=0;i<n;i++) particles.push(new Particle()); };
-        const animate = () => { ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animate); };
-        window.addEventListener('resize', ()=>{resize();initParticles();}); resize(); initParticles(); animate();
-
+        let w, h, p = [];
+        const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
+        class Part { constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.3; this.vy = (Math.random()-0.5)*0.3; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; } draw() { ctx.fillStyle='rgba(59,130,246,0.06)'; ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fill(); } }
+        resize(); p = Array.from({length: 40}, () => new Part());
+        function anim() { ctx.clearRect(0,0,w,h); p.forEach(v=>{v.update();v.draw();}); requestAnimationFrame(anim); }
+        window.onresize = resize; anim();
     </script>
 </body>
 </html>
