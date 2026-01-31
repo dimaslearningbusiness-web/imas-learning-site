@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimas Learning</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -29,6 +29,7 @@
         @keyframes slideFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
         .slide h1 { font-size: clamp(40px, 5vw, 80px); background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-weight: 700; text-align: center; }
         .slide h2.slide-title { font-size: clamp(32px, 4vw, 56px); color: #1e293b; margin: 0 0 40px 0; border-left: 8px solid #2563eb; padding-left: 30px; }
+        .slide p, .slide li { color: #475569; font-size: clamp(20px, 1.5vw, 26px); line-height: 1.6; }
         
         .nav-btn-slide { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: none; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; color: #2563eb; z-index: 10; display: flex; align-items: center; justify-content: center; }
         .dot { width: 12px; height: 12px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
@@ -39,6 +40,10 @@
         .status-pending { background: #fef3c7; color: #b45309; }
         .status-student { background: #dcfce7; color: #15803d; }
         .status-admin { background: #1e293b; color: #ffffff; }
+
+        .admin-tab-btn { padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 13px; transition: all 0.2s; }
+        .admin-tab-btn.active { background: #2563eb; color: white; }
+        .admin-tab-btn:not(.active) { background: #f1f5f9; color: #64748b; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen relative flex flex-col">
@@ -60,8 +65,8 @@
             </div>
 
             <div id="user-nav-links" class="hidden-section flex gap-8 text-sm font-medium text-slate-600">
-                <button onclick="window.switchTab('dashboard')" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</button>
-                <button onclick="window.switchTab('profile')" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1"><i data-lucide="user" class="w-4 h-4"></i> Perfil</button>
+                <button onclick="window.switchTab('dashboard')" id="nav-dashboard-link" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-blue-600"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</button>
+                <button onclick="window.switchTab('profile')" id="nav-profile-link" class="hover:text-blue-600 transition-colors font-bold flex items-center gap-1"><i data-lucide="user" class="w-4 h-4"></i> Perfil</button>
             </div>
 
             <div class="flex items-center gap-4">
@@ -95,7 +100,7 @@
                     <div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-500"><i data-lucide="message-circle" class="w-16 h-16 opacity-60"></i></div>
                     <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Inglês Personalizado</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">Aulas com objetivo prático e totalmente personalizadas para cada aluno. Foca-te no que realmente precisas.</p>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Aulas com objetivo prático e totalmente personalizadas para cada aluno.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
                         <div class="flex justify-between items-center border-b pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Aula (50m)</span><span class="text-lg font-bold text-blue-600">€12</span></div>
                         <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Aula (1h30)</span><span class="text-lg font-bold text-blue-600">€15</span></div>
@@ -107,7 +112,7 @@
                     <div class="h-40 bg-green-50 rounded-xl mb-4 flex items-center justify-center text-green-600"><i data-lucide="book-a" class="w-16 h-16 opacity-60"></i></div>
                     <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 4.9</div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Portuguese for English</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">Learn Portuguese effectively. Classes specifically designed for English speakers, focusing on conversation and culture.</p>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Learn Portuguese effectively. Focus on conversation and culture.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
                         <div class="flex justify-between items-center border-b pb-2 mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Class (50m)</span><span class="text-lg font-bold text-green-600">€12</span></div>
                         <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Class (1h30)</span><span class="text-lg font-bold text-green-600">€15</span></div>
@@ -119,7 +124,7 @@
                     <div class="h-40 bg-violet-50 rounded-xl mb-4 flex items-center justify-center text-violet-600"><i data-lucide="cpu" class="w-16 h-16 opacity-60"></i></div>
                     <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Aulas de AI e Tecnologia</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">Orientação prática para criação de projetos utilizando ferramentas de Inteligência Artificial. Potencia a tua criatividade.</p>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Orientação prática para criação de projetos utilizando Inteligência Artificial.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
                         <div class="flex justify-between items-center"><span class="text-xs font-semibold text-slate-500 uppercase">Mentoria (1h30)</span><span class="text-lg font-bold text-violet-600">€20</span></div>
                     </div>
@@ -146,7 +151,6 @@
                         </div>
                         <p class="text-blue-100 text-lg font-light" id="user-subtitle">Pronto para continuar a aprender?</p>
                     </div>
-                    <!-- Botão Agendar (Só Alunos) -->
                     <div id="student-schedule-btn-area" class="hidden">
                         <button onclick="window.openScheduleModal()" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-xl transition-all flex items-center gap-2">
                             <i data-lucide="calendar-plus" class="w-5 h-5"></i> Agendar Aula
@@ -155,37 +159,43 @@
                 </div>
             </div>
 
-            <!-- PAINEL ADMIN: AGENDAMENTOS -->
-            <div id="admin-schedule-management" class="hidden-section mb-10 animate-fade-in">
-                <div class="glass-card rounded-[2rem] p-8 border border-amber-200 bg-amber-50/20">
+            <!-- PAINEL ADMIN -->
+            <div id="admin-main-panel" class="hidden-section mb-10 animate-fade-in">
+                <div class="flex gap-4 mb-6">
+                    <button onclick="window.switchAdminTab('users')" id="admin-tab-users" class="admin-tab-btn active">Gestão de Alunos</button>
+                    <button onclick="window.switchAdminTab('agenda')" id="admin-tab-agenda" class="admin-tab-btn">Agenda Oficial</button>
+                    <button onclick="window.switchAdminTab('requests')" id="admin-tab-requests" class="admin-tab-btn">Pedidos de Aula</button>
+                </div>
+
+                <div id="admin-view-users" class="glass-card rounded-[2rem] p-8 border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="users" class="text-blue-600"></i> Gestão de Alunos</h3>
+                    <div id="users-list-admin" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+
+                <div id="admin-view-agenda" class="hidden-section glass-card rounded-[2rem] p-8 border border-blue-200 bg-blue-50/10">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="calendar" class="text-blue-600"></i> Agenda Confirmada</h3>
+                    <div id="confirmed-lessons-admin" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div id="admin-view-requests" class="hidden-section glass-card rounded-[2rem] p-8 border border-amber-200 bg-amber-50/20">
                     <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="calendar-check" class="text-amber-600"></i> Pedidos de Agendamento</h3>
                     <div id="schedule-list-admin" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
             </div>
 
-            <!-- PAINEL ADMIN: GESTÃO DE ALUNOS -->
-            <div id="admin-user-management" class="hidden-section mb-10 animate-fade-in">
-                <div class="glass-card rounded-[2rem] p-8 border border-slate-200">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="users" class="text-blue-600"></i> Gestão de Candidatos</h3>
-                    <div id="users-list-admin" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                </div>
-            </div>
-
-            <!-- FORMULÁRIO GUEST -->
+            <!-- GUEST FORM -->
             <div id="guest-request-form" class="hidden-section mb-10 animate-fade-in">
-                <div class="glass-card rounded-[2.5rem] p-10 border-2 border-blue-50 max-w-2xl mx-auto">
-                    <div class="text-center mb-8">
-                        <h3 class="text-3xl font-bold text-slate-900 mb-2">Torna-te Aluno</h3>
-                        <p class="text-slate-500">Diz-nos o teu curso e horário.</p>
-                    </div>
+                <div class="glass-card rounded-[2.5rem] p-10 border-2 border-blue-50 max-w-2xl mx-auto text-center">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">Torna-te Aluno</h3>
+                    <p class="text-slate-500 mb-8">Diz-nos o teu curso e horário preferencial.</p>
                     <form id="studentRequestForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
-                            <select id="reqCourse" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold focus:border-blue-500 text-slate-700">
+                            <select id="reqCourse" required class="w-full px-5 py-4 border rounded-2xl outline-none font-semibold text-slate-700">
                                 <option value="Inglês Personalizado">Inglês Personalizado</option>
                                 <option value="Portuguese for English Speakers">Portuguese for English Speakers</option>
                                 <option value="AI e Tecnologia">AI e Tecnologia</option>
                             </select>
-                            <select id="reqAvailability" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold focus:border-blue-500 text-slate-700">
+                            <select id="reqAvailability" required class="w-full px-5 py-4 border rounded-2xl outline-none font-semibold text-slate-700">
                                 <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
                                 <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
                                 <option value="Fins de Semana">Fins de Semana</option>
@@ -199,16 +209,37 @@
                 </div>
             </div>
 
-            <!-- ÁREA ALUNO (MATERIAIS) -->
+            <!-- STUDENT AREA -->
             <div id="student-content-area" class="hidden-section grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- BLOCO ESTATÍSTICAS -->
+                <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-2 animate-fade-in">
+                    <div class="glass-card rounded-[2rem] p-6 flex items-center gap-5 border-l-4 border-emerald-500">
+                        <div class="bg-emerald-100 text-emerald-600 p-3 rounded-2xl"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aulas Concluídas</p>
+                            <h4 id="stat-completed-count" class="text-3xl font-black text-slate-800">0</h4>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-[2rem] p-6 flex items-center gap-5 border-l-4 border-blue-500">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-2xl"><i data-lucide="calendar-days" class="w-6 h-6"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aulas Futuras</p>
+                            <h4 id="stat-future-count" class="text-3xl font-black text-slate-800">0</h4>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="study-area" class="lg:col-span-2 space-y-6">
+                    <div class="glass-card rounded-[2rem] p-8 border-l-4 border-blue-600 bg-blue-50/20">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><i data-lucide="calendar" class="text-blue-600"></i> Minhas Próximas Aulas</h3>
+                        <div id="student-confirmed-lessons" class="space-y-2"></div>
+                    </div>
                     <div class="glass-card rounded-[2rem] p-8">
                         <h3 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3"><i data-lucide="folder-open" class="text-blue-600"></i> Meus Materiais</h3>
                         <div id="materials-list" class="space-y-4"></div>
                     </div>
-                    <!-- Aviso de Segurança -->
-                    <div class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 text-xs text-slate-400 text-center font-medium">
-                        <i data-lucide="info" class="w-4 h-4 inline-block mr-1"></i> Em caso de erro, contactar: <span class="font-bold text-blue-600">dimaslearningbusiness@gmail.com</span>
+                    <div class="p-6 bg-slate-50 rounded-[2rem] border text-xs text-slate-400 text-center font-medium">
+                        Problemas? Contactar: <span class="font-bold text-blue-600">dimaslearningbusiness@gmail.com</span>
                     </div>
                 </div>
                 <div class="glass-card rounded-[2rem] p-8 h-fit">
@@ -218,108 +249,114 @@
                 </div>
             </div>
 
-            <!-- PENDENTE -->
             <div id="pending-empty-state" class="hidden-section py-20 text-center glass-card rounded-[2rem] mt-10">
                 <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 animate-pulse"><i data-lucide="clock"></i></div>
-                <h3 class="text-2xl font-bold text-slate-800">Candidatura Pendente</h3>
-                <p class="text-slate-500">O Dimas está a rever o teu pedido.</p>
+                <h3 class="text-2xl font-bold text-slate-800">Candidatura em Análise</h3>
             </div>
         </div>
 
         <!-- PROFILE TAB -->
         <div id="profile-tab-content" class="hidden-section animate-fade-in max-w-2xl mx-auto">
-            <div class="glass-card rounded-[2.5rem] p-8 md:p-12 border-2 border-slate-100">
-                <div class="text-center mb-10"><h3 class="text-3xl font-bold text-slate-900">Editar Perfil</h3></div>
+            <div class="glass-card rounded-[2.5rem] p-12 border">
+                <h3 class="text-3xl font-bold text-slate-900 text-center mb-10">Editar Perfil</h3>
                 <form id="editProfileForm" class="space-y-6">
-                    <div class="space-y-2">
-                        <label class="text-xs font-black text-slate-400 ml-2 uppercase">Nome Completo</label>
-                        <input type="text" id="editName" required class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none font-semibold text-slate-700 focus:border-blue-500">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-black text-slate-400 ml-2 uppercase tracking-widest opacity-50">Email (Não editável)</label>
-                        <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-semibold text-slate-400 cursor-not-allowed">
-                    </div>
-                    <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl shadow-xl hover:bg-blue-600 transition-all">Guardar Alterações</button>
+                    <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none">
+                    <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border rounded-2xl text-slate-400 cursor-not-allowed">
+                    <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl">Guardar Alterações</button>
                 </form>
-                <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-bold border border-emerald-100">Perfil atualizado com sucesso!</div>
+                <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-bold">Perfil atualizado!</div>
             </div>
         </div>
 
-        <!-- PAINEL ADMIN: ATRIBUIR FICHEIRO -->
+        <!-- ADMIN ADD MATERIAL -->
         <div id="admin-add-material-panel" class="hidden-section mt-10 animate-fade-in scroll-mt-32">
             <div class="bg-amber-50 border border-amber-200 rounded-[2rem] p-10 shadow-lg">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-xl font-bold text-amber-900 tracking-tight">Atribuir Ficheiro a <span id="target-student-name" class="underline">...</span></h3>
-                    <button onclick="window.closeMaterialPanel()" class="text-amber-800 text-xs font-black uppercase bg-white px-3 py-1 rounded-lg">Fechar</button>
+                    <button onclick="window.closeMaterialPanel()" class="bg-white px-3 py-1 rounded-lg">Fechar</button>
                 </div>
                 <form id="addMaterialForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                    <input type="text" id="matTitle" required placeholder="Título do material" class="px-5 py-4 bg-white border border-amber-100 rounded-2xl outline-none font-medium">
-                    <input type="url" id="matLink" required placeholder="Link (PDF, Drive...)" class="px-5 py-4 bg-white border border-amber-100 rounded-2xl outline-none font-medium">
-                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl hover:bg-amber-700 shadow-md">Adicionar Agora</button>
+                    <input type="text" id="matTitle" required placeholder="Título" class="px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+                    <input type="url" id="matLink" required placeholder="URL do Link" class="px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl shadow-md">Adicionar</button>
                 </form>
             </div>
         </div>
     </main>
 
-    <!-- MODAL CONFIRMAÇÃO -->
-    <div id="confirmModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-sm w-full text-center animate-fade-in">
-            <h4 class="text-2xl font-black text-slate-900 mb-4" id="confirmTitle">Confirmar?</h4>
-            <p class="text-slate-500 font-medium mb-10" id="confirmText">Desejas realizar esta ação?</p>
-            <div class="grid grid-cols-2 gap-4">
-                <button onclick="window.closeConfirmModal()" class="py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl">Cancelar</button>
-                <button id="confirmActionBtn" class="py-4 bg-red-600 text-white font-black rounded-2xl shadow-lg">Sim, Confirmar</button>
+    <!-- MODAL DETALHES -->
+    <div id="detailsModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl max-w-2xl w-full relative animate-fade-in overflow-hidden">
+            <div class="bg-slate-50 p-8 border-b flex justify-between items-center">
+                <h3 id="modalTitle" class="text-2xl font-black text-slate-900">Detalhes</h3>
+                <button onclick="document.getElementById('detailsModal').classList.add('hidden')" class="p-3 bg-white border rounded-2xl hover:bg-red-50 hover:text-red-600 transition-all"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-8" id="modalObjectivesArea"></div>
+                    <div class="bg-slate-50 rounded-3xl p-8 text-center border">
+                        <div class="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center shadow-lg mb-6 text-blue-600 mx-auto"><i data-lucide="calendar-check"></i></div>
+                        <h4 class="text-xl font-black mb-2">Pronto para a aula?</h4>
+                        <div id="detailsActionArea" class="w-full"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAIS DE LOGIN -->
-    <div id="loginModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative animate-fade-in">
-            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600"><i data-lucide="x"></i></button>
-            <div id="loginFormContainer">
-                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Entrar</h3>
-                <form id="formLogin" class="space-y-4">
-                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="loginPass" type="password" placeholder="Palavra-passe" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all">Iniciar Sessão</button>
-                </form>
-                <p class="text-center mt-6 text-xs text-slate-400 uppercase font-bold tracking-widest">Novo por aqui? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar Conta</a></p>
-            </div>
-            <div id="registerFormContainer" class="hidden">
-                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Criar Conta</h3>
-                <form id="formRegister" class="space-y-4">
-                    <input id="regName" type="text" placeholder="Teu Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="regEmail" type="email" placeholder="Teu Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="regPass" type="password" placeholder="Password (mín. 6 chars)" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all">Criar Agora</button>
-                </form>
-                <p class="text-center mt-6 text-xs text-slate-400 uppercase font-bold tracking-widest">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL AGENDAR (ALUNO) -->
+    <!-- MODAL AGENDAR -->
     <div id="scheduleModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
         <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-w-md w-full relative animate-fade-in">
             <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Marcar Aula</h3>
             <form id="formLessonRequest" class="space-y-6">
-                <div>
-                    <label class="text-xs font-black text-slate-400 uppercase ml-1">Data Pretendida</label>
-                    <input type="date" id="lessonDate" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-medium text-slate-700 focus:bg-white focus:border-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="text-xs font-black text-slate-400 uppercase ml-1">Bloco Horário</label>
-                    <select id="lessonSlot" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-semibold text-slate-700 focus:bg-white focus:border-blue-500 outline-none">
-                        <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
-                        <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
-                        <option value="Fins de Semana">Fins de Semana</option>
-                        <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl hover:bg-slate-900 transition-all">Solicitar Agendamento</button>
+                <input type="date" id="lessonDate" required class="w-full px-5 py-4 border rounded-2xl outline-none focus:border-blue-500">
+                <select id="lessonSlot" required class="w-full px-5 py-4 border rounded-2xl font-semibold outline-none focus:border-blue-500">
+                    <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
+                    <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
+                    <option value="Fins de Semana">Fins de Semana</option>
+                    <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
+                </select>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl">Solicitar Agendamento</button>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMAÇÃO -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-[2rem] p-10 shadow-2xl max-sm w-full text-center">
+            <h4 class="text-2xl font-bold text-slate-900 mb-4" id="confirmTitle">Confirmar?</h4>
+            <p class="text-slate-500 mb-10" id="confirmText"></p>
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="window.closeConfirmModal()" class="py-4 bg-slate-100 font-bold rounded-2xl">Voltar</button>
+                <button id="confirmActionBtn" class="py-4 bg-red-600 text-white font-black rounded-2xl">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAIS LOGIN -->
+    <div id="loginModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative animate-fade-in">
+            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
+            <div id="loginFormContainer">
+                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Login</h3>
+                <form id="formLogin" class="space-y-4">
+                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none">
+                    <input id="loginPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none">
+                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all">Entrar</button>
+                </form>
+                <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Não tens conta? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar</a></p>
+            </div>
+            <div id="registerFormContainer" class="hidden">
+                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Registo</h3>
+                <form id="formRegister" class="space-y-4">
+                    <input id="regName" type="text" placeholder="Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none">
+                    <input id="regEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none">
+                    <input id="regPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none">
+                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all">Registar</button>
+                </form>
+                <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
+            </div>
         </div>
     </div>
 
@@ -327,9 +364,7 @@
     <div id="presentation-overlay">
         <button class="close-presentation-btn" onclick="window.closePresentation()"><i class="fa-solid fa-arrow-left"></i> <span>Voltar</span></button>
         <div class="presentation-container">
-            <!-- Slides preenchidos por JS para garantir tradução e dinâmica -->
             <div id="slides-container" class="w-full h-full"></div>
-            
             <button class="nav-btn-slide" style="left:20px" onclick="window.changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="nav-btn-slide" style="right:20px" onclick="window.changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
             <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-3" id="presentation-dots"></div>
@@ -339,7 +374,7 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc, where } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDgmisKY0vQY1UkRm2dndaAa2jbOl9Ju1s",
@@ -360,75 +395,35 @@
         let selectedTargetStudentId = null;
         let pendingActionFn = null;
         let slideIdx = 0;
+        let activeStatsUnsubscribes = [];
 
         window.lucide.createIcons();
 
-        // --- SISTEMA DE MODAL ---
+        // --- ESTRUTURA PARA COLAR O TEXTO ORIGINAL "SOBRE" ---
+        const presentationData = [
+            { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza e no ritmo individual.", icon: "sparkles", type: "welcome" },
+            { title: "A Minha Jornada", text: "Veterano na aprendizagem autodidata. Aprendi Inglês sozinho e estou a dominar Francês. Sei usar as ferramentas certas para te ajudar.", icon: "graduation-cap", type: "text" },
+            { title: "Tecnologia que te Guia", tiles: [ {t:"Apoio Silencioso", d:"A tecnologia trabalha nos bastidores para entender o teu ritmo, sugerindo exercícios que te ajudam a superar desafios de forma natural e sem esforço."}, {t:"Recursos no Momento Certo", d:"Tens acesso às ferramentas ideais para cada etapa do teu percurso, garantindo que nunca te sentes perdido e que tens sempre o apoio necessário para avançar."}, {t:"Evolução com Confiança", d:"O nosso sistema ajuda-te a consolidar o que aprendeste no tempo certo, para que possas aplicar o conhecimento no mundo real com total segurança e autonomia."}, {t:"Acompanhamento Constante", d:"Estamos sempre por perto. A tecnologia funciona como uma bússola invisível que te orienta, permitindo que te foques apenas no mais importante: o teu sucesso."} ], type: "tiles" },
+            { title: "Filosofia", list: ["Foco prático", "Preços justos", "Autonomia total"], icon: "check", type: "list" }
+        ];
+
+        // --- GLOBAL ACTIONS ---
         window.openConfirmModal = (title, text, actionFn) => {
             document.getElementById('confirmTitle').innerText = title;
             document.getElementById('confirmText').innerText = text;
             pendingActionFn = actionFn;
             document.getElementById('confirmModal').classList.remove('hidden');
         };
+        window.closeConfirmModal = () => document.getElementById('confirmModal').classList.add('hidden');
+        document.getElementById('confirmActionBtn').addEventListener('click', () => { if (pendingActionFn) { pendingActionFn(); window.closeConfirmModal(); } });
 
-        window.closeConfirmModal = () => {
-            document.getElementById('confirmModal').classList.add('hidden');
-            pendingActionFn = null;
-        };
-
-        document.getElementById('confirmActionBtn').addEventListener('click', () => {
-            if (pendingActionFn) { pendingActionFn(); window.closeConfirmModal(); }
-        });
-
-        // --- GLOBAL ACTIONS ---
-        window.approve = async (uid) => {
-            await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' });
-        };
-
-        window.revoke = (uid) => {
-            window.openConfirmModal("Revogar Acesso?", "O utilizador voltará a ser Convidado.", async () => {
-                await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' });
-            });
-        };
-
-        window.changeLevel = async (uid, newLevel) => {
-            await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: newLevel });
-        };
-
-        window.deleteMaterialForStudent = (uid, matId) => {
-            window.openConfirmModal("Eliminar Ficheiro?", "O aluno deixará de ver este material.", async () => {
-                await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId));
-            });
-        };
-
-        window.resolveLessonRequest = async (requestId, status) => {
-            if (status === 'confirmar') alert("Agendamento aceite! Podes contactar o aluno.");
-            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', requestId));
-        };
-
-        window.openMaterialPanel = (uid, name) => {
-            selectedTargetStudentId = uid;
-            document.getElementById('target-student-name').innerText = name;
-            document.getElementById('admin-add-material-panel').classList.remove('hidden-section');
-            document.getElementById('admin-add-material-panel').scrollIntoView({ behavior: 'smooth' });
-        };
-
-        window.closeMaterialPanel = () => {
-            document.getElementById('admin-add-material-panel').classList.add('hidden-section');
-            selectedTargetStudentId = null;
-        };
-
-        // --- NAVIGATION ---
         window.logout = () => signOut(auth);
-        window.openLoginModal = () => {
-            document.getElementById('loginModal').classList.remove('hidden');
-            window.toggleAuthMode('login');
-        };
+        window.openLoginModal = () => document.getElementById('loginModal').classList.remove('hidden');
         window.toggleAuthMode = (m) => {
             document.getElementById('loginFormContainer').classList.toggle('hidden', m === 'register');
             document.getElementById('registerFormContainer').classList.toggle('hidden', m === 'login');
         };
-        
+
         window.showLandingPage = () => {
             document.getElementById('landing-page').classList.remove('hidden-section');
             document.getElementById('user-dashboard').classList.add('hidden-section');
@@ -442,317 +437,293 @@
         window.switchTab = (tab) => {
             document.getElementById('landing-page').classList.add('hidden-section');
             document.getElementById('user-dashboard').classList.remove('hidden-section');
-            const dContent = document.getElementById('dashboard-tab-content');
-            const pContent = document.getElementById('profile-tab-content');
-            if (tab === 'dashboard') {
-                dContent.classList.remove('hidden-section');
-                pContent.classList.add('hidden-section');
-            } else {
-                dContent.classList.add('hidden-section');
-                pContent.classList.remove('hidden-section');
+            document.getElementById('dashboard-tab-content').classList.toggle('hidden-section', tab !== 'dashboard');
+            document.getElementById('profile-tab-content').classList.toggle('hidden-section', tab !== 'profile');
+            document.getElementById('nav-dashboard-link').className = (tab === 'dashboard' ? 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-blue-600' : 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-slate-600');
+            document.getElementById('nav-profile-link').className = (tab === 'profile' ? 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-blue-600' : 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-slate-600');
+            if (tab === 'profile' && currentUserProfile) {
                 document.getElementById('editName').value = currentUserProfile.name;
                 document.getElementById('displayEmail').value = currentUserProfile.email;
             }
         };
 
-        window.scrollToSection = (id) => {
-            if (id === 'user-dashboard') { window.switchTab('dashboard'); return; }
-            window.showLandingPage();
-            setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }, 100);
+        window.switchAdminTab = (tab) => {
+            document.getElementById('admin-view-users').classList.toggle('hidden-section', tab !== 'users');
+            document.getElementById('admin-view-agenda').classList.toggle('hidden-section', tab !== 'agenda');
+            document.getElementById('admin-view-requests').classList.toggle('hidden-section', tab !== 'requests');
+            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.toggle('active', b.id === `admin-tab-${tab}`));
         };
 
-        window.openScheduleModal = () => document.getElementById('scheduleModal').classList.remove('hidden');
+        window.openScheduleModal = () => { document.getElementById('scheduleModal').classList.remove('hidden'); document.getElementById('detailsModal').classList.add('hidden'); };
 
-        // --- PROFILE MONITOR ---
+        // --- ADMIN ACTIONS ---
+        window.approve = async (uid) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' });
+        window.revoke = (uid) => window.openConfirmModal("Revogar?", "O utilizador voltará a ser Convidado.", async () => { await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' }); });
+        window.changeLevel = async (uid, newLevel) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: newLevel });
+        window.deleteMaterialForStudent = (uid, matId) => window.openConfirmModal("Eliminar?", "O aluno perderá o acesso.", async () => { await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId)); });
+        
+        window.resolveLessonRequest = async (requestId, action, data = null) => {
+            if (action === 'confirmar') { await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp() }); alert("Confirmada!"); }
+            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', requestId));
+        };
+        
+        window.completeLesson = async (lessonId, lessonData) => {
+            window.openConfirmModal("Finalizar Aula?", "A aula será registada como concluída no histórico do aluno.", async () => {
+                try {
+                    await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), { ...lessonData, completedAt: serverTimestamp() });
+                    await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId));
+                    alert("Aula arquivada com sucesso!");
+                } catch (e) { console.error(e); }
+            });
+        };
+
+        window.deleteConfirmedLesson = (lessonId) => window.openConfirmModal("Remover?", "Aula sairá da agenda.", async () => { await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId)); });
+        window.openMaterialPanel = (uid, name) => { selectedTargetStudentId = uid; document.getElementById('target-student-name').innerText = name; document.getElementById('admin-add-material-panel').classList.remove('hidden-section'); document.getElementById('admin-add-material-panel').scrollIntoView({ behavior: 'smooth' }); };
+        window.closeMaterialPanel = () => { document.getElementById('admin-add-material-panel').classList.add('hidden-section'); selectedTargetStudentId = null; };
+
+        // --- STATS LOGIC ---
+        function loadStudentStats(uid) {
+            if (!uid) return;
+            activeStatsUnsubscribes.forEach(unsub => { if (typeof unsub === 'function') unsub(); });
+            activeStatsUnsubscribes = [];
+            const elComp = document.getElementById('stat-completed-count');
+            const elFut = document.getElementById('stat-future-count');
+            if(elComp) elComp.innerText = "0"; if(elFut) elFut.innerText = "0";
+
+            const qComp = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), where('studentUid', '==', uid));
+            const qConf = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), where('studentUid', '==', uid));
+            const qReq = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), where('studentUid', '==', uid));
+
+            let counts = { confirmed: 0, requested: 0 };
+            const updateFutureUI = () => { if (elFut) elFut.innerText = (counts.confirmed + counts.requested); };
+
+            activeStatsUnsubscribes.push(onSnapshot(qComp, (snap) => { if (elComp) elComp.innerText = snap.size; }));
+            activeStatsUnsubscribes.push(onSnapshot(qConf, (snap) => { counts.confirmed = snap.size; updateFutureUI(); }));
+            activeStatsUnsubscribes.push(onSnapshot(qReq, (snap) => { counts.requested = snap.size; updateFutureUI(); }));
+        }
+
+        // --- CURSOS DETAILS ---
+        const courseObjectives = {
+            'ingles': { title: "Inglês Personalizado", objectives: [{ t: "Falar", d: "Foco total na conversação." }, { t: "Adaptado", d: "Aulas baseadas nos teus objetivos." }, { t: "Prático", d: "Língua para situações reais." }] },
+            'portugues': { title: "Portuguese for English", objectives: [{ t: "Speach", d: "Learn native pronunciation." }, { t: "Culture", d: "Portuguese lifestyle immersion." }, { t: "Grammar", d: "Practical rules for daily life." }] },
+            'ai': { title: "Aulas de AI e Tecnologia", objectives: [{ t: "Futuro", d: "Domina ferramentas de IA." }, { t: "Criação", d: "Cria projetos reais guiados." }, { t: "Produtividade", d: "Aumenta a tua eficiência digital." }] }
+        };
+        window.openDetails = (key) => {
+            const data = courseObjectives[key];
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalObjectivesArea').innerHTML = data.objectives.map(obj => `<div class="flex gap-4"><div class="bg-blue-100 p-2 rounded-xl text-blue-600 h-fit"><i data-lucide="target" class="w-5 h-5"></i></div><div><h4 class="font-bold text-sm uppercase">${obj.t}</h4><p class="text-xs text-slate-500">${obj.d}</p></div></div>`).join('');
+            
+            const loggedIn = !!auth.currentUser;
+            document.getElementById('detailsActionArea').innerHTML = loggedIn ? 
+                `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : 
+                `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
+            
+            document.getElementById('detailsModal').classList.remove('hidden');
+            window.lucide.createIcons();
+        };
+
+        // --- SESSION MONITOR ---
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid);
-                onSnapshot(profileRef, (snap) => {
+                onSnapshot(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), (snap) => {
                     if (snap.exists()) {
                         currentUserProfile = snap.data();
                         updateDashboardUI();
                     } else {
                         const data = { 
-                            uid: user.uid, name: user.displayName || "Novo Aluno", email: user.email, 
+                            uid: user.uid, name: user.displayName || "Utilizador", email: user.email, 
                             status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante'
                         };
-                        setDoc(profileRef, data);
+                        setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), data);
                     }
                 });
             } else {
+                currentUserProfile = null;
                 window.showLandingPage();
             }
         });
-
-        function getProgressPercentage(level) {
-            const levels = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
-            return levels[level] || 10;
-        }
 
         function updateDashboardUI() {
             if (!currentUserProfile) return;
             const profile = currentUserProfile;
             const isAdmin = profile.email === ADMIN_EMAIL;
-            
             document.getElementById('user-name-display').innerText = profile.name;
             document.getElementById('user-initial').innerText = (profile.name || "U").charAt(0).toUpperCase();
-            document.getElementById('user-status-badge').innerText = isAdmin ? 'Administrador' : profile.status;
+            document.getElementById('user-status-badge').innerText = isAdmin ? 'Admin' : profile.status;
             document.getElementById('user-status-badge').className = `status-badge status-${isAdmin ? 'admin' : profile.status}`;
-
+            document.getElementById('user-nav-links').classList.remove('hidden-section');
             document.getElementById('loginBtn').classList.add('hidden');
             document.getElementById('logoutBtn').classList.remove('hidden');
-            document.getElementById('user-nav-links').classList.remove('hidden-section');
 
-            document.getElementById('admin-user-management').classList.toggle('hidden-section', !isAdmin);
-            document.getElementById('admin-schedule-management').classList.toggle('hidden-section', !isAdmin);
+            document.getElementById('admin-main-panel').classList.toggle('hidden-section', !isAdmin);
             document.getElementById('student-schedule-btn-area').classList.toggle('hidden', isAdmin || profile.status !== 'student');
-            
+
             if (isAdmin) {
-                document.getElementById('user-subtitle').innerText = "Painel Central Dimas Learning.";
-                loadAdminDashboard();
-                loadAdminSchedules();
+                loadAdminDashboard(); loadAdminSchedules(); loadConfirmedLessonsAdmin();
             } else {
                 document.getElementById('guest-request-form').classList.toggle('hidden-section', profile.status !== 'guest');
                 document.getElementById('pending-empty-state').classList.toggle('hidden-section', profile.status !== 'pending');
                 document.getElementById('student-content-area').classList.toggle('hidden-section', profile.status !== 'student');
                 if (profile.status === 'student') {
-                    document.getElementById('user-level-display').innerText = profile.level || 'A1 Iniciante';
-                    document.getElementById('progress-bar-fill').style.width = getProgressPercentage(profile.level) + "%";
-                    loadStudentMaterials(profile.uid);
+                    document.getElementById('user-level-display').innerText = profile.level;
+                    const lvMap = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
+                    document.getElementById('progress-bar-fill').style.width = (lvMap[profile.level] || 10) + "%";
+                    loadStudentMaterials(profile.uid); loadStudentLessons(profile.uid); loadStudentStats(profile.uid);
                 }
             }
             window.lucide.createIcons();
         }
 
+        // --- DATA LOADERS ---
         function loadAdminDashboard() {
-            const list = document.getElementById('users-list-admin');
-            const q = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles'));
-            onSnapshot(q, (snap) => {
-                list.innerHTML = "";
+            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles')), (snap) => {
+                const list = document.getElementById('users-list-admin'); list.innerHTML = "";
                 snap.forEach((d) => {
-                    const u = d.data();
-                    if (u.email === ADMIN_EMAIL) return;
+                    const u = d.data(); if (u.email === ADMIN_EMAIL) return;
+                    const mid = `adm-mat-${u.uid}`;
                     const div = document.createElement('div');
-                    div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4 animate-fade-in";
-                    const mid = `admin-mat-list-${u.uid}`;
-                    div.innerHTML = `
-                        <div class="flex justify-between items-start">
-                            <div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400 font-bold">${u.email}</p></div>
-                            <span class="status-badge status-${u.status}">${u.status}</span>
-                        </div>
-                        <div class="bg-slate-50 p-3 rounded-xl space-y-2">
-                            <label class="text-[9px] font-black text-slate-400 uppercase">Nível Atual:</label>
-                            <select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white border border-slate-200 rounded p-1 text-[11px] font-bold text-slate-700 outline-none">
-                                <option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>Idioma: A1</option>
-                                <option value="A2" ${u.level === 'A2' ? 'selected' : ''}>Idioma: A2</option>
-                                <option value="B1" ${u.level === 'B1' ? 'selected' : ''}>Idioma: B1</option>
-                                <option value="B2" ${u.level === 'B2' ? 'selected' : ''}>Idioma: B2</option>
-                                <option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Tech: Iniciante</option>
-                                <option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Tech: Intermédio</option>
-                                <option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Tech: Avançado</option>
-                            </select>
-                        </div>
-                        <div class="border-t pt-3">
-                            <p class="text-[9px] font-black text-slate-400 uppercase mb-2">Ficheiros Atribuídos:</p>
-                            <div id="${mid}" class="space-y-1 max-h-24 overflow-y-auto pr-1"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mt-auto pt-2">
-                            ${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2.5 rounded-xl shadow-sm">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2.5 rounded-xl border border-red-100">REVOGAR</button>`}
-                            <button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2.5 rounded-xl shadow-sm">FICHEIROS</button>
-                        </div>
-                    `;
+                    div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4";
+                    div.innerHTML = `<div class="flex justify-between items-start"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400 font-bold">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
+                    <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white border border-slate-200 rounded p-1 text-[11px] font-bold text-slate-700 outline-none">
+                    <option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="A2" ${u.level === 'A2' ? 'selected' : ''}>A2</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="B2" ${u.level === 'B2' ? 'selected' : ''}>B2</option><option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Iniciante</option><option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Intermédio</option><option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Avançado</option></select></div>
+                    <div class="border-t pt-2"><div id="${mid}" class="space-y-1"></div></div>
+                    <div class="grid grid-cols-2 gap-2 mt-auto pt-2">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl border border-red-100">REVOGAR</button>`}
+                    <button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">NOVO FICHEIRO</button></div>`;
                     list.appendChild(div);
-                    loadAdminMaterialsView(u.uid, mid);
+                    onSnapshot(query(collection(db, 'artifacts', APP_ID, 'users', u.uid, 'materials'), orderBy('createdAt', 'desc')), (s) => {
+                        const c = document.getElementById(mid); if (!c) return;
+                        c.innerHTML = s.empty ? '<p class="text-[9px] italic text-slate-300">Sem ficheiros.</p>' : '';
+                        s.forEach(mat => { const m = mat.data(); const item = document.createElement('div'); item.className = "flex justify-between bg-white p-1 rounded border text-[9px]"; item.innerHTML = `<span class="truncate pr-2">${m.title}</span><div class="flex gap-2"><a href="${m.link}" target="_blank" class="text-blue-500"><i data-lucide="external-link" class="w-3 h-3"></i></a><button onclick="window.deleteMaterialForStudent('${u.uid}', '${mat.id}')" class="text-red-400"><i data-lucide="trash-2" class="w-3 h-3"></i></button></div>`; c.appendChild(item); });
+                        window.lucide.createIcons();
+                    });
                 });
             });
         }
 
-        function loadAdminMaterialsView(uid, cid) {
-            const container = document.getElementById(cid);
-            const q = query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc'));
-            onSnapshot(q, (snap) => {
-                if (!container) return;
-                container.innerHTML = snap.empty ? '<p class="text-[10px] text-slate-400 italic">Vazio.</p>' : '';
-                snap.forEach((d) => {
-                    const m = d.data();
-                    const item = document.createElement('div');
-                    item.className = "flex items-center justify-between bg-slate-50 p-2 rounded-lg";
-                    item.innerHTML = `
-                        <span class="text-[9px] font-bold text-slate-600 truncate mr-2">${m.title}</span>
+        function loadAdminSchedules() {
+            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), orderBy('createdAt', 'desc')), (snap) => {
+                const list = document.getElementById('schedule-list-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Nenhum pedido pendente.</p>' : '';
+                snap.forEach((d) => { const r = d.data(); const card = document.createElement('div'); card.className = "bg-white p-4 rounded-xl border flex justify-between items-center shadow-sm"; card.innerHTML = `<div><p class="text-xs font-black uppercase">${r.studentName}</p><p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p></div><div class="flex gap-2"><button onclick="window.resolveLessonRequest('${d.id}', 'confirmar', ${JSON.stringify(r).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button><button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button></div>`; list.appendChild(card); });
+            });
+        }
+
+        function loadConfirmedLessonsAdmin() {
+            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), orderBy('date', 'asc')), (snap) => {
+                const list = document.getElementById('confirmed-lessons-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Agenda vazia.</p>' : '';
+                snap.forEach((d) => { 
+                    const l = d.data(); 
+                    const div = document.createElement('div'); 
+                    div.className = "bg-white p-4 rounded-xl border-blue-200 border flex justify-between items-center shadow-sm"; 
+                    div.innerHTML = `
+                        <div><p class="text-xs font-black text-blue-600 uppercase">${l.studentName}</p><p class="text-[11px] font-bold">${l.date} às ${l.slot}</p></div>
                         <div class="flex gap-2">
-                            <a href="${m.link}" target="_blank" class="text-blue-500 hover:scale-110"><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
-                            <button onclick="window.deleteMaterialForStudent('${uid}', '${d.id}')" class="text-red-400 hover:text-red-600"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                        </div>
-                    `;
-                    container.appendChild(item);
+                            <button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="bg-emerald-100 text-emerald-700 px-3 py-2 rounded-lg text-[9px] font-black hover:bg-emerald-600 hover:text-white transition-colors uppercase">Concluir</button>
+                            <button onclick="window.deleteConfirmedLesson('${d.id}')" class="text-red-300"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>`; 
+                    list.appendChild(div); 
                 });
                 window.lucide.createIcons();
             });
         }
 
-        function loadAdminSchedules() {
-            const list = document.getElementById('schedule-list-admin');
-            const q = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), orderBy('createdAt', 'desc'));
-            onSnapshot(q, (snap) => {
-                list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Nenhum pedido pendente.</p>' : '';
-                snap.forEach((d) => {
-                    const r = d.data();
-                    const card = document.createElement('div');
-                    card.className = "bg-white p-4 rounded-xl border border-amber-200 flex justify-between items-center shadow-sm";
-                    card.innerHTML = `
-                        <div>
-                            <p class="text-xs font-black text-slate-800 uppercase tracking-tighter">${r.studentName}</p>
-                            <p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="window.resolveLessonRequest('${d.id}', 'confirmar')" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button>
-                            <button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button>
-                        </div>
-                    `;
-                    list.appendChild(card);
-                });
+        function loadStudentLessons(uid) {
+            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), orderBy('date', 'asc')), (snap) => {
+                const list = document.getElementById('student-confirmed-lessons');
+                const filtered = snap.docs.filter(d => d.data().studentUid === uid);
+                list.innerHTML = filtered.length === 0 ? '<p class="text-slate-400 text-sm italic">Nenhuma aula confirmada.</p>' : '';
+                filtered.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border flex items-center gap-3"; div.innerHTML = `<div class="bg-blue-100 text-blue-600 p-2 rounded-lg"><i data-lucide="video" class="w-4 h-4"></i></div><div><p class="text-xs font-bold">${l.date}</p><p class="text-[11px] text-slate-500">${l.slot}</p></div>`; list.appendChild(div); });
+                window.lucide.createIcons();
             });
         }
 
         function loadStudentMaterials(uid) {
-            const list = document.getElementById('materials-list');
-            const q = query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc'));
-            onSnapshot(q, (snap) => {
-                list.innerHTML = snap.empty ? '<p class="text-center py-12 text-slate-400 italic font-medium">O teu tutor ainda não enviou ficheiros.</p>' : '';
-                snap.forEach((d) => {
-                    const m = d.data();
-                    const item = document.createElement('div');
-                    item.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl";
-                    item.innerHTML = `
-                        <div class="flex items-center gap-4"><div class="bg-blue-50 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-lines text-xl"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div>
-                        <a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-2xl hover:bg-blue-600 transition-all shadow-md">
-                            <span>Aceder ao Link</span><i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    `;
-                    list.appendChild(item);
-                    window.lucide.createIcons();
-                });
+            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc')), (snap) => {
+                const list = document.getElementById('materials-list'); list.innerHTML = snap.empty ? '<p class="text-center py-10 text-slate-400 italic">Sem materiais.</p>' : '';
+                snap.forEach((d) => { const m = d.data(); const div = document.createElement('div'); div.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl"; div.innerHTML = `<div class="flex items-center gap-4"><div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-lines text-xl"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div><a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-2xl hover:bg-blue-600 transition-all shadow-md"><span>Aceder ao Link</span><i data-lucide="external-link" class="w-4 h-4"></i></a>`; list.appendChild(div); });
+                window.lucide.createIcons();
             });
         }
 
-        // --- SUBMISSÕES ---
-        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid);
-            await updateDoc(profileRef, { name: document.getElementById('editName').value });
-            const msg = document.getElementById('profileUpdateMsg');
-            msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000);
-        });
+        // --- SUBMISSIONS ---
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => { e.preventDefault(); await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { name: document.getElementById('editName').value }); const msg = document.getElementById('profileUpdateMsg'); msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000); });
+        document.getElementById('studentRequestForm').addEventListener('submit', async (e) => { e.preventDefault(); await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { status: 'pending', courseOfInterest: document.getElementById('reqCourse').value, availability: document.getElementById('reqAvailability').value }); });
+        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => { e.preventDefault(); await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), { studentUid: auth.currentUser.uid, studentName: currentUserProfile.name, date: document.getElementById('lessonDate').value, slot: document.getElementById('lessonSlot').value, createdAt: serverTimestamp() }); document.getElementById('scheduleModal').classList.add('hidden'); alert("Pedido enviado!"); });
+        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => { e.preventDefault(); if (!selectedTargetStudentId) return; await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() }); document.getElementById('addMaterialForm').reset(); alert("Ficheiro atribuído!"); });
+        document.getElementById('formLogin').addEventListener('submit', async (e) => { e.preventDefault(); try { await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value); document.getElementById('loginModal').classList.add('hidden'); } catch (err) { alert("Credenciais erradas."); } });
+        document.getElementById('formRegister').addEventListener('submit', async (e) => { e.preventDefault(); try { const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value); await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() }); document.getElementById('loginModal').classList.add('hidden'); } catch (err) { alert("Erro ao criar conta."); } });
 
-        document.getElementById('studentRequestForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const profileRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid);
-            await updateDoc(profileRef, { 
-                status: 'pending', courseOfInterest: document.getElementById('reqCourse').value, availability: document.getElementById('reqAvailability').value 
-            });
-        });
-
-        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), {
-                studentUid: auth.currentUser.uid, studentName: currentUserProfile.name, date: document.getElementById('lessonDate').value, slot: document.getElementById('lessonSlot').value, createdAt: serverTimestamp()
-            });
-            document.getElementById('scheduleModal').classList.add('hidden');
-            alert("Pedido de agendamento enviado com sucesso!");
-        });
-
-        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!selectedTargetStudentId) return;
-            await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { 
-                title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() 
-            });
-            document.getElementById('addMaterialForm').reset();
-            alert("Ficheiro atribuído ao aluno!");
-        });
-
-        // --- AUTH ---
-        document.getElementById('formLogin').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
-                document.getElementById('loginModal').classList.add('hidden');
-            } catch (err) { alert("Credenciais erradas."); }
-        });
-
-        document.getElementById('formRegister').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value);
-                await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { 
-                    uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() 
-                });
-                document.getElementById('loginModal').classList.add('hidden');
-            } catch (err) { alert("Erro ao criar conta."); }
-        });
-
-        // --- PRESENTATION (SOBRE) ---
-        const presentationData = [
-            { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza e no ritmo individual.", icon: "sparkles", type: "welcome" },
-            { title: "A Minha Jornada", text: "Novo no ensino, veterano na aprendizagem. Aprendi Inglês sozinho e estou a dominar Francês. Sei usar as ferramentas certas para te ajudar.", icon: "graduation-cap", type: "text" },
-            { title: "Tecnologia", tiles: [ {t:"IA", d:"Exercícios com IA"}, {t:"Digital", d:"Mobile-first"}, {t:"Ritmo", d:"Velocidade pessoal"} ], type: "tiles" },
-            { title: "Filosofia", list: ["Foco na aplicação real", "Preços transparentes", "Autonomia total"], icon: "check", type: "list" }
-        ];
-
-        window.openPresentation = () => {
-            document.getElementById('presentation-overlay').classList.add('active');
-            slideIdx = 0;
-            window.updateSlides();
-        };
+        // --- SLIDER LOGIC ---
+        window.openPresentation = () => { document.getElementById('presentation-overlay').classList.add('active'); slideIdx = 0; window.updateSlides(); };
         window.closePresentation = () => document.getElementById('presentation-overlay').classList.remove('active');
         window.changeSlide = (n) => { slideIdx += n; if(slideIdx < 0) slideIdx = presentationData.length-1; if(slideIdx >= presentationData.length) slideIdx = 0; window.updateSlides(); };
-
         window.updateSlides = () => {
             const container = document.getElementById('slides-container');
             const dotsContainer = document.getElementById('presentation-dots');
             const data = presentationData[slideIdx];
             
-            container.innerHTML = `
-                <div class="slide active">
-                    ${data.type === 'welcome' ? `
-                        <div class="text-center">
-                            <div class="text-blue-600 mb-8"><i class="fa-solid fa-graduation-cap" style="font-size: 80px;"></i></div>
-                            <h1>${data.title}</h1>
-                            <p>${data.text}</p>
+            // LÓGICA DE RENDERIZAÇÃO MELHORADA
+            let content = '';
+            if (data.type === 'welcome') {
+                content = `
+                    <div class="text-center">
+                        <div class="text-blue-600 mb-8"><i class="fa-solid fa-graduation-cap" style="font-size: 80px;"></i></div>
+                        <h1>${data.title}</h1>
+                        <p>${data.text}</p>
+                    </div>`;
+            } else if (data.type === 'text') {
+                content = `
+                    <div class="max-w-3xl mx-auto text-left">
+                        <h2 class="slide-title">${data.title}</h2>
+                        <p class="font-bold text-blue-600 mb-4 tracking-tight">Novo no ensino, veterano na aprendizagem.</p>
+                        <p class="text-slate-600">${data.text}</p>
+                    </div>`;
+            } else if (data.type === 'tiles') {
+                // NOVO LAYOUT: BARRAS HORIZONTAIS
+                content = `
+                    <div class="flex flex-col gap-4 max-w-4xl mx-auto w-full">
+                        <h2 class="slide-title">${data.title}</h2>
+                        <div class="space-y-3">
+                            ${data.tiles.map(tile => {
+                                // Mapeamento de ícones fixo baseado no título ou posição
+                                let icon = 'sparkles';
+                                if (tile.t.includes('Silencioso') || tile.t.includes('IA')) icon = 'shield-check';
+                                if (tile.t.includes('Recursos') || tile.t.includes('Digital')) icon = 'layers';
+                                if (tile.t.includes('Evolução') || tile.t.includes('Ritmo')) icon = 'trending-up';
+                                if (tile.t.includes('Acompanhamento')) icon = 'navigation';
+
+                                return `
+                                <div class="glass-card flex items-center p-5 gap-6 rounded-3xl border border-white/40 shadow-sm transition-all hover:bg-white/80">
+                                    <div class="bg-blue-600 text-white p-4 rounded-2xl shrink-0 shadow-md">
+                                        <i data-lucide="${icon}" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <h4 class="font-black text-slate-800 text-lg uppercase tracking-tight">${tile.t}</h4>
+                                        <p class="text-slate-500 font-medium leading-tight text-base">${tile.d}</p>
+                                    </div>
+                                </div>`;
+                            }).join('')}
                         </div>
-                    ` : ''}
-                    ${data.type === 'text' ? `
-                        <div class="max-w-3xl mx-auto">
-                            <h2 class="slide-title">${data.title}</h2>
-                            <p class="font-bold text-blue-600 mb-4">Novo no ensino, veterano na aprendizagem.</p>
-                            <p>${data.text}</p>
-                        </div>
-                    ` : ''}
-                    ${data.type === 'tiles' ? `
-                        <div class="tiled-content">
-                            ${data.tiles.map(t => `<div class="tile"><h3>${t.t}</h3><p>${t.d}</p></div>`).join('')}
-                        </div>
-                    ` : ''}
-                    ${data.type === 'list' ? `
-                        <div class="max-w-3xl mx-auto">
-                            <h2 class="slide-title">${data.title}</h2>
-                            <ul class="space-y-4">
-                                ${data.list.map(l => `<li class="flex items-center gap-4 font-bold text-slate-600"><i class="fa-solid fa-check text-blue-600"></i> ${l}</li>`).join('')}
-                            </ul>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-            
+                    </div>`;
+            } else if (data.type === 'list') {
+                content = `
+                    <div class="max-w-3xl mx-auto text-left">
+                        <h2 class="slide-title">${data.title}</h2>
+                        <ul class="space-y-4">
+                            ${data.list.map(l => `<li class="flex items-center gap-4 font-bold text-slate-600"><i class="fa-solid fa-check text-blue-600 text-xl"></i> ${l}</li>`).join('')}
+                        </ul>
+                    </div>`;
+            }
+
+            container.innerHTML = `<div class="slide active">${content}</div>`;
             dotsContainer.innerHTML = presentationData.map((_, i) => `<div class="dot ${i === slideIdx ? 'active' : ''}"></div>`).join('');
             window.lucide.createIcons();
         };
 
-        // --- BG ANIM ---
+        // --- BACKGROUND ---
         const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
         let w, h, p = [];
         const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-        class Part { constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.3; this.vy = (Math.random()-0.5)*0.3; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; } draw() { ctx.fillStyle='rgba(59,130,246,0.06)'; ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fill(); } }
+        class Part { constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.2; this.vy = (Math.random()-0.5)*0.2; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; } draw() { ctx.fillStyle='rgba(59,130,246,0.06)'; ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fill(); } }
         resize(); p = Array.from({length: 40}, () => new Part());
         function anim() { ctx.clearRect(0,0,w,h); p.forEach(v=>{v.update();v.draw();}); requestAnimationFrame(anim); }
         window.onresize = resize; anim();
