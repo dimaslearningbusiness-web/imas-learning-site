@@ -59,6 +59,7 @@
             <div id="nav-links" class="flex gap-8 text-sm font-medium text-slate-600">
                 <a href="#home" onclick="window.showLandingPage()" class="hover:text-blue-600 transition-colors">Início</a>
                 <a href="#cursos" onclick="window.showLandingPage()" class="hover:text-blue-600 transition-colors">Cursos</a>
+                <a href="#reviews-section" onclick="window.showLandingPage()" class="hover:text-blue-600 transition-colors">Reviews</a>
                 <button onclick="window.openPresentation()" class="hover:text-blue-600 transition-colors font-medium">Sobre</button>
             </div>
 
@@ -95,7 +96,7 @@
                 <div class="glass-card rounded-2xl p-6 flex flex-col relative overflow-hidden group h-full">
                     <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                     <div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-500"><i data-lucide="message-circle" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> <span id="avg-ingles">5.0</span></div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Inglês Personalizado</h3>
                     <p class="text-slate-600 text-sm mb-4 flex-grow">Aulas com objetivo prático e totalmente personalizadas para cada aluno.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
@@ -106,7 +107,7 @@
                 </div>
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-green-400/50 transition-colors h-full">
                     <div class="h-40 bg-green-50 rounded-xl mb-4 flex items-center justify-center text-green-600"><i data-lucide="book-a" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 4.9</div></div>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> <span id="avg-portugues">4.9</span></div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Portuguese for English</h3>
                     <p class="text-slate-600 text-sm mb-4 flex-grow">Learn Portuguese effectively. Focus on conversation and culture.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
@@ -117,7 +118,7 @@
                 </div>
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-violet-400/50 transition-colors h-full">
                     <div class="h-40 bg-violet-50 rounded-xl mb-4 flex items-center justify-center text-violet-600"><i data-lucide="cpu" class="w-16 h-16 opacity-60"></i></div>
-                    <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
+                    <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> <span id="avg-ai">5.0</span></div></div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">Aulas de AI e Tecnologia</h3>
                     <p class="text-slate-600 text-sm mb-4 flex-grow">Orientação prática para criação de projetos utilizando Inteligência Artificial.</p>
                     <div class="bg-white/50 rounded-lg p-3 mb-4 border border-white mt-auto">
@@ -128,6 +129,16 @@
             </div>
 
             <div id="dynamic-courses-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="reviews-section" class="max-w-7xl mx-auto py-16 border-t border-slate-100">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 tracking-tight">O que dizem os nossos alunos</h2>
+                <p class="text-slate-500">Feedback real da nossa comunidade.</p>
+            </div>
+            <div id="reviews-feed" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <p class="text-center col-span-full text-slate-400 italic">A carregar avaliações...</p>
+            </div>
         </section>
     </main>
 
@@ -145,11 +156,6 @@
                             <span id="user-status-badge" class="status-badge">...</span>
                         </div>
                         <p class="text-blue-100 text-lg font-light" id="user-subtitle">Pronto para continuar a aprender?</p>
-                    </div>
-                    <div id="student-schedule-btn-area" class="hidden">
-                        <button onclick="window.openScheduleModal()" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-xl transition-all flex items-center gap-2">
-                            <i data-lucide="calendar-plus" class="w-5 h-5"></i> Agendar Aula
-                        </button>
                     </div>
                 </div>
             </div>
@@ -182,17 +188,21 @@
                     <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="layout-grid" class="text-indigo-600"></i> Catálogo Dinâmico</h3>
                     
                     <div class="bg-white/50 p-6 rounded-3xl border border-white mb-8">
-                        <h4 class="font-bold text-slate-800 mb-4">Adicionar Novo Curso</h4>
-                        <form id="adminCourseForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <h4 class="font-bold text-slate-800 mb-4">Adicionar Novo Curso de Grupo</h4>
+                        <form id="adminCourseForm" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                             <div class="md:col-span-1">
                                 <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Nome do Curso</label>
                                 <input type="text" id="courseTitleInput" required placeholder="Ex: Francês Iniciante" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
                             </div>
                             <div class="md:col-span-1">
-                                <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Descrição Curta (Opcional)</label>
-                                <input type="text" id="courseDescInput" placeholder="Ex: Foco em conversação" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Descrição</label>
+                                <input type="text" id="courseDescInput" placeholder="Ex: Nível A1" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
                             </div>
-                            <button type="submit" class="bg-indigo-600 text-white font-black py-3 rounded-xl shadow-md hover:bg-indigo-700 transition-all text-sm uppercase">Criar Curso</button>
+                            <div class="md:col-span-1">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Datas (Informativo)</label>
+                                <input type="text" id="courseDatesInput" placeholder="Ex: Sábados, 14h" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
+                            </div>
+                            <button type="submit" class="bg-indigo-600 text-white font-black py-3 rounded-xl shadow-md hover:bg-indigo-700 transition-all text-sm uppercase">Criar</button>
                         </form>
                     </div>
 
@@ -228,43 +238,78 @@
                 </div>
             </div>
 
-            <!-- ÁREA ALUNO -->
-            <div id="student-content-area" class="hidden-section grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-2 animate-fade-in">
-                    <div class="glass-card rounded-[2rem] p-6 flex items-center gap-5 border-l-4 border-emerald-500">
-                        <div class="bg-emerald-100 text-emerald-600 p-3 rounded-2xl"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aulas Concluídas</p>
-                            <h4 id="stat-completed-count" class="text-3xl font-black text-slate-800">0</h4>
+            <!-- ÁREA ALUNO (Dashboard Útil e Claro) -->
+            <div id="student-content-area" class="hidden-section grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
+                
+                <!-- 1. PRÓXIMAS AÇÕES (Agenda) -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-blue-500 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2 text-blue-600">
+                            <i data-lucide="calendar-days" class="w-5 h-5"></i>
+                            <h3 class="text-xs font-bold uppercase tracking-widest">Próximas Sessões</h3>
                         </div>
+                        <p id="stat-future-count" class="text-xl font-black text-blue-600">0</p>
                     </div>
-                    <div class="glass-card rounded-[2rem] p-6 flex items-center gap-5 border-l-4 border-blue-500">
-                        <div class="bg-blue-100 text-blue-600 p-3 rounded-2xl"><i data-lucide="calendar-days" class="w-6 h-6"></i></div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aulas Futuras</p>
-                            <h4 id="stat-future-count" class="text-3xl font-black text-slate-800">0</h4>
+                    <div id="student-next-actions" class="flex-grow">
+                        <button onclick="window.openScheduleModal()" class="w-full py-3 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl font-bold text-xs hover:bg-blue-600 hover:text-white transition-all mb-4">
+                            Agendar Nova Aula Agora
+                        </button>
+                        <p class="text-[10px] text-slate-400 font-medium mb-3 uppercase tracking-tighter">Confirmadas na tua agenda:</p>
+                        <!-- Aulas dinâmicas carregadas aqui pelo listener existente -->
+                        <div id="student-confirmed-lessons-dash" class="space-y-2 overflow-y-auto max-h-[100px]">
+                            <p class="text-[10px] text-slate-400 italic">Nenhuma aula para breve.</p>
                         </div>
                     </div>
                 </div>
 
-                <div id="study-area" class="lg:col-span-2 space-y-6">
-                    <div class="glass-card rounded-[2rem] p-8 border-l-4 border-blue-600 bg-blue-50/20">
-                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><i data-lucide="calendar" class="text-blue-600"></i> Minhas Próximas Aulas</h3>
-                        <div id="student-confirmed-lessons" class="space-y-2"></div>
+                <!-- 2. ESTADO ATUAL (Progresso) -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4 text-emerald-600">
+                            <i data-lucide="trending-up" class="w-5 h-5"></i>
+                            <h3 class="text-xs font-bold uppercase tracking-widest">A Minha Jornada</h3>
+                        </div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-emerald-50 text-emerald-600 p-3 rounded-2xl"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 id="stat-completed-count" class="text-3xl font-black text-slate-800">0</h4>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase">Aulas Concluídas</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="glass-card rounded-[2rem] p-8">
-                        <h3 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3"><i data-lucide="folder-open" class="text-blue-600"></i> Meus Materiais</h3>
-                        <div id="materials-list" class="space-y-4"></div>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-[2rem] border text-xs text-slate-400 text-center font-medium">
-                        Problemas? Contactar: <span class="font-bold text-blue-600">dimaslearningbusiness@gmail.com</span>
+                    <div class="pt-4 border-t border-slate-100">
+                        <div class="flex justify-between items-end mb-2">
+                            <span id="user-level-display" class="text-sm font-black text-emerald-600">Nível A1</span>
+                            <span class="text-[9px] font-bold text-slate-400 uppercase">Caminho para C2</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden shadow-inner">
+                            <div id="progress-bar-fill" class="bg-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="glass-card rounded-[2rem] p-8 h-fit">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest">Nível Atual</h3>
-                    <div id="user-level-display" class="text-xl font-black text-blue-600 mb-2">A1 Iniciante</div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden"><div id="progress-bar-fill" class="bg-blue-600 h-3 transition-all duration-1000" style="width: 0%"></div></div>
+
+                <!-- 3. NOVAS OPORTUNIDADES (Cursos de Grupo) -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-indigo-500 flex flex-col">
+                    <div class="flex items-center gap-2 mb-4 text-indigo-600">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                        <h3 class="text-xs font-bold uppercase tracking-widest">Aulas de Grupo</h3>
+                    </div>
+                    <div id="dashboard-dynamic-courses" class="space-y-3 overflow-y-auto max-h-[150px]">
+                        <p class="text-slate-400 italic text-[10px]">A carregar novos conteúdos...</p>
+                    </div>
                 </div>
+
+                <!-- 4. REGISTO PASSADO (Histórico) -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-slate-400 flex flex-col opacity-80 hover:opacity-100 transition-opacity">
+                    <div class="flex items-center gap-2 mb-4 text-slate-500">
+                        <i data-lucide="history" class="w-5 h-5"></i>
+                        <h3 class="text-xs font-bold uppercase tracking-widest">Registo de Atividade</h3>
+                    </div>
+                    <div id="student-history-list" class="flex-grow overflow-y-auto max-h-[150px] space-y-2 text-xs">
+                        <p class="text-slate-400 italic">Sem histórico recente.</p>
+                    </div>
+                </div>
+
             </div>
 
             <div id="pending-empty-state" class="hidden-section py-20 text-center glass-card rounded-[2rem] mt-10">
@@ -278,11 +323,23 @@
             <div class="glass-card rounded-[2.5rem] p-12 border">
                 <h3 class="text-3xl font-bold text-slate-900 text-center mb-10">Editar Perfil</h3>
                 <form id="editProfileForm" class="space-y-6">
-                    <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Nickname</label>
+                        <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Nova Password (deixar vazio para manter)</label>
+                        <input type="password" id="editPassword" placeholder="••••••••" class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
+                    </div>
                     <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border rounded-2xl text-slate-400 cursor-not-allowed">
                     <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl">Guardar Alterações</button>
                 </form>
                 <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-bold">Perfil atualizado!</div>
+                
+                <div class="mt-10 pt-8 border-t text-center">
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-2">Dúvidas ou Suporte?</p>
+                    <a href="mailto:dimaslearningbusiness@gmail.com" class="text-blue-600 font-bold hover:underline">dimaslearningbusiness@gmail.com</a>
+                </div>
             </div>
         </div>
 
@@ -308,7 +365,7 @@
         </div>
     </main>
 
-    <!-- MODAIS E APRESENTAÇÃO -->
+    <!-- MODAIS -->
     <div id="detailsModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
         <div class="bg-white rounded-[2.5rem] shadow-2xl max-w-2xl w-full relative animate-fade-in overflow-hidden">
             <div class="bg-slate-50 p-8 border-b flex justify-between items-center">
@@ -321,7 +378,23 @@
                     <div class="bg-slate-50 rounded-3xl p-8 text-center border">
                         <div class="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center shadow-lg mb-6 text-blue-600 mx-auto"><i data-lucide="calendar-check"></i></div>
                         <h4 class="text-xl font-black mb-2">Pronto para a aula?</h4>
-                        <div id="detailsActionArea" class="w-full"></div>
+                        <div id="detailsActionArea" class="w-full mb-6"></div>
+                        <div id="review-form-container" class="hidden border-t pt-6 text-left">
+                            <h5 class="text-xs font-black text-slate-400 uppercase mb-3">Deixa a tua Review</h5>
+                            <form id="courseReviewForm" class="space-y-3">
+                                <div class="flex gap-2 justify-center mb-2">
+                                    <select id="revStars" class="bg-white border rounded-lg text-xs font-bold p-1">
+                                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                                        <option value="3">⭐⭐⭐ (3)</option>
+                                        <option value="2">⭐⭐ (2)</option>
+                                        <option value="1">⭐ (1)</option>
+                                    </select>
+                                </div>
+                                <textarea id="revComment" maxlength="150" placeholder="A tua experiência (máx 150 car.)" class="w-full text-xs p-3 border rounded-xl outline-none resize-none h-20"></textarea>
+                                <button type="submit" class="w-full py-2 bg-slate-900 text-white text-[10px] font-black uppercase rounded-lg">Submeter Review</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,7 +402,7 @@
     </div>
 
     <div id="scheduleModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
-        <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-w-md w-full relative animate-fade-in">
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-md w-full relative animate-fade-in">
             <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Marcar Aula</h3>
             <form id="formLessonRequest" class="space-y-6">
@@ -356,19 +429,8 @@
         </div>
     </div>
 
-    <div id="confirmModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-[2rem] p-10 shadow-2xl max-sm w-full text-center">
-            <h4 class="text-2xl font-bold text-slate-900 mb-4" id="confirmTitle">Confirmar?</h4>
-            <p class="text-slate-500 mb-10" id="confirmText"></p>
-            <div class="grid grid-cols-2 gap-4">
-                <button onclick="window.closeConfirmModal()" class="py-4 bg-slate-100 font-bold rounded-2xl">Voltar</button>
-                <button id="confirmActionBtn" class="py-4 bg-red-600 text-white font-black rounded-2xl">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
     <div id="loginModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative animate-fade-in">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-sm w-full relative animate-fade-in">
             <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <div id="loginFormContainer">
                 <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Login</h3>
@@ -392,20 +454,10 @@
         </div>
     </div>
 
-    <div id="presentation-overlay">
-        <button class="close-presentation-btn" onclick="window.closePresentation()"><i class="fa-solid fa-arrow-left"></i> <span>Voltar</span></button>
-        <div class="presentation-container">
-            <div id="slides-container" class="w-full h-full"></div>
-            <button class="nav-btn-slide" style="left:20px" onclick="window.changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="nav-btn-slide" style="right:20px" onclick="window.changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-            <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-3" id="presentation-dots"></div>
-        </div>
-    </div>
-
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, getDoc, getDocs, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously, signInWithCustomToken, updatePassword } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, getDocs, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDgmisKY0vQY1UkRm2dndaAa2jbOl9Ju1s",
@@ -424,39 +476,335 @@
 
         let currentUserProfile = null;
         let selectedTargetStudentId = null;
-        let pendingActionFn = null;
         let slideIdx = 0;
         let activeStatsUnsubscribes = [];
 
         window.lucide.createIcons();
 
-        // --- APRESENTAÇÃO ---
+        // --- DADOS ---
+        const courseObjectives = {
+            ingles: { title: "Inglês Personalizado", objectives: [{t:"Conversação", d:"Foco em fluência real."}, {t:"Gramática", d:"Estrutura e correção."}] },
+            portugues: { title: "Portuguese for English", objectives: [{t:"Daily Use", d:"Basic survival expressions."}, {t:"Grammar", d:"Structure and logic."}] },
+            ai: { title: "Aulas de AI e Tecnologia", objectives: [{t:"Prompting", d:"How to talk to AI."}, {t:"Tools", d:"Workflows and automation."}] }
+        };
+
         const presentationData = [
-            { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza e no ritmo individual.", icon: "sparkles", type: "welcome" },
-            { title: "A Minha Jornada", text: "Veterano na aprendizagem autodidata. Aprendi Inglês sozinho e estou a dominar Francês. Sei usar as ferramentas certas para te ajudar.", icon: "graduation-cap", type: "text" },
-            { title: "Tecnologia que te Guia", tiles: [ {t:"Apoio Silencioso", d:"A tecnologia trabalha nos bastidores para entender o teu ritmo, sugerindo exercícios que te ajudam a superar desafios de forma natural e sem esforço."}, {t:"Recursos no Momento Certo", d:"Tens acesso às ferramentas ideais para cada etapa do teu percurso, garantindo que nunca te sentes perdido e que tens sempre o apoio necessário para avançar."}, {t:"Evolução com Confiança", d:"O nosso sistema ajuda-te a consolidar o que aprendeste no tempo certo, para que possas aplicar o conhecimento no mundo real com total segurança e autonomia."}, {t:"Acompanhamento Constante", d:"Estamos sempre por perto. A tecnologia funciona como uma bússola invisível que te orienta, permitindo que te foques apenas no mais importante: o teu sucesso."} ], type: "tiles" },
-            { title: "Filosofia", list: ["Foco prático", "Preços justos", "Autonomia total"], icon: "check", type: "list" }
+            { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza." },
+            { title: "Metodologia", text: "Foco prático e autónomo para resultados rápidos." },
+            { title: "Tecnologia", text: "Ferramentas de IA integradas no percurso." }
         ];
 
-        // --- AUTH INICIAL (REGRA 3) ---
-        (async function initApp() {
-            try {
-                // Inicia sessão anónima por defeito para carregar dados públicos
-                if (!auth.currentUser) await signInAnonymously(auth);
-                loadDynamicCourses();
-            } catch (e) { console.error("Falha na inicialização segura."); }
-        })();
-
-        // --- UI ACTIONS ---
-        window.openConfirmModal = (title, text, actionFn) => {
-            document.getElementById('confirmTitle').innerText = title;
-            document.getElementById('confirmText').innerText = text;
-            pendingActionFn = actionFn;
-            document.getElementById('confirmModal').classList.remove('hidden');
+        // --- FUNÇÕES ADMIN ---
+        window.approve = async (uid) => { if(!auth.currentUser) return; await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' }); };
+        window.revoke = async (uid) => { if(!auth.currentUser) return; await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' }); };
+        window.changeLevel = async (uid, lvl) => { if(!auth.currentUser) return; await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: lvl }); };
+        window.deleteMaterialForStudent = async (uid, matId) => { if(!auth.currentUser) return; await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId)); };
+        
+        window.resolveLessonRequest = async (id, act, data) => {
+            if(!auth.currentUser) return;
+            if (act === 'confirmar') await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp() });
+            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', id));
         };
-        window.closeConfirmModal = () => document.getElementById('confirmModal').classList.add('hidden');
-        document.getElementById('confirmActionBtn').addEventListener('click', () => { if (pendingActionFn) { pendingActionFn(); window.closeConfirmModal(); } });
+        
+        window.completeLesson = async (id, data) => {
+            if(!auth.currentUser) return;
+            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), { ...data, completedAt: serverTimestamp() });
+            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', id));
+        };
+        
+        window.deleteConfirmedLesson = async (id) => { if(!auth.currentUser) return; await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', id)); };
+        window.deleteCourse = async (id) => { if(!auth.currentUser) return; await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'courses', id)); };
 
+        window.openMaterialPanel = (uid, name) => { selectedTargetStudentId = uid; document.getElementById('target-student-name').innerText = name; document.getElementById('admin-add-material-panel').classList.remove('hidden-section'); };
+        window.closeMaterialPanel = () => { document.getElementById('admin-add-material-panel').classList.add('hidden-section'); selectedTargetStudentId = null; };
+
+        window.switchAdminTab = (tab) => {
+            ['users', 'agenda', 'requests', 'courses'].forEach(t => {
+                const view = document.getElementById(`admin-view-${t}`);
+                if (view) view.classList.toggle('hidden-section', t !== tab);
+                const btn = document.getElementById(`admin-tab-${t}`);
+                if (btn) btn.classList.toggle('active', t === tab);
+            });
+        };
+
+        // --- SISTEMA DE REVIEWS ---
+        let currentOpenCourseId = null;
+
+        function loadReviews() {
+            // Removido if(!auth.currentUser) para permitir visão pública social
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'), (snap) => {
+                const reviews = snap.docs.map(d => d.data());
+                const feed = document.getElementById('reviews-feed');
+                if (feed) feed.innerHTML = reviews.length === 0 ? '<p class="text-center col-span-full text-slate-400">Ainda não existem avaliações.</p>' : '';
+                
+                const courses = ['ingles', 'portugues', 'ai'];
+                courses.forEach(id => {
+                    const courseRev = reviews.filter(r => r.courseId === id);
+                    if (courseRev.length > 0) {
+                        const avg = (courseRev.reduce((acc, c) => acc + Number(c.rating), 0) / courseRev.length).toFixed(1);
+                        const el = document.getElementById(`avg-${id}`);
+                        if (el) el.innerText = avg;
+                    }
+                });
+
+                reviews.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)).forEach(r => {
+                    if (!feed) return;
+                    const div = document.createElement('div');
+                    div.className = "glass-card p-6 rounded-2xl border-t-4 border-amber-400 animate-fade-in shadow-sm";
+                    div.innerHTML = `<div class="flex justify-between mb-2"><span class="text-[10px] font-black uppercase text-blue-600">${r.courseId}</span><span class="text-amber-500 font-bold">★ ${r.rating}</span></div>
+                                     <p class="text-sm text-slate-700 italic">"${r.comment}"</p>
+                                     <p class="text-[10px] text-slate-400 mt-4 font-bold">— ${r.userName}</p>`;
+                    feed.appendChild(div);
+                });
+            }, (err) => {});
+        }
+
+        document.getElementById('courseReviewForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser || auth.currentUser.isAnonymous) return;
+            
+            const comment = document.getElementById('revComment').value;
+            const rating = document.getElementById('revStars').value;
+
+            try {
+                const reviewsSnap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'));
+                const alreadyReviewed = reviewsSnap.docs.some(d => d.data().userId === auth.currentUser.uid && d.data().courseId === currentOpenCourseId);
+                
+                if (alreadyReviewed) {
+                    alert("Já avaliaste este curso anteriormente.");
+                    return;
+                }
+
+                await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'), {
+                    userId: auth.currentUser.uid,
+                    userName: currentUserProfile?.name || "Aluno",
+                    courseId: currentOpenCourseId,
+                    rating: Number(rating),
+                    comment: comment,
+                    createdAt: serverTimestamp()
+                });
+                document.getElementById('review-form-container').classList.add('hidden');
+                document.getElementById('courseReviewForm').reset();
+                alert("Obrigado pelo teu feedback!");
+            } catch (err) {
+                console.error("Erro ao enviar review.");
+            }
+        });
+
+        // --- CARREGAMENTO DE DADOS ---
+        async function loadDynamicCourses() {
+            if(!auth.currentUser) return;
+            const container = document.getElementById('dynamic-courses-list');
+            const dashContainer = document.getElementById('dashboard-dynamic-courses');
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
+                if (container) container.innerHTML = "";
+                if (dashContainer) dashContainer.innerHTML = "";
+                const activeOnes = snap.docs.map(d => ({id: d.id, ...d.data()})).filter(c => c.active === true);
+                activeOnes.forEach((c) => {
+                    if (container) {
+                        const card = document.createElement('div');
+                        card.className = "glass-card rounded-2xl p-6 flex flex-col hover:border-blue-400/50 transition-colors h-full animate-fade-in";
+                        card.innerHTML = `<div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600"><i data-lucide="users" class="w-16 h-16 opacity-60"></i></div>
+                            <div class="flex justify-between items-start mb-2"><span class="bg-amber-100 text-amber-700 text-[9px] font-black px-2 py-1 rounded-full uppercase">NOVO • GRUPO</span></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-1 leading-tight">${c.title}</h3>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase mb-2">Professor: ${c.teacher || 'Dimas Learning'}</p>
+                            <p class="text-slate-600 text-sm mb-3 flex-grow">${c.description || 'Sem descrição.'}</p>
+                            <div class="text-[10px] bg-slate-50 p-2 rounded-lg border mb-4 font-bold text-slate-500 italic">📅 ${c.dates || 'Datas a definir'}</div>
+                            <button class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-bold text-xs cursor-not-allowed opacity-50">Inscrições Brevemente</button>`;
+                        container.appendChild(card);
+                    }
+                    if (dashContainer) {
+                        const div = document.createElement('div');
+                        div.className = "p-3 bg-white border rounded-xl flex flex-col gap-1 shadow-sm animate-fade-in";
+                        div.innerHTML = `<div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-700">${c.title}</span><span class="text-[8px] font-black text-amber-500 uppercase tracking-tighter">Grupo</span></div>
+                                         <div class="text-[9px] text-slate-400 font-medium">${c.dates || 'Em breve'}</div>`;
+                        dashContainer.appendChild(div);
+                    }
+                });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => {});
+        }
+
+        function loadStudentHistory(uid) {
+            if(!auth.currentUser) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), (snap) => {
+                const list = document.getElementById('student-history-list');
+                if (!list) return;
+                const filtered = snap.docs.filter(d => d.data().studentUid === uid);
+                list.innerHTML = filtered.length === 0 ? '<p class="text-slate-400 italic">Consulta aqui as tuas aulas terminadas.</p>' : '';
+                filtered.forEach((d) => {
+                    const l = d.data();
+                    const div = document.createElement('div');
+                    div.className = "p-2 bg-slate-50 border border-slate-100 rounded-lg flex justify-between items-center";
+                    div.innerHTML = `<span class="font-bold text-slate-700">${l.courseType || 'Aula'}</span><span class="text-[10px] text-slate-400 font-medium">${l.date || 'Data N/A'}</span>`;
+                    list.appendChild(div);
+                });
+            }, (err) => {});
+        }
+
+        function loadStudentStats(uid) {
+            if (!uid || !auth.currentUser) return;
+            activeStatsUnsubscribes.forEach(unsub => unsub());
+            activeStatsUnsubscribes = [];
+            
+            const unsub1 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), (snap) => {
+                const count = snap.docs.filter(d => d.data().studentUid === uid).length;
+                const el = document.getElementById('stat-completed-count');
+                if (el) el.innerText = count;
+            }, (err) => {});
+
+            const unsub2 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
+                const filtered = snap.docs.filter(d => d.data().studentUid === uid);
+                const count = filtered.length;
+                
+                // Update dashboard stat
+                const el = document.getElementById('stat-future-count');
+                if (el) el.innerText = count;
+                
+                // Update dashboard mini-list
+                const dashList = document.getElementById('student-confirmed-lessons-dash');
+                if (dashList) {
+                    dashList.innerHTML = count === 0 ? '<p class="text-[10px] text-slate-400 italic">Nenhuma aula para breve.</p>' : '';
+                    filtered.forEach(d => {
+                        const l = d.data();
+                        const div = document.createElement('div');
+                        div.className = "p-2 bg-blue-50 border border-blue-100 rounded-lg flex justify-between items-center";
+                        div.innerHTML = `<span class="font-bold text-blue-700 text-[10px]">${l.courseType}</span><span class="text-[9px] text-blue-400 font-black">${l.date} • ${l.slot}</span>`;
+                        dashList.appendChild(div);
+                    });
+                }
+            }, (err) => {});
+
+            activeStatsUnsubscribes = [unsub1, unsub2];
+        }
+
+        // --- AUTH MONITOR ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user && !user.isAnonymous) {
+                onSnapshot(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), (snap) => {
+                    if (snap.exists()) {
+                        currentUserProfile = snap.data();
+                        updateDashboardUI();
+                    } else {
+                        const data = { uid: user.uid, name: user.displayName || "Utilizador", email: user.email, status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante' };
+                        setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), data);
+                    }
+                }, (err) => {});
+            } else {
+                currentUserProfile = null;
+                window.showLandingPage();
+            }
+        });
+
+        function updateDashboardUI() {
+            if (!currentUserProfile) return;
+            const profile = currentUserProfile; const isAdmin = profile.email === ADMIN_EMAIL;
+            const elName = document.getElementById('user-name-display');
+            const elInit = document.getElementById('user-initial');
+            const elBadge = document.getElementById('user-status-badge');
+
+            if(elName) elName.innerText = profile.name;
+            if(elInit) elInit.innerText = (profile.name || "U").charAt(0).toUpperCase();
+            if(elBadge) {
+                elBadge.className = `status-badge status-${isAdmin ? 'admin' : profile.status}`;
+                elBadge.innerText = isAdmin ? 'Admin' : profile.status;
+            }
+            
+            const userNav = document.getElementById('user-nav-links');
+            if(userNav) userNav.classList.remove('hidden-section');
+            document.getElementById('loginBtn').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+
+            const adminPanel = document.getElementById('admin-main-panel');
+            if(adminPanel) adminPanel.classList.toggle('hidden-section', !isAdmin);
+
+            if (!isAdmin) {
+                const gReq = document.getElementById('guest-request-form');
+                const pEmp = document.getElementById('pending-empty-state');
+                const sCont = document.getElementById('student-content-area');
+                if(gReq) gReq.classList.toggle('hidden-section', profile.status !== 'guest');
+                if(pEmp) pEmp.classList.toggle('hidden-section', profile.status !== 'pending');
+                if(sCont) sCont.classList.toggle('hidden-section', profile.status !== 'student');
+                
+                if (profile.status === 'student') {
+                    const elLvl = document.getElementById('user-level-display');
+                    const elProg = document.getElementById('progress-bar-fill');
+                    if(elLvl) elLvl.innerText = profile.level;
+                    if(elProg) {
+                        const lvMap = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
+                        elProg.style.width = (lvMap[profile.level] || 10) + "%";
+                    }
+                    loadStudentHistory(profile.uid);
+                    loadStudentStats(profile.uid);
+                    loadDynamicCourses();
+                }
+            } else {
+                loadAdminSchedules(); loadConfirmedLessonsAdmin(); loadCoursesAdmin(); loadAdminDashboard();
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // --- FORM HANDLERS ---
+        document.getElementById('editProfileForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!auth.currentUser) return;
+            const newName = document.getElementById('editName').value;
+            const newPass = document.getElementById('editPassword').value;
+            
+            try {
+                await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { name: newName });
+                if (newPass.trim() !== "") {
+                    await updatePassword(auth.currentUser, newPass);
+                    document.getElementById('editPassword').value = "";
+                }
+                const msg = document.getElementById('profileUpdateMsg');
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 3000);
+            } catch (err) {
+                console.error("Erro ao atualizar perfil:", err);
+            }
+        });
+
+        document.getElementById('studentRequestForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!auth.currentUser) return;
+            await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { 
+                status: 'pending', 
+                reqCourse: document.getElementById('reqCourse').value,
+                reqAvailability: document.getElementById('reqAvailability').value
+            });
+        });
+
+        document.getElementById('formLessonRequest')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!auth.currentUser || !currentUserProfile) return;
+            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), {
+                studentUid: auth.currentUser.uid,
+                studentName: currentUserProfile.name,
+                courseType: document.getElementById('lessonCourse').value,
+                date: document.getElementById('lessonDate').value,
+                slot: document.getElementById('lessonSlot').value,
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('scheduleModal').classList.add('hidden');
+        });
+
+        document.getElementById('addMaterialForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!auth.currentUser || !selectedTargetStudentId) return;
+            try {
+                await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), {
+                    title: document.getElementById('matTitle').value,
+                    link: document.getElementById('matLink').value,
+                    createdAt: serverTimestamp()
+                });
+                document.getElementById('addMaterialForm').reset();
+                window.closeMaterialPanel();
+            } catch (err) {}
+        });
+
+        // --- MISC ---
+        window.openScheduleModal = () => document.getElementById('scheduleModal').classList.remove('hidden');
         window.logout = async () => { await signOut(auth); window.location.reload(); };
         window.openLoginModal = () => { window.toggleAuthMode('login'); document.getElementById('loginModal').classList.remove('hidden'); };
         window.toggleAuthMode = (m) => {
@@ -467,12 +815,6 @@
         window.showLandingPage = () => {
             document.getElementById('landing-page').classList.remove('hidden-section');
             document.getElementById('user-dashboard').classList.add('hidden-section');
-            const isAnon = auth.currentUser?.isAnonymous;
-            const hasUser = auth.currentUser && !isAnon;
-            document.getElementById('loginBtn').classList.toggle('hidden', hasUser);
-            document.getElementById('logoutBtn').classList.toggle('hidden', !hasUser);
-            document.getElementById('user-nav-links').classList.toggle('hidden-section', !hasUser);
-            window.scrollTo(0, 0);
         };
 
         window.switchTab = (tab) => {
@@ -486,304 +828,109 @@
             }
         };
 
-        window.switchAdminTab = (tab) => {
-            document.getElementById('admin-view-users').classList.toggle('hidden-section', tab !== 'users');
-            document.getElementById('admin-view-agenda').classList.toggle('hidden-section', tab !== 'agenda');
-            document.getElementById('admin-view-requests').classList.toggle('hidden-section', tab !== 'requests');
-            document.getElementById('admin-view-courses').classList.toggle('hidden-section', tab !== 'courses');
-            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.toggle('active', b.id === `admin-tab-${tab}`));
-        };
-
-        // --- DATA LOADERS (REGRA 2 - FILTROS EM JS) ---
-        async function loadDynamicCourses() {
-            const container = document.getElementById('dynamic-courses-list');
-            if (!container) return;
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
-                container.innerHTML = "";
-                snap.docs.map(d => d.data()).filter(c => c.active === true).forEach((c) => {
-                    const card = document.createElement('div');
-                    card.className = "glass-card rounded-2xl p-6 flex flex-col hover:border-blue-400/50 transition-colors h-full animate-fade-in";
-                    card.innerHTML = `<div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600"><i data-lucide="book" class="w-16 h-16 opacity-60"></i></div>
-                        <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Novo Curso</span></div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">${c.title}</h3>
-                        <p class="text-slate-600 text-sm mb-4 flex-grow">${c.description || 'Sem descrição.'}</p>
-                        <button class="w-full py-2.5 bg-slate-100 text-slate-400 rounded-lg font-medium cursor-not-allowed" disabled>Em breve</button>`;
-                    container.appendChild(card);
-                });
-                if (window.lucide) window.lucide.createIcons();
-            }, (err) => console.error("Erro ao carregar cursos dinâmicos."));
-        }
-
-        window.openScheduleModal = async () => {
-            const user = auth.currentUser;
-            if (!user || user.isAnonymous) { window.openLoginModal(); return; }
-            
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            document.getElementById('autoYearDisplay').innerText = `Ano: ${currentYear}`;
-            const dateInput = document.getElementById('lessonDate');
-            dateInput.min = `${currentYear}-01-01`;
-            dateInput.max = `${currentYear}-12-31`;
-
-            document.getElementById('detailsModal').classList.add('hidden');
-
-            try {
-                const snap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'));
-                const history = snap.docs.map(d => d.data()).filter(d => d.studentUid === user.uid);
-                if (history.length > 0) {
-                    history.sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
-                    const lastType = history[0].courseType;
-                    if (lastType) document.getElementById('lessonCourse').value = lastType;
-                }
-            } catch (e) { console.error("Não foi possível carregar sugestões."); }
-
-            document.getElementById('scheduleModal').classList.remove('hidden');
-            if (window.lucide) window.lucide.createIcons();
-        };
-
-        // --- ADMIN ACTIONS ---
-        window.approve = async (uid) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' });
-        window.revoke = (uid) => window.openConfirmModal("Revogar?", "Volta a Convidado.", async () => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' }));
-        window.changeLevel = async (uid, newLevel) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: newLevel });
-        window.deleteMaterialForStudent = (uid, matId) => window.openConfirmModal("Eliminar?", "Remove acesso.", async () => await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId)));
-        
-        window.resolveLessonRequest = async (requestId, action, data = null) => {
-            if (action === 'confirmar') { await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp() }); alert("Confirmada!"); }
-            await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', requestId));
-        };
-        
-        window.completeLesson = async (lessonId, lessonData) => {
-            window.openConfirmModal("Finalizar?", "Move para histórico.", async () => {
-                await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), { ...lessonData, completedAt: serverTimestamp() });
-                await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId));
-                alert("Arquivada!");
-            });
-        };
-
-        window.deleteConfirmedLesson = (lessonId) => window.openConfirmModal("Remover?", "Apaga da agenda.", async () => await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId)));
-        window.openMaterialPanel = (uid, name) => { selectedTargetStudentId = uid; document.getElementById('target-student-name').innerText = name; document.getElementById('admin-add-material-panel').classList.remove('hidden-section'); };
-        window.closeMaterialPanel = () => { document.getElementById('admin-add-material-panel').classList.add('hidden-section'); selectedTargetStudentId = null; };
-
-        async function loadCoursesAdmin() {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
-                const list = document.getElementById('courses-list-admin'); list.innerHTML = "";
-                if (snap.empty) { list.innerHTML = '<p class="text-xs p-4">Sem cursos dinâmicos.</p>'; return; }
-                snap.forEach(doc => {
-                    const c = doc.data(); const div = document.createElement('div');
-                    div.className = "bg-white p-4 rounded-xl border flex flex-col gap-2";
-                    div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-xs">${c.title}</h4></div><span class="text-[9px] uppercase font-bold ${c.active ? 'text-emerald-600' : 'text-slate-400'}">${c.active ? 'Ativo' : 'Inativo'}</span></div>
-                    <button onclick="window.toggleCourseStatus('${doc.id}', ${!c.active})" class="w-full py-2 rounded-lg text-[9px] font-black uppercase ${c.active ? 'bg-amber-50 text-amber-600' : 'bg-indigo-50 text-indigo-600'}">${c.active ? 'Desativar' : 'Ativar'}</button>`;
-                    list.appendChild(div);
-                });
-            }, (err) => console.error("Erro ao carregar admin courses."));
-        }
-
-        window.toggleCourseStatus = async (id, status) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'courses', id), { active: status });
-        document.getElementById('adminCourseForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), { title: document.getElementById('courseTitleInput').value, description: document.getElementById('courseDescInput').value, active: true, createdAt: serverTimestamp() });
-            document.getElementById('adminCourseForm').reset();
-            alert("Curso Criado!");
-        });
-
-        function loadStudentStats(uid) {
-            if (!uid) return;
-            activeStatsUnsubscribes.forEach(unsub => { if (typeof unsub === 'function') unsub(); });
-            activeStatsUnsubscribes = [];
-            const elComp = document.getElementById('stat-completed-count');
-            const elFut = document.getElementById('stat-future-count');
-            
-            const unsub1 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), (snap) => {
-                if (elComp) elComp.innerText = snap.docs.filter(d => d.data().studentUid === uid).length;
-            }, (err) => console.error("Erro stats concluídas."));
-
-            let c_count = 0, r_count = 0;
-            const up = () => { if(elFut) elFut.innerText = c_count + r_count; };
-            
-            const unsub2 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
-                c_count = snap.docs.filter(d => d.data().studentUid === uid).length; up();
-            }, (err) => console.error("Erro stats confirmadas."));
-
-            const unsub3 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), (snap) => {
-                r_count = snap.docs.filter(d => d.data().studentUid === uid).length; up();
-            }, (err) => console.error("Erro stats pedidos."));
-
-            activeStatsUnsubscribes = [unsub1, unsub2, unsub3];
-        }
-
-        // --- SESSION MONITOR ---
-        onAuthStateChanged(auth, async (user) => {
-            if (user && !user.isAnonymous) {
-                onSnapshot(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), (snap) => {
-                    if (snap.exists()) {
-                        currentUserProfile = snap.data();
-                        updateDashboardUI();
-                    } else {
-                        const data = { uid: user.uid, name: user.displayName || "Utilizador", email: user.email, status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante' };
-                        setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), data);
-                    }
-                }, (err) => console.error("Erro ao ler perfil."));
-            } else {
-                currentUserProfile = null;
-                window.showLandingPage();
-            }
-        });
-
-        function updateDashboardUI() {
-            if (!currentUserProfile) return;
-            const profile = currentUserProfile; const isAdmin = profile.email === ADMIN_EMAIL;
-            document.getElementById('user-name-display').innerText = profile.name;
-            document.getElementById('user-initial').innerText = (profile.name || "U").charAt(0).toUpperCase();
-            document.getElementById('user-status-badge').innerText = isAdmin ? 'Admin' : profile.status;
-            document.getElementById('user-status-badge').className = `status-badge status-${isAdmin ? 'admin' : profile.status}`;
-            
-            document.getElementById('user-nav-links').classList.remove('hidden-section');
-            document.getElementById('loginBtn').classList.add('hidden');
-            document.getElementById('logoutBtn').classList.remove('hidden');
-
-            const isHomeActive = !document.getElementById('landing-page').classList.contains('hidden-section');
-            if (isHomeActive) window.switchTab('dashboard');
-
-            document.getElementById('admin-main-panel').classList.toggle('hidden-section', !isAdmin);
-            document.getElementById('student-schedule-btn-area').classList.toggle('hidden', isAdmin || profile.status !== 'student');
-
-            if (isAdmin) {
-                loadAdminDashboard(); loadAdminSchedules(); loadConfirmedLessonsAdmin(); loadCoursesAdmin();
-            } else {
-                document.getElementById('guest-request-form').classList.toggle('hidden-section', profile.status !== 'guest');
-                document.getElementById('pending-empty-state').classList.toggle('hidden-section', profile.status !== 'pending');
-                document.getElementById('student-content-area').classList.toggle('hidden-section', profile.status !== 'student');
-                if (profile.status === 'student') {
-                    document.getElementById('user-level-display').innerText = profile.level;
-                    const lvMap = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
-                    document.getElementById('progress-bar-fill').style.width = (lvMap[profile.level] || 10) + "%";
-                    loadStudentMaterials(profile.uid); loadStudentLessons(profile.uid); loadStudentStats(profile.uid);
-                }
-            }
-            if (window.lucide) window.lucide.createIcons();
-        }
-
-        function loadAdminDashboard() {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles'), (snap) => {
-                const list = document.getElementById('users-list-admin'); list.innerHTML = "";
-                snap.forEach((d) => {
-                    const u = d.data(); if (u.email === ADMIN_EMAIL) return;
-                    const mid = `adm-mat-${u.uid}`; const div = document.createElement('div');
-                    div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4";
-                    div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
-                    <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white text-[11px] font-bold text-slate-700 outline-none"><option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="A2" ${u.level === 'A2' ? 'selected' : ''}>A2</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="B2" ${u.level === 'B2' ? 'selected' : ''}>B2</option><option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Iniciante</option><option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Intermédio</option><option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Avançado</option></select></div>
-                    <div id="${mid}" class="space-y-1"></div>
-                    <div class="grid grid-cols-2 gap-2 mt-auto">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl">REVOGAR</button>`}<button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">FICHEIRO</button></div>`;
-                    list.appendChild(div);
-                    onSnapshot(collection(db, 'artifacts', APP_ID, 'users', u.uid, 'materials'), (s) => {
-                        const c = document.getElementById(mid); if (!c) return; c.innerHTML = s.empty ? '<p class="text-[9px] italic text-slate-300">Sem ficheiros.</p>' : '';
-                        s.forEach(mat => { const m = mat.data(); const item = document.createElement('div'); item.className = "flex justify-between bg-white p-1 rounded border text-[9px]"; item.innerHTML = `<span class="truncate pr-2">${m.title}</span><div class="flex gap-2"><a href="${m.link}" target="_blank" class="text-blue-500"><i data-lucide="external-link" class="w-3 h-3"></i></a><button onclick="window.deleteMaterialForStudent('${u.uid}', '${mat.id}')" class="text-red-400"><i data-lucide="trash-2" class="w-3 h-3"></i></button></div>`; c.appendChild(item); });
-                        if (window.lucide) window.lucide.createIcons();
-                    }, (err) => console.error("Erro materiais admin."));
-                });
-            }, (err) => console.error("Erro perfis admin."));
-        }
-
-        function loadAdminSchedules() {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), (snap) => {
-                const list = document.getElementById('schedule-list-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Nenhum pedido pendente.</p>' : '';
-                snap.forEach((d) => { const r = d.data(); const card = document.createElement('div'); card.className = "bg-white p-4 rounded-xl border flex justify-between items-center shadow-sm"; card.innerHTML = `<div><p class="text-xs font-black uppercase">${r.studentName}</p><p class="text-[10px] text-slate-500 font-bold mb-1">${r.courseType || 'Tipo não definido'}</p><p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p></div><div class="flex gap-2"><button onclick="window.resolveLessonRequest('${d.id}', 'confirmar', ${JSON.stringify(r).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button><button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button></div>`; list.appendChild(card); });
-            }, (err) => console.error("Erro pedidos admin."));
-        }
-
-        function loadConfirmedLessonsAdmin() {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
-                const list = document.getElementById('confirmed-lessons-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Agenda vazia.</p>' : '';
-                snap.forEach((d) => { 
-                    const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border-blue-200 border flex justify-between items-center shadow-sm"; 
-                    div.innerHTML = `<div><p class="text-xs font-black text-blue-600 uppercase">${l.studentName}</p><p class="text-[10px] font-bold text-slate-500">${l.courseType || 'Tipo N/A'}</p><p class="text-[11px] font-bold">${l.date} às ${l.slot}</p></div><div class="flex gap-2"><button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="bg-emerald-100 text-emerald-700 px-3 py-2 rounded-lg text-[9px] font-black hover:bg-emerald-600 hover:text-white transition-colors uppercase">Concluir</button><button onclick="window.deleteConfirmedLesson('${d.id}')" class="text-red-300"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; 
-                    list.appendChild(div); 
-                });
-                if (window.lucide) window.lucide.createIcons();
-            }, (err) => console.error("Erro agenda admin."));
-        }
-
-        function loadStudentLessons(uid) {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
-                const list = document.getElementById('student-confirmed-lessons');
-                const filtered = snap.docs.filter(d => d.data().studentUid === uid);
-                list.innerHTML = filtered.length === 0 ? '<p class="text-slate-400 text-sm italic">Nenhuma aula confirmada.</p>' : '';
-                filtered.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border flex items-center gap-3"; div.innerHTML = `<div class="bg-blue-100 text-blue-600 p-2 rounded-lg"><i data-lucide="video" class="w-4 h-4"></i></div><div><p class="text-xs font-bold">${l.date} às ${l.slot}</p><p class="text-[11px] text-slate-500 font-medium">${l.courseType || ''}</p></div>`; list.appendChild(div); });
-                if (window.lucide) window.lucide.createIcons();
-            }, (err) => console.error("Erro aulas aluno."));
-        }
-
-        function loadStudentMaterials(uid) {
-            onSnapshot(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), (snap) => {
-                const list = document.getElementById('materials-list'); list.innerHTML = snap.empty ? '<p class="text-center py-10 text-slate-400 italic">Sem materiais.</p>' : '';
-                snap.forEach((d) => { const m = d.data(); const div = document.createElement('div'); div.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl"; div.innerHTML = `<div class="flex items-center gap-4"><div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-pdf"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div><a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-blue-600 transition-all shadow-md"><span>Aceder</span><i data-lucide="external-link" class="w-4 h-4"></i></a>`; list.appendChild(div); });
-                if (window.lucide) window.lucide.createIcons();
-            }, (err) => console.error("Erro materiais aluno."));
-        }
-
-        // --- SUBMISSIONS ---
         window.openDetails = (key) => {
+            currentOpenCourseId = key;
             const data = courseObjectives[key];
             if (!data) return;
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalObjectivesArea').innerHTML = (data.objectives || []).map(obj => `<div class="flex gap-4"><div class="bg-blue-100 p-2 rounded-xl text-blue-600 h-fit"><i data-lucide="target" class="w-5 h-5"></i></div><div><h4 class="font-bold text-sm uppercase">${obj.t}</h4><p class="text-xs text-slate-500">${obj.d}</p></div></div>`).join('');
             const hasUser = auth.currentUser && !auth.currentUser.isAnonymous;
-            document.getElementById('detailsActionArea').innerHTML = hasUser ? 
-                `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : 
-                `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
+            const elAct = document.getElementById('detailsActionArea');
+            if(elAct) elAct.innerHTML = hasUser ? `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
+            
+            const isStudent = currentUserProfile && currentUserProfile.status === 'student';
+            document.getElementById('review-form-container').classList.toggle('hidden', !isStudent);
+            
             document.getElementById('detailsModal').classList.remove('hidden');
             if (window.lucide) window.lucide.createIcons();
         };
 
-        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const dateVal = document.getElementById('lessonDate').value;
-            const chosenDate = new Date(dateVal);
-            if (chosenDate.getUTCDay() !== 6) { alert("Por favor, escolha um Sábado."); return; }
-            if (!currentUserProfile) { alert("A carregar perfil..."); return; }
-            try {
-                await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), {
-                    studentUid: auth.currentUser.uid,
-                    studentName: currentUserProfile.name || "Utilizador",
-                    courseType: document.getElementById('lessonCourse').value,
-                    date: dateVal,
-                    slot: document.getElementById('lessonSlot').value,
-                    createdAt: serverTimestamp()
+        function loadAdminDashboard() {
+            if(!auth.currentUser) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles'), (snap) => {
+                const list = document.getElementById('users-list-admin'); if(!list) return; list.innerHTML = "";
+                snap.forEach((d) => {
+                    const u = d.data(); if (u.email === ADMIN_EMAIL) return;
+                    const div = document.createElement('div');
+                    div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4";
+                    div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
+                    <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white text-[11px] font-bold text-slate-700 outline-none"><option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="C1" ${u.level === 'C1' ? 'selected' : ''}>C1</option></select></div>
+                    <div class="grid grid-cols-2 gap-2 mt-auto">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl">REVOGAR</button>`}<button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">FICHEIRO</button></div>`;
+                    list.appendChild(div);
                 });
-                document.getElementById('scheduleModal').classList.add('hidden');
-                document.getElementById('detailsModal').classList.add('hidden');
-                alert("Agendamento solicitado!");
-            } catch (err) { alert("Erro ao solicitar aula."); }
-        });
+            }, (err) => {});
+        }
 
-        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => {
+        function loadAdminSchedules() {
+            if(!auth.currentUser) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), (snap) => {
+                const list = document.getElementById('schedule-list-admin'); if(!list) return; list.innerHTML = snap.empty ? '<p class="p-4 italic text-slate-400">Nenhum pedido.</p>' : '';
+                snap.forEach((d) => { const r = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border flex justify-between items-center"; div.innerHTML = `<div><p class="text-xs font-black">${r.studentName}</p><p class="text-[10px] text-blue-600 font-bold">${r.date} | ${r.slot}</p></div><div class="flex gap-2"><button onclick="window.resolveLessonRequest('${d.id}', 'confirmar', ${JSON.stringify(r).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-3 py-1 rounded-lg text-[10px] font-black">OK</button></div>`; list.appendChild(div); });
+            }, (err) => {});
+        }
+
+        function loadConfirmedLessonsAdmin() {
+            if(!auth.currentUser) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
+                const list = document.getElementById('confirmed-lessons-admin'); if(!list) return; list.innerHTML = "";
+                snap.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "p-4 bg-white border border-blue-100 rounded-xl flex justify-between"; div.innerHTML = `<div><p class="font-bold text-xs">${l.studentName}</p><p class="text-[10px]">${l.date} às ${l.slot}</p></div><button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="text-[10px] bg-emerald-100 text-emerald-600 font-black px-3 py-1 rounded-lg">CONCLUIR</button>`; list.appendChild(div); });
+            }, (err) => {});
+        }
+
+        window.toggleCourseStatus = async (id, status) => { if(!auth.currentUser) return; await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'courses', id), { active: status }); };
+
+        async function loadCoursesAdmin() {
+            if(!auth.currentUser) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
+                const list = document.getElementById('courses-list-admin'); if(!list) return; list.innerHTML = "";
+                snap.forEach(doc => {
+                    const c = doc.data(); const div = document.createElement('div'); div.className = "p-4 bg-white border rounded-xl flex justify-between items-center shadow-sm";
+                    div.innerHTML = `<span class="text-xs font-bold">${c.title}</span>
+                        <div class="flex gap-3">
+                            <button onclick="window.toggleCourseStatus('${doc.id}', ${!c.active})" class="text-[9px] font-black uppercase ${c.active ? 'text-amber-500' : 'text-blue-500'}">${c.active ? 'Pausar' : 'Ativar'}</button>
+                            <button onclick="window.deleteCourse('${doc.id}')" class="text-red-500 hover:text-red-700"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>`;
+                    list.appendChild(div);
+                });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => {});
+        }
+
+        document.getElementById('adminCourseForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!selectedTargetStudentId) return;
-            await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { 
-                title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() 
+            if(!auth.currentUser) return;
+            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), { 
+                title: document.getElementById('courseTitleInput').value, 
+                description: document.getElementById('courseDescInput').value, 
+                dates: document.getElementById('courseDatesInput').value,
+                teacher: 'Dimas Learning',
+                active: true, 
+                createdAt: serverTimestamp() 
             });
-            document.getElementById('addMaterialForm').reset();
-            alert("Ficheiro enviado!");
+            document.getElementById('adminCourseForm').reset();
         });
 
-        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+        document.getElementById('formLogin')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
                 await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
                 document.getElementById('loginModal').classList.add('hidden');
-            } catch (err) { alert("Credenciais incorretas."); }
+                window.switchTab('dashboard');
+            } catch (err) {
+                alert("Email ou Password incorretos.");
+            }
         });
 
-        document.getElementById('formRegister').addEventListener('submit', async (e) => {
+        document.getElementById('formRegister')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
                 const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value);
-                await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { 
-                    uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, 
-                    status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() 
-                });
+                await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() });
                 document.getElementById('loginModal').classList.add('hidden');
-            } catch (err) { alert("Erro ao criar conta."); }
+                window.switchTab('dashboard');
+            } catch (err) {
+                alert("Erro ao criar conta: Verifique se o email é válido ou se a password tem pelo menos 6 caracteres.");
+            }
         });
 
         // --- BACKGROUND ---
@@ -793,6 +940,19 @@
         resize(); p = Array.from({length: 40}, () => new Part());
         function anim() { ctx.clearRect(0,0,w,h); p.forEach(v=>{v.update();v.draw();}); requestAnimationFrame(anim); }
         window.onresize = resize; anim();
+        
+        // --- INIT ---
+        (async function initApp() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
+                loadDynamicCourses();
+                loadReviews();
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>
