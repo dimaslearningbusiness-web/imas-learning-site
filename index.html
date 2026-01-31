@@ -18,7 +18,6 @@
         @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
         .hidden-section { display: none !important; }
         
-        /* Slides Overlay */
         #presentation-overlay { background-color: #cbd5e1; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         #presentation-overlay.active { opacity: 1; pointer-events: all; }
         .presentation-container { position: relative; width: 90%; max-width: 1280px; height: 80vh; max-height: 720px; background-color: #f8fafc; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); overflow: hidden; display: flex; flex-direction: column; }
@@ -50,7 +49,6 @@
 
     <canvas id="bgCanvas"></canvas>
 
-    <!-- Navegação -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.showLandingPage()">
@@ -76,7 +74,6 @@
         </div>
     </nav>
 
-    <!-- LANDING PAGE -->
     <main id="landing-page" class="flex-grow pt-28 pb-12 px-4">
         <section id="home" class="min-h-[80vh] flex flex-col justify-center items-center text-center animate-fade-in mb-20">
             <div class="glass-effect p-10 rounded-3xl shadow-xl border border-slate-100/50 flex flex-col items-center max-w-4xl mx-auto">
@@ -88,13 +85,13 @@
             </div>
         </section>
 
-        <section id="cursos" class="max-w-7xl mx-auto py-16">
+        <section id="cursos" class="max-w-7xl mx-auto py-16 border-t border-slate-100">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Cursos Disponíveis</h2>
                 <p class="text-slate-500">Escolhe o plano que melhor se adapta aos teus objetivos.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Inglês -->
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div class="glass-card rounded-2xl p-6 flex flex-col relative overflow-hidden group h-full">
                     <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                     <div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-500"><i data-lucide="message-circle" class="w-16 h-16 opacity-60"></i></div>
@@ -107,7 +104,6 @@
                     </div>
                     <button onclick="window.openDetails('ingles')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
-                <!-- Português -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-green-400/50 transition-colors h-full">
                     <div class="h-40 bg-green-50 rounded-xl mb-4 flex items-center justify-center text-green-600"><i data-lucide="book-a" class="w-16 h-16 opacity-60"></i></div>
                     <div class="flex justify-between items-start mb-2"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Idiomas</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 4.9</div></div>
@@ -119,7 +115,6 @@
                     </div>
                     <button onclick="window.openDetails('portugues')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-green-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
-                <!-- AI -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col hover:border-violet-400/50 transition-colors h-full">
                     <div class="h-40 bg-violet-50 rounded-xl mb-4 flex items-center justify-center text-violet-600"><i data-lucide="cpu" class="w-16 h-16 opacity-60"></i></div>
                     <div class="flex justify-between items-start mb-2"><span class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Tecnologia</span><div class="flex items-center text-amber-500 text-sm font-bold"><i data-lucide="star" class="w-4 h-4 fill-current mr-1"></i> 5.0</div></div>
@@ -131,14 +126,14 @@
                     <button onclick="window.openDetails('ai')" class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-violet-600 transition-colors shadow-md">Ver Detalhes</button>
                 </div>
             </div>
+
+            <div id="dynamic-courses-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
         </section>
     </main>
 
-    <!-- DASHBOARD -->
     <main id="user-dashboard" class="hidden-section flex-grow pt-28 pb-12 px-4 max-w-7xl mx-auto w-full animate-fade-in">
         
         <div id="dashboard-tab-content">
-            <!-- Header User -->
             <div class="mb-10 bg-gradient-to-r from-slate-900 to-blue-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
                 <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
                     <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-3xl font-bold border-2 border-white/20">
@@ -161,10 +156,11 @@
 
             <!-- PAINEL ADMIN -->
             <div id="admin-main-panel" class="hidden-section mb-10 animate-fade-in">
-                <div class="flex gap-4 mb-6">
-                    <button onclick="window.switchAdminTab('users')" id="admin-tab-users" class="admin-tab-btn active">Gestão de Alunos</button>
-                    <button onclick="window.switchAdminTab('agenda')" id="admin-tab-agenda" class="admin-tab-btn">Agenda Oficial</button>
-                    <button onclick="window.switchAdminTab('requests')" id="admin-tab-requests" class="admin-tab-btn">Pedidos de Aula</button>
+                <div class="flex gap-4 mb-6 overflow-x-auto pb-2">
+                    <button onclick="window.switchAdminTab('users')" id="admin-tab-users" class="admin-tab-btn active shrink-0">Gestão de Alunos</button>
+                    <button onclick="window.switchAdminTab('agenda')" id="admin-tab-agenda" class="admin-tab-btn shrink-0">Agenda Oficial</button>
+                    <button onclick="window.switchAdminTab('requests')" id="admin-tab-requests" class="admin-tab-btn shrink-0">Pedidos de Aula</button>
+                    <button onclick="window.switchAdminTab('courses')" id="admin-tab-courses" class="admin-tab-btn shrink-0">Gestão de Cursos</button>
                 </div>
 
                 <div id="admin-view-users" class="glass-card rounded-[2rem] p-8 border border-slate-200">
@@ -180,6 +176,29 @@
                 <div id="admin-view-requests" class="hidden-section glass-card rounded-[2rem] p-8 border border-amber-200 bg-amber-50/20">
                     <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="calendar-check" class="text-amber-600"></i> Pedidos de Agendamento</h3>
                     <div id="schedule-list-admin" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div id="admin-view-courses" class="hidden-section glass-card rounded-[2rem] p-8 border border-indigo-200 bg-indigo-50/10">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3"><i data-lucide="layout-grid" class="text-indigo-600"></i> Catálogo Dinâmico</h3>
+                    
+                    <div class="bg-white/50 p-6 rounded-3xl border border-white mb-8">
+                        <h4 class="font-bold text-slate-800 mb-4">Adicionar Novo Curso</h4>
+                        <form id="adminCourseForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                            <div class="md:col-span-1">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Nome do Curso</label>
+                                <input type="text" id="courseTitleInput" required placeholder="Ex: Francês Iniciante" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
+                            </div>
+                            <div class="md:col-span-1">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-1">Descrição Curta (Opcional)</label>
+                                <input type="text" id="courseDescInput" placeholder="Ex: Foco em conversação" class="w-full px-4 py-3 rounded-xl border outline-none text-sm text-slate-700">
+                            </div>
+                            <button type="submit" class="bg-indigo-600 text-white font-black py-3 rounded-xl shadow-md hover:bg-indigo-700 transition-all text-sm uppercase">Criar Curso</button>
+                        </form>
+                    </div>
+
+                    <div id="courses-list-admin" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <p class="text-slate-400 italic text-sm p-4">A carregar catálogo...</p>
+                    </div>
                 </div>
             </div>
 
@@ -209,9 +228,8 @@
                 </div>
             </div>
 
-            <!-- STUDENT AREA -->
+            <!-- ÁREA ALUNO -->
             <div id="student-content-area" class="hidden-section grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- BLOCO ESTATÍSTICAS -->
                 <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-2 animate-fade-in">
                     <div class="glass-card rounded-[2rem] p-6 flex items-center gap-5 border-l-4 border-emerald-500">
                         <div class="bg-emerald-100 text-emerald-600 p-3 rounded-2xl"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
@@ -245,7 +263,7 @@
                 <div class="glass-card rounded-[2rem] p-8 h-fit">
                     <h3 class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest">Nível Atual</h3>
                     <div id="user-level-display" class="text-xl font-black text-blue-600 mb-2">A1 Iniciante</div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden"><div id="progress-bar-fill" class="bg-blue-600 h-3 transition-all duration-1000" style="width: 25%"></div></div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden"><div id="progress-bar-fill" class="bg-blue-600 h-3 transition-all duration-1000" style="width: 0%"></div></div>
                 </div>
             </div>
 
@@ -260,7 +278,7 @@
             <div class="glass-card rounded-[2.5rem] p-12 border">
                 <h3 class="text-3xl font-bold text-slate-900 text-center mb-10">Editar Perfil</h3>
                 <form id="editProfileForm" class="space-y-6">
-                    <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none">
+                    <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
                     <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border rounded-2xl text-slate-400 cursor-not-allowed">
                     <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl">Guardar Alterações</button>
                 </form>
@@ -273,18 +291,24 @@
             <div class="bg-amber-50 border border-amber-200 rounded-[2rem] p-10 shadow-lg">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-xl font-bold text-amber-900 tracking-tight">Atribuir Ficheiro a <span id="target-student-name" class="underline">...</span></h3>
-                    <button onclick="window.closeMaterialPanel()" class="bg-white px-3 py-1 rounded-lg">Fechar</button>
+                    <button onclick="window.closeMaterialPanel()" class="bg-white px-3 py-1 rounded-lg font-bold">X</button>
                 </div>
                 <form id="addMaterialForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                    <input type="text" id="matTitle" required placeholder="Título" class="px-5 py-4 border rounded-2xl text-slate-700 outline-none">
-                    <input type="url" id="matLink" required placeholder="URL do Link" class="px-5 py-4 border rounded-2xl text-slate-700 outline-none">
-                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl shadow-md">Adicionar</button>
+                    <div class="md:col-span-1">
+                        <label class="text-[10px] font-black text-amber-800 uppercase ml-1">Título do Ficheiro</label>
+                        <input type="text" id="matTitle" required placeholder="Ex: PDF Aula 1" class="w-full px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="text-[10px] font-black text-amber-800 uppercase ml-1">URL do Link</label>
+                        <input type="url" id="matLink" required placeholder="https://drive.google.com/..." class="w-full px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+                    </div>
+                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl shadow-md hover:bg-amber-700 transition-all uppercase">Atribuir</button>
                 </form>
             </div>
         </div>
     </main>
 
-    <!-- MODAL DETALHES -->
+    <!-- MODAIS E APRESENTAÇÃO -->
     <div id="detailsModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
         <div class="bg-white rounded-[2.5rem] shadow-2xl max-w-2xl w-full relative animate-fade-in overflow-hidden">
             <div class="bg-slate-50 p-8 border-b flex justify-between items-center">
@@ -304,25 +328,34 @@
         </div>
     </div>
 
-    <!-- MODAL AGENDAR -->
     <div id="scheduleModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
         <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-w-md w-full relative animate-fade-in">
             <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Marcar Aula</h3>
             <form id="formLessonRequest" class="space-y-6">
-                <input type="date" id="lessonDate" required class="w-full px-5 py-4 border rounded-2xl outline-none focus:border-blue-500">
-                <select id="lessonSlot" required class="w-full px-5 py-4 border rounded-2xl font-semibold outline-none focus:border-blue-500">
+                <select id="lessonCourse" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-semibold text-slate-700 outline-none focus:bg-white focus:border-blue-500">
+                    <option value="Inglês Personalizado">Inglês Personalizado</option>
+                    <option value="Portuguese for English Speakers">Portuguese for English Speakers</option>
+                    <option value="AI e Tecnologia">AI e Tecnologia</option>
+                </select>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between items-center px-1">
+                        <label class="text-xs font-black text-slate-400 uppercase">Data Pretendida</label>
+                        <span id="autoYearDisplay" class="text-xs font-bold text-blue-600">Ano: 2026</span>
+                    </div>
+                    <input type="date" id="lessonDate" required class="w-full px-5 py-4 border rounded-2xl outline-none focus:border-blue-500 text-slate-700 font-medium">
+                </div>
+                <select id="lessonSlot" required class="w-full px-5 py-4 border rounded-2xl font-semibold text-slate-700 outline-none focus:border-blue-500">
                     <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
                     <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
-                    <option value="Fins de Semana">Fins de Semana</option>
+                    <option value="Sábado">Apenas Sábado</option>
                     <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
                 </select>
-                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl">Solicitar Agendamento</button>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl hover:bg-slate-900 transition-all uppercase">Solicitar</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL CONFIRMAÇÃO -->
     <div id="confirmModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
         <div class="bg-white rounded-[2rem] p-10 shadow-2xl max-sm w-full text-center">
             <h4 class="text-2xl font-bold text-slate-900 mb-4" id="confirmTitle">Confirmar?</h4>
@@ -334,33 +367,31 @@
         </div>
     </div>
 
-    <!-- MODAIS LOGIN -->
     <div id="loginModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
         <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative animate-fade-in">
             <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <div id="loginFormContainer">
                 <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Login</h3>
                 <form id="formLogin" class="space-y-4">
-                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none">
-                    <input id="loginPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none">
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all">Entrar</button>
+                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="loginPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all uppercase">Entrar</button>
                 </form>
                 <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Não tens conta? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar</a></p>
             </div>
             <div id="registerFormContainer" class="hidden">
                 <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Registo</h3>
                 <form id="formRegister" class="space-y-4">
-                    <input id="regName" type="text" placeholder="Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none">
-                    <input id="regEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none">
-                    <input id="regPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none">
-                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all">Registar</button>
+                    <input id="regName" type="text" placeholder="Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="regEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <input id="regPass" type="password" placeholder="Password (mín. 6)" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
+                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all text-sm uppercase">Registar</button>
                 </form>
                 <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
             </div>
         </div>
     </div>
 
-    <!-- APRESENTAÇÃO (SOBRE) -->
     <div id="presentation-overlay">
         <button class="close-presentation-btn" onclick="window.closePresentation()"><i class="fa-solid fa-arrow-left"></i> <span>Voltar</span></button>
         <div class="presentation-container">
@@ -373,8 +404,8 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc, where } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, getDocs, updateDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDgmisKY0vQY1UkRm2dndaAa2jbOl9Ju1s",
@@ -399,7 +430,7 @@
 
         window.lucide.createIcons();
 
-        // --- ESTRUTURA PARA COLAR O TEXTO ORIGINAL "SOBRE" ---
+        // --- APRESENTAÇÃO ---
         const presentationData = [
             { title: "Dimas Learning", text: "Uma nova abordagem ao ensino focado na clareza e no ritmo individual.", icon: "sparkles", type: "welcome" },
             { title: "A Minha Jornada", text: "Veterano na aprendizagem autodidata. Aprendi Inglês sozinho e estou a dominar Francês. Sei usar as ferramentas certas para te ajudar.", icon: "graduation-cap", type: "text" },
@@ -407,7 +438,16 @@
             { title: "Filosofia", list: ["Foco prático", "Preços justos", "Autonomia total"], icon: "check", type: "list" }
         ];
 
-        // --- GLOBAL ACTIONS ---
+        // --- AUTH INICIAL (REGRA 3) ---
+        (async function initApp() {
+            try {
+                // Inicia sessão anónima por defeito para carregar dados públicos
+                if (!auth.currentUser) await signInAnonymously(auth);
+                loadDynamicCourses();
+            } catch (e) { console.error("Falha na inicialização segura."); }
+        })();
+
+        // --- UI ACTIONS ---
         window.openConfirmModal = (title, text, actionFn) => {
             document.getElementById('confirmTitle').innerText = title;
             document.getElementById('confirmText').innerText = text;
@@ -417,8 +457,8 @@
         window.closeConfirmModal = () => document.getElementById('confirmModal').classList.add('hidden');
         document.getElementById('confirmActionBtn').addEventListener('click', () => { if (pendingActionFn) { pendingActionFn(); window.closeConfirmModal(); } });
 
-        window.logout = () => signOut(auth);
-        window.openLoginModal = () => document.getElementById('loginModal').classList.remove('hidden');
+        window.logout = async () => { await signOut(auth); window.location.reload(); };
+        window.openLoginModal = () => { window.toggleAuthMode('login'); document.getElementById('loginModal').classList.remove('hidden'); };
         window.toggleAuthMode = (m) => {
             document.getElementById('loginFormContainer').classList.toggle('hidden', m === 'register');
             document.getElementById('registerFormContainer').classList.toggle('hidden', m === 'login');
@@ -427,10 +467,11 @@
         window.showLandingPage = () => {
             document.getElementById('landing-page').classList.remove('hidden-section');
             document.getElementById('user-dashboard').classList.add('hidden-section');
-            const loggedIn = !!auth.currentUser;
-            document.getElementById('loginBtn').classList.toggle('hidden', loggedIn);
-            document.getElementById('logoutBtn').classList.toggle('hidden', !loggedIn);
-            document.getElementById('user-nav-links').classList.toggle('hidden-section', !loggedIn);
+            const isAnon = auth.currentUser?.isAnonymous;
+            const hasUser = auth.currentUser && !isAnon;
+            document.getElementById('loginBtn').classList.toggle('hidden', hasUser);
+            document.getElementById('logoutBtn').classList.toggle('hidden', !hasUser);
+            document.getElementById('user-nav-links').classList.toggle('hidden-section', !hasUser);
             window.scrollTo(0, 0);
         };
 
@@ -439,8 +480,6 @@
             document.getElementById('user-dashboard').classList.remove('hidden-section');
             document.getElementById('dashboard-tab-content').classList.toggle('hidden-section', tab !== 'dashboard');
             document.getElementById('profile-tab-content').classList.toggle('hidden-section', tab !== 'profile');
-            document.getElementById('nav-dashboard-link').className = (tab === 'dashboard' ? 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-blue-600' : 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-slate-600');
-            document.getElementById('nav-profile-link').className = (tab === 'profile' ? 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-blue-600' : 'hover:text-blue-600 transition-colors font-bold flex items-center gap-1 text-slate-600');
             if (tab === 'profile' && currentUserProfile) {
                 document.getElementById('editName').value = currentUserProfile.name;
                 document.getElementById('displayEmail').value = currentUserProfile.email;
@@ -451,16 +490,62 @@
             document.getElementById('admin-view-users').classList.toggle('hidden-section', tab !== 'users');
             document.getElementById('admin-view-agenda').classList.toggle('hidden-section', tab !== 'agenda');
             document.getElementById('admin-view-requests').classList.toggle('hidden-section', tab !== 'requests');
+            document.getElementById('admin-view-courses').classList.toggle('hidden-section', tab !== 'courses');
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.toggle('active', b.id === `admin-tab-${tab}`));
         };
 
-        window.openScheduleModal = () => { document.getElementById('scheduleModal').classList.remove('hidden'); document.getElementById('detailsModal').classList.add('hidden'); };
+        // --- DATA LOADERS (REGRA 2 - FILTROS EM JS) ---
+        async function loadDynamicCourses() {
+            const container = document.getElementById('dynamic-courses-list');
+            if (!container) return;
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
+                container.innerHTML = "";
+                snap.docs.map(d => d.data()).filter(c => c.active === true).forEach((c) => {
+                    const card = document.createElement('div');
+                    card.className = "glass-card rounded-2xl p-6 flex flex-col hover:border-blue-400/50 transition-colors h-full animate-fade-in";
+                    card.innerHTML = `<div class="h-40 bg-blue-50 rounded-xl mb-4 flex items-center justify-center text-blue-600"><i data-lucide="book" class="w-16 h-16 opacity-60"></i></div>
+                        <div class="flex justify-between items-start mb-2"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase">Novo Curso</span></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">${c.title}</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow">${c.description || 'Sem descrição.'}</p>
+                        <button class="w-full py-2.5 bg-slate-100 text-slate-400 rounded-lg font-medium cursor-not-allowed" disabled>Em breve</button>`;
+                    container.appendChild(card);
+                });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => console.error("Erro ao carregar cursos dinâmicos."));
+        }
+
+        window.openScheduleModal = async () => {
+            const user = auth.currentUser;
+            if (!user || user.isAnonymous) { window.openLoginModal(); return; }
+            
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            document.getElementById('autoYearDisplay').innerText = `Ano: ${currentYear}`;
+            const dateInput = document.getElementById('lessonDate');
+            dateInput.min = `${currentYear}-01-01`;
+            dateInput.max = `${currentYear}-12-31`;
+
+            document.getElementById('detailsModal').classList.add('hidden');
+
+            try {
+                const snap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'));
+                const history = snap.docs.map(d => d.data()).filter(d => d.studentUid === user.uid);
+                if (history.length > 0) {
+                    history.sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
+                    const lastType = history[0].courseType;
+                    if (lastType) document.getElementById('lessonCourse').value = lastType;
+                }
+            } catch (e) { console.error("Não foi possível carregar sugestões."); }
+
+            document.getElementById('scheduleModal').classList.remove('hidden');
+            if (window.lucide) window.lucide.createIcons();
+        };
 
         // --- ADMIN ACTIONS ---
         window.approve = async (uid) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'student' });
-        window.revoke = (uid) => window.openConfirmModal("Revogar?", "O utilizador voltará a ser Convidado.", async () => { await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' }); });
+        window.revoke = (uid) => window.openConfirmModal("Revogar?", "Volta a Convidado.", async () => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { status: 'guest' }));
         window.changeLevel = async (uid, newLevel) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', uid), { level: newLevel });
-        window.deleteMaterialForStudent = (uid, matId) => window.openConfirmModal("Eliminar?", "O aluno perderá o acesso.", async () => { await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId)); });
+        window.deleteMaterialForStudent = (uid, matId) => window.openConfirmModal("Eliminar?", "Remove acesso.", async () => await deleteDoc(doc(db, 'artifacts', APP_ID, 'users', uid, 'materials', matId)));
         
         window.resolveLessonRequest = async (requestId, action, data = null) => {
             if (action === 'confirmar') { await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp() }); alert("Confirmada!"); }
@@ -468,75 +553,76 @@
         };
         
         window.completeLesson = async (lessonId, lessonData) => {
-            window.openConfirmModal("Finalizar Aula?", "A aula será registada como concluída no histórico do aluno.", async () => {
-                try {
-                    await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), { ...lessonData, completedAt: serverTimestamp() });
-                    await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId));
-                    alert("Aula arquivada com sucesso!");
-                } catch (e) { console.error(e); }
+            window.openConfirmModal("Finalizar?", "Move para histórico.", async () => {
+                await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), { ...lessonData, completedAt: serverTimestamp() });
+                await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId));
+                alert("Arquivada!");
             });
         };
 
-        window.deleteConfirmedLesson = (lessonId) => window.openConfirmModal("Remover?", "Aula sairá da agenda.", async () => { await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId)); });
-        window.openMaterialPanel = (uid, name) => { selectedTargetStudentId = uid; document.getElementById('target-student-name').innerText = name; document.getElementById('admin-add-material-panel').classList.remove('hidden-section'); document.getElementById('admin-add-material-panel').scrollIntoView({ behavior: 'smooth' }); };
+        window.deleteConfirmedLesson = (lessonId) => window.openConfirmModal("Remover?", "Apaga da agenda.", async () => await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons', lessonId)));
+        window.openMaterialPanel = (uid, name) => { selectedTargetStudentId = uid; document.getElementById('target-student-name').innerText = name; document.getElementById('admin-add-material-panel').classList.remove('hidden-section'); };
         window.closeMaterialPanel = () => { document.getElementById('admin-add-material-panel').classList.add('hidden-section'); selectedTargetStudentId = null; };
 
-        // --- STATS LOGIC ---
+        async function loadCoursesAdmin() {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), (snap) => {
+                const list = document.getElementById('courses-list-admin'); list.innerHTML = "";
+                if (snap.empty) { list.innerHTML = '<p class="text-xs p-4">Sem cursos dinâmicos.</p>'; return; }
+                snap.forEach(doc => {
+                    const c = doc.data(); const div = document.createElement('div');
+                    div.className = "bg-white p-4 rounded-xl border flex flex-col gap-2";
+                    div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-xs">${c.title}</h4></div><span class="text-[9px] uppercase font-bold ${c.active ? 'text-emerald-600' : 'text-slate-400'}">${c.active ? 'Ativo' : 'Inativo'}</span></div>
+                    <button onclick="window.toggleCourseStatus('${doc.id}', ${!c.active})" class="w-full py-2 rounded-lg text-[9px] font-black uppercase ${c.active ? 'bg-amber-50 text-amber-600' : 'bg-indigo-50 text-indigo-600'}">${c.active ? 'Desativar' : 'Ativar'}</button>`;
+                    list.appendChild(div);
+                });
+            }, (err) => console.error("Erro ao carregar admin courses."));
+        }
+
+        window.toggleCourseStatus = async (id, status) => await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'courses', id), { active: status });
+        document.getElementById('adminCourseForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'courses'), { title: document.getElementById('courseTitleInput').value, description: document.getElementById('courseDescInput').value, active: true, createdAt: serverTimestamp() });
+            document.getElementById('adminCourseForm').reset();
+            alert("Curso Criado!");
+        });
+
         function loadStudentStats(uid) {
             if (!uid) return;
             activeStatsUnsubscribes.forEach(unsub => { if (typeof unsub === 'function') unsub(); });
             activeStatsUnsubscribes = [];
             const elComp = document.getElementById('stat-completed-count');
             const elFut = document.getElementById('stat-future-count');
-            if(elComp) elComp.innerText = "0"; if(elFut) elFut.innerText = "0";
+            
+            const unsub1 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), (snap) => {
+                if (elComp) elComp.innerText = snap.docs.filter(d => d.data().studentUid === uid).length;
+            }, (err) => console.error("Erro stats concluídas."));
 
-            const qComp = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'completedLessons'), where('studentUid', '==', uid));
-            const qConf = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), where('studentUid', '==', uid));
-            const qReq = query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), where('studentUid', '==', uid));
+            let c_count = 0, r_count = 0;
+            const up = () => { if(elFut) elFut.innerText = c_count + r_count; };
+            
+            const unsub2 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
+                c_count = snap.docs.filter(d => d.data().studentUid === uid).length; up();
+            }, (err) => console.error("Erro stats confirmadas."));
 
-            let counts = { confirmed: 0, requested: 0 };
-            const updateFutureUI = () => { if (elFut) elFut.innerText = (counts.confirmed + counts.requested); };
+            const unsub3 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), (snap) => {
+                r_count = snap.docs.filter(d => d.data().studentUid === uid).length; up();
+            }, (err) => console.error("Erro stats pedidos."));
 
-            activeStatsUnsubscribes.push(onSnapshot(qComp, (snap) => { if (elComp) elComp.innerText = snap.size; }));
-            activeStatsUnsubscribes.push(onSnapshot(qConf, (snap) => { counts.confirmed = snap.size; updateFutureUI(); }));
-            activeStatsUnsubscribes.push(onSnapshot(qReq, (snap) => { counts.requested = snap.size; updateFutureUI(); }));
+            activeStatsUnsubscribes = [unsub1, unsub2, unsub3];
         }
-
-        // --- CURSOS DETAILS ---
-        const courseObjectives = {
-            'ingles': { title: "Inglês Personalizado", objectives: [{ t: "Falar", d: "Foco total na conversação." }, { t: "Adaptado", d: "Aulas baseadas nos teus objetivos." }, { t: "Prático", d: "Língua para situações reais." }] },
-            'portugues': { title: "Portuguese for English", objectives: [{ t: "Speach", d: "Learn native pronunciation." }, { t: "Culture", d: "Portuguese lifestyle immersion." }, { t: "Grammar", d: "Practical rules for daily life." }] },
-            'ai': { title: "Aulas de AI e Tecnologia", objectives: [{ t: "Futuro", d: "Domina ferramentas de IA." }, { t: "Criação", d: "Cria projetos reais guiados." }, { t: "Produtividade", d: "Aumenta a tua eficiência digital." }] }
-        };
-        window.openDetails = (key) => {
-            const data = courseObjectives[key];
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalObjectivesArea').innerHTML = data.objectives.map(obj => `<div class="flex gap-4"><div class="bg-blue-100 p-2 rounded-xl text-blue-600 h-fit"><i data-lucide="target" class="w-5 h-5"></i></div><div><h4 class="font-bold text-sm uppercase">${obj.t}</h4><p class="text-xs text-slate-500">${obj.d}</p></div></div>`).join('');
-            
-            const loggedIn = !!auth.currentUser;
-            document.getElementById('detailsActionArea').innerHTML = loggedIn ? 
-                `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : 
-                `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
-            
-            document.getElementById('detailsModal').classList.remove('hidden');
-            window.lucide.createIcons();
-        };
 
         // --- SESSION MONITOR ---
         onAuthStateChanged(auth, async (user) => {
-            if (user) {
+            if (user && !user.isAnonymous) {
                 onSnapshot(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), (snap) => {
                     if (snap.exists()) {
                         currentUserProfile = snap.data();
                         updateDashboardUI();
                     } else {
-                        const data = { 
-                            uid: user.uid, name: user.displayName || "Utilizador", email: user.email, 
-                            status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante'
-                        };
+                        const data = { uid: user.uid, name: user.displayName || "Utilizador", email: user.email, status: user.email === ADMIN_EMAIL ? 'admin' : 'guest', level: 'A1 Iniciante' };
                         setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', user.uid), data);
                     }
-                });
+                }, (err) => console.error("Erro ao ler perfil."));
             } else {
                 currentUserProfile = null;
                 window.showLandingPage();
@@ -545,21 +631,24 @@
 
         function updateDashboardUI() {
             if (!currentUserProfile) return;
-            const profile = currentUserProfile;
-            const isAdmin = profile.email === ADMIN_EMAIL;
+            const profile = currentUserProfile; const isAdmin = profile.email === ADMIN_EMAIL;
             document.getElementById('user-name-display').innerText = profile.name;
             document.getElementById('user-initial').innerText = (profile.name || "U").charAt(0).toUpperCase();
             document.getElementById('user-status-badge').innerText = isAdmin ? 'Admin' : profile.status;
             document.getElementById('user-status-badge').className = `status-badge status-${isAdmin ? 'admin' : profile.status}`;
+            
             document.getElementById('user-nav-links').classList.remove('hidden-section');
             document.getElementById('loginBtn').classList.add('hidden');
             document.getElementById('logoutBtn').classList.remove('hidden');
+
+            const isHomeActive = !document.getElementById('landing-page').classList.contains('hidden-section');
+            if (isHomeActive) window.switchTab('dashboard');
 
             document.getElementById('admin-main-panel').classList.toggle('hidden-section', !isAdmin);
             document.getElementById('student-schedule-btn-area').classList.toggle('hidden', isAdmin || profile.status !== 'student');
 
             if (isAdmin) {
-                loadAdminDashboard(); loadAdminSchedules(); loadConfirmedLessonsAdmin();
+                loadAdminDashboard(); loadAdminSchedules(); loadConfirmedLessonsAdmin(); loadCoursesAdmin();
             } else {
                 document.getElementById('guest-request-form').classList.toggle('hidden-section', profile.status !== 'guest');
                 document.getElementById('pending-empty-state').classList.toggle('hidden-section', profile.status !== 'pending');
@@ -571,158 +660,135 @@
                     loadStudentMaterials(profile.uid); loadStudentLessons(profile.uid); loadStudentStats(profile.uid);
                 }
             }
-            window.lucide.createIcons();
+            if (window.lucide) window.lucide.createIcons();
         }
 
-        // --- DATA LOADERS ---
         function loadAdminDashboard() {
-            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles')), (snap) => {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'profiles'), (snap) => {
                 const list = document.getElementById('users-list-admin'); list.innerHTML = "";
                 snap.forEach((d) => {
                     const u = d.data(); if (u.email === ADMIN_EMAIL) return;
-                    const mid = `adm-mat-${u.uid}`;
-                    const div = document.createElement('div');
+                    const mid = `adm-mat-${u.uid}`; const div = document.createElement('div');
                     div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4";
-                    div.innerHTML = `<div class="flex justify-between items-start"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400 font-bold">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
-                    <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white border border-slate-200 rounded p-1 text-[11px] font-bold text-slate-700 outline-none">
-                    <option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="A2" ${u.level === 'A2' ? 'selected' : ''}>A2</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="B2" ${u.level === 'B2' ? 'selected' : ''}>B2</option><option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Iniciante</option><option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Intermédio</option><option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Avançado</option></select></div>
-                    <div class="border-t pt-2"><div id="${mid}" class="space-y-1"></div></div>
-                    <div class="grid grid-cols-2 gap-2 mt-auto pt-2">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl border border-red-100">REVOGAR</button>`}
-                    <button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">NOVO FICHEIRO</button></div>`;
+                    div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
+                    <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white text-[11px] font-bold text-slate-700 outline-none"><option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="A2" ${u.level === 'A2' ? 'selected' : ''}>A2</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="B2" ${u.level === 'B2' ? 'selected' : ''}>B2</option><option value="Iniciante" ${u.level === 'Iniciante' ? 'selected' : ''}>Iniciante</option><option value="Intermédio" ${u.level === 'Intermédio' ? 'selected' : ''}>Intermédio</option><option value="Avançado" ${u.level === 'Avançado' ? 'selected' : ''}>Avançado</option></select></div>
+                    <div id="${mid}" class="space-y-1"></div>
+                    <div class="grid grid-cols-2 gap-2 mt-auto">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl">REVOGAR</button>`}<button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">FICHEIRO</button></div>`;
                     list.appendChild(div);
-                    onSnapshot(query(collection(db, 'artifacts', APP_ID, 'users', u.uid, 'materials'), orderBy('createdAt', 'desc')), (s) => {
-                        const c = document.getElementById(mid); if (!c) return;
-                        c.innerHTML = s.empty ? '<p class="text-[9px] italic text-slate-300">Sem ficheiros.</p>' : '';
+                    onSnapshot(collection(db, 'artifacts', APP_ID, 'users', u.uid, 'materials'), (s) => {
+                        const c = document.getElementById(mid); if (!c) return; c.innerHTML = s.empty ? '<p class="text-[9px] italic text-slate-300">Sem ficheiros.</p>' : '';
                         s.forEach(mat => { const m = mat.data(); const item = document.createElement('div'); item.className = "flex justify-between bg-white p-1 rounded border text-[9px]"; item.innerHTML = `<span class="truncate pr-2">${m.title}</span><div class="flex gap-2"><a href="${m.link}" target="_blank" class="text-blue-500"><i data-lucide="external-link" class="w-3 h-3"></i></a><button onclick="window.deleteMaterialForStudent('${u.uid}', '${mat.id}')" class="text-red-400"><i data-lucide="trash-2" class="w-3 h-3"></i></button></div>`; c.appendChild(item); });
-                        window.lucide.createIcons();
-                    });
+                        if (window.lucide) window.lucide.createIcons();
+                    }, (err) => console.error("Erro materiais admin."));
                 });
-            });
+            }, (err) => console.error("Erro perfis admin."));
         }
 
         function loadAdminSchedules() {
-            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), orderBy('createdAt', 'desc')), (snap) => {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), (snap) => {
                 const list = document.getElementById('schedule-list-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Nenhum pedido pendente.</p>' : '';
-                snap.forEach((d) => { const r = d.data(); const card = document.createElement('div'); card.className = "bg-white p-4 rounded-xl border flex justify-between items-center shadow-sm"; card.innerHTML = `<div><p class="text-xs font-black uppercase">${r.studentName}</p><p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p></div><div class="flex gap-2"><button onclick="window.resolveLessonRequest('${d.id}', 'confirmar', ${JSON.stringify(r).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button><button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button></div>`; list.appendChild(card); });
-            });
+                snap.forEach((d) => { const r = d.data(); const card = document.createElement('div'); card.className = "bg-white p-4 rounded-xl border flex justify-between items-center shadow-sm"; card.innerHTML = `<div><p class="text-xs font-black uppercase">${r.studentName}</p><p class="text-[10px] text-slate-500 font-bold mb-1">${r.courseType || 'Tipo não definido'}</p><p class="text-[10px] text-amber-600 font-bold">${r.date} | ${r.slot}</p></div><div class="flex gap-2"><button onclick="window.resolveLessonRequest('${d.id}', 'confirmar', ${JSON.stringify(r).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-3 py-2 rounded-lg text-[9px] font-black">OK</button><button onclick="window.resolveLessonRequest('${d.id}', 'rejeitar')" class="bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-[9px] font-black">X</button></div>`; list.appendChild(card); });
+            }, (err) => console.error("Erro pedidos admin."));
         }
 
         function loadConfirmedLessonsAdmin() {
-            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), orderBy('date', 'asc')), (snap) => {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
                 const list = document.getElementById('confirmed-lessons-admin'); list.innerHTML = snap.empty ? '<p class="text-slate-400 italic text-sm p-4">Agenda vazia.</p>' : '';
                 snap.forEach((d) => { 
-                    const l = d.data(); 
-                    const div = document.createElement('div'); 
-                    div.className = "bg-white p-4 rounded-xl border-blue-200 border flex justify-between items-center shadow-sm"; 
-                    div.innerHTML = `
-                        <div><p class="text-xs font-black text-blue-600 uppercase">${l.studentName}</p><p class="text-[11px] font-bold">${l.date} às ${l.slot}</p></div>
-                        <div class="flex gap-2">
-                            <button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="bg-emerald-100 text-emerald-700 px-3 py-2 rounded-lg text-[9px] font-black hover:bg-emerald-600 hover:text-white transition-colors uppercase">Concluir</button>
-                            <button onclick="window.deleteConfirmedLesson('${d.id}')" class="text-red-300"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                        </div>`; 
+                    const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border-blue-200 border flex justify-between items-center shadow-sm"; 
+                    div.innerHTML = `<div><p class="text-xs font-black text-blue-600 uppercase">${l.studentName}</p><p class="text-[10px] font-bold text-slate-500">${l.courseType || 'Tipo N/A'}</p><p class="text-[11px] font-bold">${l.date} às ${l.slot}</p></div><div class="flex gap-2"><button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="bg-emerald-100 text-emerald-700 px-3 py-2 rounded-lg text-[9px] font-black hover:bg-emerald-600 hover:text-white transition-colors uppercase">Concluir</button><button onclick="window.deleteConfirmedLesson('${d.id}')" class="text-red-300"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; 
                     list.appendChild(div); 
                 });
-                window.lucide.createIcons();
-            });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => console.error("Erro agenda admin."));
         }
 
         function loadStudentLessons(uid) {
-            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), orderBy('date', 'asc')), (snap) => {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
                 const list = document.getElementById('student-confirmed-lessons');
                 const filtered = snap.docs.filter(d => d.data().studentUid === uid);
                 list.innerHTML = filtered.length === 0 ? '<p class="text-slate-400 text-sm italic">Nenhuma aula confirmada.</p>' : '';
-                filtered.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border flex items-center gap-3"; div.innerHTML = `<div class="bg-blue-100 text-blue-600 p-2 rounded-lg"><i data-lucide="video" class="w-4 h-4"></i></div><div><p class="text-xs font-bold">${l.date}</p><p class="text-[11px] text-slate-500">${l.slot}</p></div>`; list.appendChild(div); });
-                window.lucide.createIcons();
-            });
+                filtered.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border flex items-center gap-3"; div.innerHTML = `<div class="bg-blue-100 text-blue-600 p-2 rounded-lg"><i data-lucide="video" class="w-4 h-4"></i></div><div><p class="text-xs font-bold">${l.date} às ${l.slot}</p><p class="text-[11px] text-slate-500 font-medium">${l.courseType || ''}</p></div>`; list.appendChild(div); });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => console.error("Erro aulas aluno."));
         }
 
         function loadStudentMaterials(uid) {
-            onSnapshot(query(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), orderBy('createdAt', 'desc')), (snap) => {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), (snap) => {
                 const list = document.getElementById('materials-list'); list.innerHTML = snap.empty ? '<p class="text-center py-10 text-slate-400 italic">Sem materiais.</p>' : '';
-                snap.forEach((d) => { const m = d.data(); const div = document.createElement('div'); div.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl"; div.innerHTML = `<div class="flex items-center gap-4"><div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-lines text-xl"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div><a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-2xl hover:bg-blue-600 transition-all shadow-md"><span>Aceder ao Link</span><i data-lucide="external-link" class="w-4 h-4"></i></a>`; list.appendChild(div); });
-                window.lucide.createIcons();
-            });
+                snap.forEach((d) => { const m = d.data(); const div = document.createElement('div'); div.className = "flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl transition-all hover:shadow-xl"; div.innerHTML = `<div class="flex items-center gap-4"><div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-file-pdf"></i></div><h4 class="font-bold text-sm text-slate-800">${m.title}</h4></div><a href="${m.link}" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-blue-600 transition-all shadow-md"><span>Aceder</span><i data-lucide="external-link" class="w-4 h-4"></i></a>`; list.appendChild(div); });
+                if (window.lucide) window.lucide.createIcons();
+            }, (err) => console.error("Erro materiais aluno."));
         }
 
         // --- SUBMISSIONS ---
-        document.getElementById('editProfileForm').addEventListener('submit', async (e) => { e.preventDefault(); await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { name: document.getElementById('editName').value }); const msg = document.getElementById('profileUpdateMsg'); msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000); });
-        document.getElementById('studentRequestForm').addEventListener('submit', async (e) => { e.preventDefault(); await updateDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', auth.currentUser.uid), { status: 'pending', courseOfInterest: document.getElementById('reqCourse').value, availability: document.getElementById('reqAvailability').value }); });
-        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => { e.preventDefault(); await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), { studentUid: auth.currentUser.uid, studentName: currentUserProfile.name, date: document.getElementById('lessonDate').value, slot: document.getElementById('lessonSlot').value, createdAt: serverTimestamp() }); document.getElementById('scheduleModal').classList.add('hidden'); alert("Pedido enviado!"); });
-        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => { e.preventDefault(); if (!selectedTargetStudentId) return; await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() }); document.getElementById('addMaterialForm').reset(); alert("Ficheiro atribuído!"); });
-        document.getElementById('formLogin').addEventListener('submit', async (e) => { e.preventDefault(); try { await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value); document.getElementById('loginModal').classList.add('hidden'); } catch (err) { alert("Credenciais erradas."); } });
-        document.getElementById('formRegister').addEventListener('submit', async (e) => { e.preventDefault(); try { const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value); await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() }); document.getElementById('loginModal').classList.add('hidden'); } catch (err) { alert("Erro ao criar conta."); } });
-
-        // --- SLIDER LOGIC ---
-        window.openPresentation = () => { document.getElementById('presentation-overlay').classList.add('active'); slideIdx = 0; window.updateSlides(); };
-        window.closePresentation = () => document.getElementById('presentation-overlay').classList.remove('active');
-        window.changeSlide = (n) => { slideIdx += n; if(slideIdx < 0) slideIdx = presentationData.length-1; if(slideIdx >= presentationData.length) slideIdx = 0; window.updateSlides(); };
-        window.updateSlides = () => {
-            const container = document.getElementById('slides-container');
-            const dotsContainer = document.getElementById('presentation-dots');
-            const data = presentationData[slideIdx];
-            
-            // LÓGICA DE RENDERIZAÇÃO MELHORADA
-            let content = '';
-            if (data.type === 'welcome') {
-                content = `
-                    <div class="text-center">
-                        <div class="text-blue-600 mb-8"><i class="fa-solid fa-graduation-cap" style="font-size: 80px;"></i></div>
-                        <h1>${data.title}</h1>
-                        <p>${data.text}</p>
-                    </div>`;
-            } else if (data.type === 'text') {
-                content = `
-                    <div class="max-w-3xl mx-auto text-left">
-                        <h2 class="slide-title">${data.title}</h2>
-                        <p class="font-bold text-blue-600 mb-4 tracking-tight">Novo no ensino, veterano na aprendizagem.</p>
-                        <p class="text-slate-600">${data.text}</p>
-                    </div>`;
-            } else if (data.type === 'tiles') {
-                // NOVO LAYOUT: BARRAS HORIZONTAIS
-                content = `
-                    <div class="flex flex-col gap-4 max-w-4xl mx-auto w-full">
-                        <h2 class="slide-title">${data.title}</h2>
-                        <div class="space-y-3">
-                            ${data.tiles.map(tile => {
-                                // Mapeamento de ícones fixo baseado no título ou posição
-                                let icon = 'sparkles';
-                                if (tile.t.includes('Silencioso') || tile.t.includes('IA')) icon = 'shield-check';
-                                if (tile.t.includes('Recursos') || tile.t.includes('Digital')) icon = 'layers';
-                                if (tile.t.includes('Evolução') || tile.t.includes('Ritmo')) icon = 'trending-up';
-                                if (tile.t.includes('Acompanhamento')) icon = 'navigation';
-
-                                return `
-                                <div class="glass-card flex items-center p-5 gap-6 rounded-3xl border border-white/40 shadow-sm transition-all hover:bg-white/80">
-                                    <div class="bg-blue-600 text-white p-4 rounded-2xl shrink-0 shadow-md">
-                                        <i data-lucide="${icon}" class="w-6 h-6"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="font-black text-slate-800 text-lg uppercase tracking-tight">${tile.t}</h4>
-                                        <p class="text-slate-500 font-medium leading-tight text-base">${tile.d}</p>
-                                    </div>
-                                </div>`;
-                            }).join('')}
-                        </div>
-                    </div>`;
-            } else if (data.type === 'list') {
-                content = `
-                    <div class="max-w-3xl mx-auto text-left">
-                        <h2 class="slide-title">${data.title}</h2>
-                        <ul class="space-y-4">
-                            ${data.list.map(l => `<li class="flex items-center gap-4 font-bold text-slate-600"><i class="fa-solid fa-check text-blue-600 text-xl"></i> ${l}</li>`).join('')}
-                        </ul>
-                    </div>`;
-            }
-
-            container.innerHTML = `<div class="slide active">${content}</div>`;
-            dotsContainer.innerHTML = presentationData.map((_, i) => `<div class="dot ${i === slideIdx ? 'active' : ''}"></div>`).join('');
-            window.lucide.createIcons();
+        window.openDetails = (key) => {
+            const data = courseObjectives[key];
+            if (!data) return;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalObjectivesArea').innerHTML = (data.objectives || []).map(obj => `<div class="flex gap-4"><div class="bg-blue-100 p-2 rounded-xl text-blue-600 h-fit"><i data-lucide="target" class="w-5 h-5"></i></div><div><h4 class="font-bold text-sm uppercase">${obj.t}</h4><p class="text-xs text-slate-500">${obj.d}</p></div></div>`).join('');
+            const hasUser = auth.currentUser && !auth.currentUser.isAnonymous;
+            document.getElementById('detailsActionArea').innerHTML = hasUser ? 
+                `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : 
+                `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
+            document.getElementById('detailsModal').classList.remove('hidden');
+            if (window.lucide) window.lucide.createIcons();
         };
+
+        document.getElementById('formLessonRequest').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const dateVal = document.getElementById('lessonDate').value;
+            const chosenDate = new Date(dateVal);
+            if (chosenDate.getUTCDay() !== 6) { alert("Por favor, escolha um Sábado."); return; }
+            if (!currentUserProfile) { alert("A carregar perfil..."); return; }
+            try {
+                await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests'), {
+                    studentUid: auth.currentUser.uid,
+                    studentName: currentUserProfile.name || "Utilizador",
+                    courseType: document.getElementById('lessonCourse').value,
+                    date: dateVal,
+                    slot: document.getElementById('lessonSlot').value,
+                    createdAt: serverTimestamp()
+                });
+                document.getElementById('scheduleModal').classList.add('hidden');
+                document.getElementById('detailsModal').classList.add('hidden');
+                alert("Agendamento solicitado!");
+            } catch (err) { alert("Erro ao solicitar aula."); }
+        });
+
+        document.getElementById('addMaterialForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedTargetStudentId) return;
+            await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), { 
+                title: document.getElementById('matTitle').value, link: document.getElementById('matLink').value, createdAt: serverTimestamp() 
+            });
+            document.getElementById('addMaterialForm').reset();
+            alert("Ficheiro enviado!");
+        });
+
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+                document.getElementById('loginModal').classList.add('hidden');
+            } catch (err) { alert("Credenciais incorretas."); }
+        });
+
+        document.getElementById('formRegister').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value);
+                await setDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'profiles', cred.user.uid), { 
+                    uid: cred.user.uid, name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, 
+                    status: 'guest', level: 'A1 Iniciante', createdAt: serverTimestamp() 
+                });
+                document.getElementById('loginModal').classList.add('hidden');
+            } catch (err) { alert("Erro ao criar conta."); }
+        });
 
         // --- BACKGROUND ---
         const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
-        let w, h, p = [];
-        const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
+        let w, h, p = []; const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
         class Part { constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.2; this.vy = (Math.random()-0.5)*0.2; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; } draw() { ctx.fillStyle='rgba(59,130,246,0.06)'; ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fill(); } }
         resize(); p = Array.from({length: 40}, () => new Part());
         function anim() { ctx.clearRect(0,0,w,h); p.forEach(v=>{v.update();v.draw();}); requestAnimationFrame(anim); }
