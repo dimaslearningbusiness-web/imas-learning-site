@@ -134,7 +134,22 @@
         <section id="reviews-section" class="max-w-7xl mx-auto py-16 border-t border-slate-100">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4 tracking-tight">O que dizem os nossos alunos</h2>
-                <p class="text-slate-500">Feedback real da nossa comunidade.</p>
+                <p class="text-slate-500 mb-8">Feedback real da nossa comunidade.</p>
+                
+                <div id="review-form-container" class="hidden max-w-lg mx-auto glass-card p-8 rounded-[2rem] border-t-4 border-amber-400 mb-12">
+                    <h5 class="text-sm font-black text-slate-700 uppercase mb-4 text-center">Partilha a tua experiência</h5>
+                    <form id="courseReviewForm" class="space-y-4">
+                        <select id="revStars" class="w-full bg-slate-50 border rounded-xl p-3 text-sm font-bold outline-none">
+                            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                            <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
+                            <option value="3">⭐⭐⭐ (Bom)</option>
+                            <option value="2">⭐⭐ (Regular)</option>
+                            <option value="1">⭐ (Fraco)</option>
+                        </select>
+                        <textarea id="revComment" maxlength="150" placeholder="Escreve aqui o teu feedback (máx 150 car.)..." class="w-full text-sm p-4 border rounded-2xl outline-none resize-none h-24 focus:border-amber-400 transition-colors"></textarea>
+                        <button type="submit" class="w-full py-4 bg-slate-900 text-white font-black uppercase rounded-2xl shadow-lg hover:bg-blue-600 transition-all tracking-widest text-xs">Publicar Avaliação</button>
+                    </form>
+                </div>
             </div>
             <div id="reviews-feed" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <p class="text-center col-span-full text-slate-400 italic">A carregar avaliações...</p>
@@ -214,7 +229,7 @@
 
             <!-- GUEST FORM -->
             <div id="guest-request-form" class="hidden-section mb-10 animate-fade-in">
-                <div class="glass-card rounded-[2.5rem] p-10 border-2 border-blue-50 max-w-2xl mx-auto text-center">
+                <div class="glass-card rounded-[2.5rem] p-10 border-2 border-blue-50 max-w-lg mx-auto text-center">
                     <h3 class="text-3xl font-bold text-slate-900 mb-4">Torna-te Aluno</h3>
                     <p class="text-slate-500 mb-8">Diz-nos o teu curso e horário preferencial.</p>
                     <form id="studentRequestForm" class="space-y-6">
@@ -241,36 +256,35 @@
             <!-- ÁREA ALUNO (Dashboard Útil e Claro) -->
             <div id="student-content-area" class="hidden-section grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
                 
-                <!-- 1. PRÓXIMAS AÇÕES (Agenda) -->
-                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-blue-500 flex flex-col">
+                <!-- 1. PRÓXIMAS AÇÕES (Agenda) - COM DESTAQUE -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-blue-600 flex flex-col shadow-md">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2 text-blue-600">
                             <i data-lucide="calendar-days" class="w-5 h-5"></i>
-                            <h3 class="text-xs font-bold uppercase tracking-widest">Próximas Sessões</h3>
+                            <h3 class="text-xs font-black uppercase tracking-widest">Próximas Sessões</h3>
                         </div>
                         <p id="stat-future-count" class="text-xl font-black text-blue-600">0</p>
                     </div>
                     <div id="student-next-actions" class="flex-grow">
-                        <button onclick="window.openScheduleModal()" class="w-full py-3 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl font-bold text-xs hover:bg-blue-600 hover:text-white transition-all mb-4">
-                            Agendar Nova Aula Agora
+                        <button onclick="window.openScheduleModal()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-black text-xs hover:bg-slate-900 transition-all mb-4 uppercase shadow-sm">
+                            Agendar Nova Aula
                         </button>
-                        <p class="text-[10px] text-slate-400 font-medium mb-3 uppercase tracking-tighter">Confirmadas na tua agenda:</p>
-                        <!-- Aulas dinâmicas carregadas aqui pelo listener existente -->
-                        <div id="student-confirmed-lessons-dash" class="space-y-2 overflow-y-auto max-h-[100px]">
+                        <p class="text-[10px] text-slate-400 font-bold mb-3 uppercase tracking-tighter">Agenda Confirmada:</p>
+                        <div id="student-confirmed-lessons-dash" class="space-y-2 overflow-y-auto max-h-[140px]">
                             <p class="text-[10px] text-slate-400 italic">Nenhuma aula para breve.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 2. ESTADO ATUAL (Progresso) -->
-                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-emerald-500 flex flex-col justify-between">
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-emerald-500 flex flex-col justify-between shadow-md">
                     <div>
                         <div class="flex items-center gap-2 mb-4 text-emerald-600">
                             <i data-lucide="trending-up" class="w-5 h-5"></i>
-                            <h3 class="text-xs font-bold uppercase tracking-widest">A Minha Jornada</h3>
+                            <h3 class="text-xs font-black uppercase tracking-widest">A Minha Jornada</h3>
                         </div>
                         <div class="flex items-center gap-4 mb-6">
-                            <div class="bg-emerald-50 text-emerald-600 p-3 rounded-2xl"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+                            <div class="bg-emerald-50 text-emerald-600 p-3 rounded-2xl shadow-sm"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
                             <div>
                                 <h4 id="stat-completed-count" class="text-3xl font-black text-slate-800">0</h4>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Aulas Concluídas</p>
@@ -279,8 +293,8 @@
                     </div>
                     <div class="pt-4 border-t border-slate-100">
                         <div class="flex justify-between items-end mb-2">
-                            <span id="user-level-display" class="text-sm font-black text-emerald-600">Nível A1</span>
-                            <span class="text-[9px] font-bold text-slate-400 uppercase">Caminho para C2</span>
+                            <span id="user-level-display" class="text-sm font-black text-emerald-600 uppercase tracking-tighter">Nível A1</span>
+                            <span class="text-[9px] font-bold text-slate-400 uppercase">Progresso Global</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden shadow-inner">
                             <div id="progress-bar-fill" class="bg-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
@@ -288,25 +302,25 @@
                     </div>
                 </div>
 
-                <!-- 3. NOVAS OPORTUNIDADES (Cursos de Grupo) -->
-                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-indigo-500 flex flex-col">
+                <!-- 3. NOVAS OPORTUNIDADES (Aulas de Grupo) -->
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-indigo-500 flex flex-col shadow-sm">
                     <div class="flex items-center gap-2 mb-4 text-indigo-600">
                         <i data-lucide="layers" class="w-5 h-5"></i>
-                        <h3 class="text-xs font-bold uppercase tracking-widest">Aulas de Grupo</h3>
+                        <h3 class="text-xs font-black uppercase tracking-widest">Aulas de Grupo</h3>
                     </div>
-                    <div id="dashboard-dynamic-courses" class="space-y-3 overflow-y-auto max-h-[150px]">
+                    <div id="dashboard-dynamic-courses" class="space-y-3 overflow-y-auto max-h-[160px]">
                         <p class="text-slate-400 italic text-[10px]">A carregar novos conteúdos...</p>
                     </div>
                 </div>
 
                 <!-- 4. REGISTO PASSADO (Histórico) -->
-                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-slate-400 flex flex-col opacity-80 hover:opacity-100 transition-opacity">
+                <div class="glass-card rounded-[2rem] p-8 border-l-4 border-slate-400 flex flex-col opacity-90 hover:opacity-100 transition-opacity shadow-sm">
                     <div class="flex items-center gap-2 mb-4 text-slate-500">
-                        <i data-lucide="history" class="w-5 h-5"></i>
-                        <h3 class="text-xs font-bold uppercase tracking-widest">Registo de Atividade</h3>
+                        <i data-lucide="history" class="w-4 h-4"></i>
+                        <h3 class="text-xs font-black uppercase tracking-widest">Histórico Recente</h3>
                     </div>
-                    <div id="student-history-list" class="flex-grow overflow-y-auto max-h-[150px] space-y-2 text-xs">
-                        <p class="text-slate-400 italic">Sem histórico recente.</p>
+                    <div id="student-history-list" class="flex-grow overflow-y-auto max-h-[160px] space-y-2 text-xs">
+                        <p class="text-slate-400 italic">Sem registos no histórico.</p>
                     </div>
                 </div>
 
@@ -319,48 +333,35 @@
         </div>
 
         <!-- PROFILE TAB -->
-        <div id="profile-tab-content" class="hidden-section animate-fade-in max-w-2xl mx-auto">
-            <div class="glass-card rounded-[2.5rem] p-12 border">
-                <h3 class="text-3xl font-bold text-slate-900 text-center mb-10">Editar Perfil</h3>
-                <form id="editProfileForm" class="space-y-6">
-                    <div>
-                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Nickname</label>
-                        <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Nova Password (deixar vazio para manter)</label>
-                        <input type="password" id="editPassword" placeholder="••••••••" class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700">
-                    </div>
-                    <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border rounded-2xl text-slate-400 cursor-not-allowed">
-                    <button type="submit" class="w-full py-5 bg-slate-900 text-white font-bold rounded-3xl">Guardar Alterações</button>
-                </form>
-                <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-bold">Perfil atualizado!</div>
-                
-                <div class="mt-10 pt-8 border-t text-center">
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-2">Dúvidas ou Suporte?</p>
-                    <a href="mailto:dimaslearningbusiness@gmail.com" class="text-blue-600 font-bold hover:underline">dimaslearningbusiness@gmail.com</a>
+        <div id="profile-tab-content" class="hidden-section animate-fade-in max-w-lg mx-auto space-y-6">
+            <!-- Ficheiros Recebidos -->
+            <div id="student-files-container" class="glass-card rounded-[2rem] p-8 border shadow-sm">
+                <h4 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest flex items-center gap-2"><i data-lucide="folder-down" class="w-4 h-4"></i> Meus Materiais</h4>
+                <div id="student-materials-list" class="space-y-2">
+                    <p class="text-[10px] text-slate-400 italic">Nenhum material recebido.</p>
                 </div>
             </div>
-        </div>
-
-        <!-- ADMIN ADD MATERIAL -->
-        <div id="admin-add-material-panel" class="hidden-section mt-10 animate-fade-in scroll-mt-32">
-            <div class="bg-amber-50 border border-amber-200 rounded-[2rem] p-10 shadow-lg">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-bold text-amber-900 tracking-tight">Atribuir Ficheiro a <span id="target-student-name" class="underline">...</span></h3>
-                    <button onclick="window.closeMaterialPanel()" class="bg-white px-3 py-1 rounded-lg font-bold">X</button>
-                </div>
-                <form id="addMaterialForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                    <div class="md:col-span-1">
-                        <label class="text-[10px] font-black text-amber-800 uppercase ml-1">Título do Ficheiro</label>
-                        <input type="text" id="matTitle" required placeholder="Ex: PDF Aula 1" class="w-full px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+            
+            <div class="glass-card rounded-[2.5rem] p-12 border shadow-lg">
+                <h3 class="text-3xl font-black text-slate-900 text-center mb-10 tracking-tighter">Editar Perfil</h3>
+                <form id="editProfileForm" class="space-y-6">
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase ml-1 tracking-widest">Nickname</label>
+                        <input type="text" id="editName" required class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700 focus:border-blue-500 transition-colors">
                     </div>
-                    <div class="md:col-span-1">
-                        <label class="text-[10px] font-black text-amber-800 uppercase ml-1">URL do Link</label>
-                        <input type="url" id="matLink" required placeholder="https://drive.google.com/..." class="w-full px-5 py-4 border rounded-2xl text-slate-700 outline-none">
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase ml-1 tracking-widest">Nova Password (opcional)</label>
+                        <input type="password" id="editPassword" placeholder="••••••••" class="w-full px-6 py-4 border rounded-2xl font-semibold outline-none text-slate-700 focus:border-blue-500 transition-colors">
                     </div>
-                    <button type="submit" class="bg-amber-600 text-white font-black py-4 rounded-2xl shadow-md hover:bg-amber-700 transition-all uppercase">Atribuir</button>
+                    <input type="email" id="displayEmail" disabled class="w-full px-6 py-4 bg-slate-50 border rounded-2xl text-slate-400 cursor-not-allowed font-medium">
+                    <button type="submit" class="w-full py-5 bg-slate-900 text-white font-black rounded-3xl hover:bg-blue-600 transition-all shadow-md uppercase tracking-widest text-sm">Guardar Alterações</button>
                 </form>
+                <div id="profileUpdateMsg" class="hidden mt-6 p-4 bg-emerald-50 text-emerald-700 text-center rounded-2xl font-black text-xs uppercase tracking-tighter">Perfil atualizado com sucesso!</div>
+                
+                <div class="mt-10 pt-8 border-t text-center">
+                    <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Dúvidas ou Suporte?</p>
+                    <a href="mailto:dimaslearningbusiness@gmail.com" class="text-blue-600 font-bold hover:underline">dimaslearningbusiness@gmail.com</a>
+                </div>
             </div>
         </div>
     </main>
@@ -378,23 +379,7 @@
                     <div class="bg-slate-50 rounded-3xl p-8 text-center border">
                         <div class="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center shadow-lg mb-6 text-blue-600 mx-auto"><i data-lucide="calendar-check"></i></div>
                         <h4 class="text-xl font-black mb-2">Pronto para a aula?</h4>
-                        <div id="detailsActionArea" class="w-full mb-6"></div>
-                        <div id="review-form-container" class="hidden border-t pt-6 text-left">
-                            <h5 class="text-xs font-black text-slate-400 uppercase mb-3">Deixa a tua Review</h5>
-                            <form id="courseReviewForm" class="space-y-3">
-                                <div class="flex gap-2 justify-center mb-2">
-                                    <select id="revStars" class="bg-white border rounded-lg text-xs font-bold p-1">
-                                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                                        <option value="4">⭐⭐⭐⭐ (4)</option>
-                                        <option value="3">⭐⭐⭐ (3)</option>
-                                        <option value="2">⭐⭐ (2)</option>
-                                        <option value="1">⭐ (1)</option>
-                                    </select>
-                                </div>
-                                <textarea id="revComment" maxlength="150" placeholder="A tua experiência (máx 150 car.)" class="w-full text-xs p-3 border rounded-xl outline-none resize-none h-20"></textarea>
-                                <button type="submit" class="w-full py-2 bg-slate-900 text-white text-[10px] font-black uppercase rounded-lg">Submeter Review</button>
-                            </form>
-                        </div>
+                        <div id="detailsActionArea" class="w-full"></div>
                     </div>
                 </div>
             </div>
@@ -402,29 +387,31 @@
     </div>
 
     <div id="scheduleModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
-        <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-md w-full relative animate-fade-in">
-            <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl max-w-md w-full relative animate-fade-in">
+            <button onclick="document.getElementById('scheduleModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400 hover:text-red-500 transition-colors"><i data-lucide="x"></i></button>
             <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Marcar Aula</h3>
             <form id="formLessonRequest" class="space-y-6">
-                <select id="lessonCourse" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-semibold text-slate-700 outline-none focus:bg-white focus:border-blue-500">
+                <select id="lessonCourse" required class="w-full px-5 py-4 bg-slate-50 border rounded-2xl font-semibold text-slate-700 outline-none focus:bg-white focus:border-blue-500 transition-all">
                     <option value="Inglês Personalizado">Inglês Personalizado</option>
                     <option value="Portuguese for English Speakers">Portuguese for English Speakers</option>
                     <option value="AI e Tecnologia">AI e Tecnologia</option>
                 </select>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between items-center px-1">
-                        <label class="text-xs font-black text-slate-400 uppercase">Data Pretendida</label>
-                        <span id="autoYearDisplay" class="text-xs font-bold text-blue-600">Ano: 2026</span>
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Data Pretendida</label>
+                        <span id="autoYearDisplay" class="text-[10px] font-bold text-blue-600">Ano: 2026</span>
                     </div>
                     <input type="date" id="lessonDate" required class="w-full px-5 py-4 border rounded-2xl outline-none focus:border-blue-500 text-slate-700 font-medium">
                 </div>
-                <select id="lessonSlot" required class="w-full px-5 py-4 border rounded-2xl font-semibold text-slate-700 outline-none focus:border-blue-500">
-                    <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
-                    <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
-                    <option value="Sábado">Apenas Sábado</option>
-                    <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
-                </select>
-                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl hover:bg-slate-900 transition-all uppercase">Solicitar</button>
+                <div id="slot-picker-container">
+                    <select id="lessonSlot" required class="w-full px-5 py-4 border rounded-2xl font-semibold text-slate-700 outline-none focus:border-blue-500 transition-all">
+                        <option value="Tarde (18h-19h)">Tarde (18h-19h)</option>
+                        <option value="Noite (20h-21h30)">Noite (20h-21h30)</option>
+                        <option value="Sábado">Apenas Sábado</option>
+                        <option value="Qualquer disponibilidade">Qualquer disponibilidade</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-3xl shadow-xl hover:bg-slate-900 transition-all uppercase tracking-widest text-sm">Enviar Pedido</button>
             </form>
         </div>
     </div>
@@ -433,23 +420,23 @@
         <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl max-sm w-full relative animate-fade-in">
             <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
             <div id="loginFormContainer">
-                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Login</h3>
+                <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Login</h3>
                 <form id="formLogin" class="space-y-4">
-                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="loginPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all uppercase">Entrar</button>
+                    <input id="loginEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700 focus:border-blue-500 transition-colors font-medium">
+                    <input id="loginPass" type="password" placeholder="Password" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700 focus:border-blue-500 transition-colors font-medium">
+                    <button type="submit" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-blue-600 transition-all uppercase tracking-widest text-sm">Entrar</button>
                 </form>
-                <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Não tens conta? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar</a></p>
+                <p class="text-center mt-6 text-[10px] text-slate-400 font-black tracking-widest uppercase">Não tens conta? <a href="#" onclick="window.toggleAuthMode('register')" class="text-blue-600 underline">Criar</a></p>
             </div>
             <div id="registerFormContainer" class="hidden">
-                <h3 class="text-3xl font-bold text-slate-900 text-center mb-8">Registo</h3>
+                <h3 class="text-3xl font-black text-slate-900 text-center mb-8 tracking-tighter">Registo</h3>
                 <form id="formRegister" class="space-y-4">
-                    <input id="regName" type="text" placeholder="Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="regEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <input id="regPass" type="password" placeholder="Password (mín. 6)" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700">
-                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all text-sm uppercase">Registar</button>
+                    <input id="regName" type="text" placeholder="Nome Completo" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700 focus:border-blue-500 transition-colors font-medium">
+                    <input id="regEmail" type="email" placeholder="Email" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700 focus:border-blue-500 transition-colors font-medium">
+                    <input id="regPass" type="password" placeholder="Password (mín. 6)" required class="w-full px-5 py-4 border rounded-2xl outline-none text-slate-700 focus:border-blue-500 transition-colors font-medium">
+                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-slate-900 transition-all uppercase tracking-widest text-sm text-center">Registar</button>
                 </form>
-                <p class="text-center mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
+                <p class="text-center mt-6 text-[10px] text-slate-400 font-black tracking-widest uppercase">Já tens conta? <a href="#" onclick="window.toggleAuthMode('login')" class="text-blue-600 underline">Entrar</a></p>
             </div>
         </div>
     </div>
@@ -476,6 +463,7 @@
 
         let currentUserProfile = null;
         let selectedTargetStudentId = null;
+        let isGroupEnrollment = false;
         let slideIdx = 0;
         let activeStatsUnsubscribes = [];
 
@@ -483,9 +471,9 @@
 
         // --- DADOS ---
         const courseObjectives = {
-            ingles: { title: "Inglês Personalizado", objectives: [{t:"Conversação", d:"Foco em fluência real."}, {t:"Gramática", d:"Estrutura e correção."}] },
-            portugues: { title: "Portuguese for English", objectives: [{t:"Daily Use", d:"Basic survival expressions."}, {t:"Grammar", d:"Structure and logic."}] },
-            ai: { title: "Aulas de AI e Tecnologia", objectives: [{t:"Prompting", d:"How to talk to AI."}, {t:"Tools", d:"Workflows and automation."}] }
+            ingles: { title: "Inglês Personalizado", objectives: [{t: "Conversação", d: "Foco em fluência real."}, {t: "Gramática", d: "Estrutura e correção."}] },
+            portugues: { title: "Portuguese for English", objectives: [{t: "Daily Use", d: "Basic survival expressions."}, {t: "Grammar", d: "Structure and logic."}] },
+            ai: { title: "Aulas de AI e Tecnologia", objectives: [{t: "Prompting", d: "How to talk to AI."}, {t: "Tools", d: "Workflows and automation."}] }
         };
 
         const presentationData = [
@@ -502,7 +490,7 @@
         
         window.resolveLessonRequest = async (id, act, data) => {
             if(!auth.currentUser) return;
-            if (act === 'confirmar') await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp() });
+            if (act === 'confirmar') await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), { ...data, confirmedAt: serverTimestamp(), type: data.isGroup ? 'group' : 'individual' });
             await deleteDoc(doc(db, 'artifacts', APP_ID, 'public', 'data', 'lessonRequests', id));
         };
         
@@ -531,7 +519,6 @@
         let currentOpenCourseId = null;
 
         function loadReviews() {
-            // Removido if(!auth.currentUser) para permitir visão pública social
             onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'), (snap) => {
                 const reviews = snap.docs.map(d => d.data());
                 const feed = document.getElementById('reviews-feed');
@@ -547,7 +534,12 @@
                     }
                 });
 
-                reviews.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)).forEach(r => {
+                const hasAlreadyReviewed = reviews.some(r => r.userId === auth.currentUser?.uid);
+                const isStudent = currentUserProfile?.status === 'student';
+                const formCont = document.getElementById('review-form-container');
+                if (formCont) formCont.classList.toggle('hidden', !isStudent || hasAlreadyReviewed);
+
+                [...reviews].sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)).forEach(r => {
                     if (!feed) return;
                     const div = document.createElement('div');
                     div.className = "glass-card p-6 rounded-2xl border-t-4 border-amber-400 animate-fade-in shadow-sm";
@@ -556,38 +548,35 @@
                                      <p class="text-[10px] text-slate-400 mt-4 font-bold">— ${r.userName}</p>`;
                     feed.appendChild(div);
                 });
+                if (window.lucide) window.lucide.createIcons();
             }, (err) => {});
         }
 
         document.getElementById('courseReviewForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!auth.currentUser || auth.currentUser.isAnonymous) return;
+            if (!auth.currentUser || auth.currentUser.isAnonymous) {
+                alert("Apenas alunos autenticados podem deixar reviews.");
+                return;
+            }
             
             const comment = document.getElementById('revComment').value;
             const rating = document.getElementById('revStars').value;
 
             try {
-                const reviewsSnap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'));
-                const alreadyReviewed = reviewsSnap.docs.some(d => d.data().userId === auth.currentUser.uid && d.data().courseId === currentOpenCourseId);
-                
-                if (alreadyReviewed) {
-                    alert("Já avaliaste este curso anteriormente.");
-                    return;
-                }
-
                 await addDoc(collection(db, 'artifacts', APP_ID, 'public', 'data', 'reviews'), {
                     userId: auth.currentUser.uid,
                     userName: currentUserProfile?.name || "Aluno",
-                    courseId: currentOpenCourseId,
+                    courseId: currentOpenCourseId || "Geral",
                     rating: Number(rating),
-                    comment: comment,
+                    comment: comment.substring(0, 150),
                     createdAt: serverTimestamp()
                 });
+                
                 document.getElementById('review-form-container').classList.add('hidden');
                 document.getElementById('courseReviewForm').reset();
-                alert("Obrigado pelo teu feedback!");
+                alert("Review submetida com sucesso!");
             } catch (err) {
-                console.error("Erro ao enviar review.");
+                alert("Erro ao enviar a sua avaliação. Por favor, tente novamente.");
             }
         });
 
@@ -610,13 +599,13 @@
                             <p class="text-[10px] font-bold text-blue-600 uppercase mb-2">Professor: ${c.teacher || 'Dimas Learning'}</p>
                             <p class="text-slate-600 text-sm mb-3 flex-grow">${c.description || 'Sem descrição.'}</p>
                             <div class="text-[10px] bg-slate-50 p-2 rounded-lg border mb-4 font-bold text-slate-500 italic">📅 ${c.dates || 'Datas a definir'}</div>
-                            <button class="w-full py-2.5 bg-slate-900 text-white rounded-lg font-bold text-xs cursor-not-allowed opacity-50">Inscrições Brevemente</button>`;
+                            <button onclick="window.enrollInGroup('${c.title}')" class="w-full py-2.5 bg-blue-600 text-white rounded-lg font-black text-xs hover:bg-slate-900 transition-all uppercase shadow-md">Inscrever Agora</button>`;
                         container.appendChild(card);
                     }
                     if (dashContainer) {
                         const div = document.createElement('div');
                         div.className = "p-3 bg-white border rounded-xl flex flex-col gap-1 shadow-sm animate-fade-in";
-                        div.innerHTML = `<div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-700">${c.title}</span><span class="text-[8px] font-black text-amber-500 uppercase tracking-tighter">Grupo</span></div>
+                        div.innerHTML = `<div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-700">${c.title}</span><span class="text-[8px] font-black text-amber-500 uppercase tracking-tighter cursor-pointer" onclick="window.enrollInGroup('${c.title}')">Inscrever</span></div>
                                          <div class="text-[9px] text-slate-400 font-medium">${c.dates || 'Em breve'}</div>`;
                         dashContainer.appendChild(div);
                     }
@@ -624,6 +613,31 @@
                 if (window.lucide) window.lucide.createIcons();
             }, (err) => {});
         }
+
+        window.enrollInGroup = (courseName) => {
+            window.switchTab('dashboard');
+            isGroupEnrollment = true;
+            document.getElementById('slot-picker-container').classList.add('hidden');
+            const select = document.getElementById('lessonCourse');
+            if (select) {
+                let exists = false;
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === courseName) {
+                        select.selectedIndex = i;
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    const opt = document.createElement('option');
+                    opt.value = courseName;
+                    opt.text = courseName;
+                    select.add(opt);
+                    select.value = courseName;
+                }
+            }
+            window.openScheduleModal();
+        };
 
         function loadStudentHistory(uid) {
             if(!auth.currentUser) return;
@@ -654,22 +668,30 @@
             }, (err) => {});
 
             const unsub2 = onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
-                const filtered = snap.docs.filter(d => d.data().studentUid === uid);
+                const filtered = snap.docs.filter(d => d.data().studentUid === uid)
+                    .sort((a, b) => a.data().date.localeCompare(b.data().date));
                 const count = filtered.length;
                 
-                // Update dashboard stat
                 const el = document.getElementById('stat-future-count');
                 if (el) el.innerText = count;
                 
-                // Update dashboard mini-list
                 const dashList = document.getElementById('student-confirmed-lessons-dash');
                 if (dashList) {
                     dashList.innerHTML = count === 0 ? '<p class="text-[10px] text-slate-400 italic">Nenhuma aula para breve.</p>' : '';
-                    filtered.forEach(d => {
+                    filtered.forEach((d, index) => {
                         const l = d.data();
                         const div = document.createElement('div');
-                        div.className = "p-2 bg-blue-50 border border-blue-100 rounded-lg flex justify-between items-center";
-                        div.innerHTML = `<span class="font-bold text-blue-700 text-[10px]">${l.courseType}</span><span class="text-[9px] text-blue-400 font-black">${l.date} • ${l.slot}</span>`;
+                        const isFirst = index === 0;
+                        div.className = isFirst ? 
+                            "p-3 bg-blue-600 text-white rounded-xl flex justify-between items-center shadow-lg ring-4 ring-blue-100 animate-pulse" : 
+                            "p-2 bg-blue-50 border border-blue-100 rounded-lg flex justify-between items-center";
+                        
+                        div.innerHTML = `
+                            <div class="flex flex-col">
+                                <span class="font-black ${isFirst ? 'text-[11px]' : 'text-[10px]'}">${l.courseType}</span>
+                                ${isFirst ? '<span class="text-[8px] font-black uppercase opacity-80 tracking-widest">Próxima Sessão</span>' : ''}
+                            </div>
+                            <span class="${isFirst ? 'text-[10px]' : 'text-[9px]'} font-black">${l.date} • ${l.slot || 'Grupo'}</span>`;
                         dashList.appendChild(div);
                     });
                 }
@@ -729,7 +751,7 @@
                 if (profile.status === 'student') {
                     const elLvl = document.getElementById('user-level-display');
                     const elProg = document.getElementById('progress-bar-fill');
-                    if(elLvl) elLvl.innerText = profile.level;
+                    if(elLvl) elLvl.innerText = "Nível " + profile.level;
                     if(elProg) {
                         const lvMap = { 'A1 Iniciante': 25, 'A2': 40, 'B1': 60, 'B2': 85, 'Iniciante': 30, 'Intermédio': 65, 'Avançado': 95 };
                         elProg.style.width = (lvMap[profile.level] || 10) + "%";
@@ -737,11 +759,28 @@
                     loadStudentHistory(profile.uid);
                     loadStudentStats(profile.uid);
                     loadDynamicCourses();
+                    loadStudentMaterials(profile.uid);
                 }
             } else {
                 loadAdminSchedules(); loadConfirmedLessonsAdmin(); loadCoursesAdmin(); loadAdminDashboard();
             }
             if (window.lucide) window.lucide.createIcons();
+        }
+
+        function loadStudentMaterials(uid) {
+            onSnapshot(collection(db, 'artifacts', APP_ID, 'users', uid, 'materials'), (snap) => {
+                const list = document.getElementById('student-materials-list');
+                if(!list) return;
+                list.innerHTML = snap.empty ? '<p class="text-[10px] text-slate-400 italic">Nenhum material recebido.</p>' : '';
+                snap.forEach(d => {
+                    const m = d.data();
+                    const div = document.createElement('div');
+                    div.className = "flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl shadow-sm";
+                    div.innerHTML = `<span class="text-[10px] font-bold text-slate-700">${m.title}</span><a href="${m.link}" target="_blank" class="text-blue-500 hover:text-blue-700 transition-colors"><i data-lucide="external-link" class="w-3 h-3"></i></a>`;
+                    list.appendChild(div);
+                });
+                if (window.lucide) window.lucide.createIcons();
+            });
         }
 
         // --- FORM HANDLERS ---
@@ -783,9 +822,11 @@
                 studentName: currentUserProfile.name,
                 courseType: document.getElementById('lessonCourse').value,
                 date: document.getElementById('lessonDate').value,
-                slot: document.getElementById('lessonSlot').value,
+                slot: isGroupEnrollment ? 'Aula de Grupo' : document.getElementById('lessonSlot').value,
+                isGroup: isGroupEnrollment,
                 createdAt: serverTimestamp()
             });
+            isGroupEnrollment = false;
             document.getElementById('scheduleModal').classList.add('hidden');
         });
 
@@ -793,18 +834,26 @@
             e.preventDefault();
             if(!auth.currentUser || !selectedTargetStudentId) return;
             try {
+                const title = document.getElementById('matTitle').value;
+                const link = document.getElementById('matLink').value;
                 await addDoc(collection(db, 'artifacts', APP_ID, 'users', selectedTargetStudentId, 'materials'), {
-                    title: document.getElementById('matTitle').value,
-                    link: document.getElementById('matLink').value,
+                    title: title,
+                    link: link,
                     createdAt: serverTimestamp()
                 });
+                alert("Material enviado com sucesso!");
                 document.getElementById('addMaterialForm').reset();
                 window.closeMaterialPanel();
-            } catch (err) {}
+            } catch (err) {
+                alert("Erro ao enviar material.");
+            }
         });
 
         // --- MISC ---
-        window.openScheduleModal = () => document.getElementById('scheduleModal').classList.remove('hidden');
+        window.openScheduleModal = () => {
+            document.getElementById('slot-picker-container').classList.remove('hidden');
+            document.getElementById('scheduleModal').classList.remove('hidden');
+        };
         window.logout = async () => { await signOut(auth); window.location.reload(); };
         window.openLoginModal = () => { window.toggleAuthMode('login'); document.getElementById('loginModal').classList.remove('hidden'); };
         window.toggleAuthMode = (m) => {
@@ -838,9 +887,6 @@
             const elAct = document.getElementById('detailsActionArea');
             if(elAct) elAct.innerHTML = hasUser ? `<button onclick="window.openScheduleModal()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-100">Agendar Aula Agora</button>` : `<button onclick="window.openLoginModal()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold">Entrar para Agendar</button>`;
             
-            const isStudent = currentUserProfile && currentUserProfile.status === 'student';
-            document.getElementById('review-form-container').classList.toggle('hidden', !isStudent);
-            
             document.getElementById('detailsModal').classList.remove('hidden');
             if (window.lucide) window.lucide.createIcons();
         };
@@ -855,8 +901,25 @@
                     div.className = "bg-white p-6 rounded-2xl border shadow-sm flex flex-col gap-4";
                     div.innerHTML = `<div class="flex justify-between"><div><h4 class="font-bold text-slate-800">${u.name}</h4><p class="text-[10px] text-slate-400">${u.email}</p></div><span class="status-badge status-${u.status}">${u.status}</span></div>
                     <div class="bg-slate-50 p-2 rounded-xl"><select onchange="window.changeLevel('${u.uid}', this.value)" class="w-full bg-white text-[11px] font-bold text-slate-700 outline-none"><option value="A1 Iniciante" ${u.level === 'A1 Iniciante' ? 'selected' : ''}>A1</option><option value="B1" ${u.level === 'B1' ? 'selected' : ''}>B1</option><option value="C1" ${u.level === 'C1' ? 'selected' : ''}>C1</option></select></div>
+                    <div id="materials-${u.uid}" class="space-y-1 mt-2 p-2 bg-slate-50 rounded-lg">
+                        <p class="text-[8px] font-black uppercase text-slate-400 mb-1">Ficheiros Enviados</p>
+                        <div class="materials-list text-[9px] text-slate-500 italic">A carregar...</div>
+                    </div>
                     <div class="grid grid-cols-2 gap-2 mt-auto">${u.status !== 'student' ? `<button onclick="window.approve('${u.uid}')" class="bg-emerald-600 text-white text-[10px] font-black py-2 rounded-xl">APROVAR</button>` : `<button onclick="window.revoke('${u.uid}')" class="bg-red-50 text-red-600 text-[10px] font-black py-2 rounded-xl">REVOGAR</button>`}<button onclick="window.openMaterialPanel('${u.uid}', '${u.name}')" class="bg-slate-900 text-white text-[10px] font-black py-2 rounded-xl">FICHEIRO</button></div>`;
                     list.appendChild(div);
+
+                    onSnapshot(collection(db, 'artifacts', APP_ID, 'users', u.uid, 'materials'), (s) => {
+                        const mList = div.querySelector('.materials-list');
+                        if(!mList) return;
+                        mList.innerHTML = s.empty ? 'Sem materiais.' : '';
+                        s.forEach(matDoc => {
+                            const mat = matDoc.data();
+                            const p = document.createElement('p');
+                            p.className = "truncate flex items-center justify-between";
+                            p.innerHTML = `<span>• ${mat.title}</span><button onclick="window.deleteMaterialForStudent('${u.uid}', '${matDoc.id}')" class="text-red-300 hover:text-red-500 ml-1">×</button>`;
+                            mList.appendChild(p);
+                        });
+                    });
                 });
             }, (err) => {});
         }
@@ -873,7 +936,20 @@
             if(!auth.currentUser) return;
             onSnapshot(collection(db, 'artifacts', APP_ID, 'public', 'data', 'confirmedLessons'), (snap) => {
                 const list = document.getElementById('confirmed-lessons-admin'); if(!list) return; list.innerHTML = "";
-                snap.forEach((d) => { const l = d.data(); const div = document.createElement('div'); div.className = "p-4 bg-white border border-blue-100 rounded-xl flex justify-between"; div.innerHTML = `<div><p class="font-bold text-xs">${l.studentName}</p><p class="text-[10px]">${l.date} às ${l.slot}</p></div><button onclick="window.completeLesson('${d.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="text-[10px] bg-emerald-100 text-emerald-600 font-black px-3 py-1 rounded-lg">CONCLUIR</button>`; list.appendChild(div); });
+                const lessons = snap.docs.map(d => ({id: d.id, ...d.data()}));
+                lessons.forEach((l) => {
+                    const participants = lessons.filter(x => x.courseType === l.courseType && x.date === l.date).length;
+                    const div = document.createElement('div');
+                    div.className = "p-4 bg-white border border-blue-100 rounded-xl flex justify-between items-center shadow-sm";
+                    div.innerHTML = `<div>
+                        <p class="font-black text-xs text-blue-600 uppercase tracking-tighter">${l.courseType}</p>
+                        <p class="text-[10px] font-bold text-slate-700">${l.studentName}</p>
+                        <p class="text-[9px] text-slate-400">${l.date} • ${l.slot || 'Grupo'}</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[8px] font-black rounded-full uppercase">Participantes: ${participants}</span>
+                    </div>
+                    <button onclick="window.completeLesson('${l.id}', ${JSON.stringify(l).replace(/"/g, '&quot;')})" class="text-[9px] bg-emerald-100 text-emerald-600 font-black px-3 py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors">CONCLUIR</button>`;
+                    list.appendChild(div);
+                });
             }, (err) => {});
         }
 
@@ -933,7 +1009,6 @@
             }
         });
 
-        // --- BACKGROUND ---
         const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
         let w, h, p = []; const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
         class Part { constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.2; this.vy = (Math.random()-0.5)*0.2; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; } draw() { ctx.fillStyle='rgba(59,130,246,0.06)'; ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fill(); } }
@@ -941,7 +1016,6 @@
         function anim() { ctx.clearRect(0,0,w,h); p.forEach(v=>{v.update();v.draw();}); requestAnimationFrame(anim); }
         window.onresize = resize; anim();
         
-        // --- INIT ---
         (async function initApp() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
